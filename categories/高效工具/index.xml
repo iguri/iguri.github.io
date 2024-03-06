@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>高效工具 on 故人笔记 - 甲拉古日的自留地</title>
+    <link>http://www.grer.cn/categories/%E9%AB%98%E6%95%88%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 高效工具 on 故人笔记 - 甲拉古日的自留地</description>
+    <image>
+      <title>故人笔记 - 甲拉古日的自留地</title>
+      <url>http://www.grer.cn/47</url>
+      <link>http://www.grer.cn/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; &lt;br /&gt; &lt;a href=&#34;//beian.miit.gov.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; &lt;br /&gt; &lt;a href=&#34;//icp.gov.moe/?keyword=20223334/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;br /&gt;</copyright>
+    <lastBuildDate>Wed, 05 Aug 2020 18:42:23 +0000</lastBuildDate>
+    <atom:link href="http://www.grer.cn/categories/%E9%AB%98%E6%95%88%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>影子卫士--Shadow Defender</title>
+      <link>http://www.grer.cn/blog/2020/jgh1.html/</link>
+      <pubDate>Wed, 05 Aug 2020 18:42:23 +0000</pubDate>
+      <guid>http://www.grer.cn/blog/2020/jgh1.html/</guid>
+      <description>介绍 Shadow Defender（简称SD，中文名：影子卫士）是一款体积小巧，但是功能却非常强大的影子系统软件，它的工作</description>
+    </item>
+    <item>
+      <title>PicGo – 免费高效的图床管理工具</title>
+      <link>http://www.grer.cn/blog/2020/03p6.html/</link>
+      <pubDate>Thu, 09 Jul 2020 18:34:35 +0000</pubDate>
+      <guid>http://www.grer.cn/blog/2020/03p6.html/</guid>
+      <description>pic介绍 相信许多自己做网站动静分离或者托管在github或coding等纯静态网站的童鞋一直苦于繁琐的图片上</description>
+    </item>
+    <item>
+      <title>物理实验软件Algodoo</title>
+      <link>http://www.grer.cn/blog/2020/918c.html/</link>
+      <pubDate>Thu, 16 Apr 2020 20:22:31 +0000</pubDate>
+      <guid>http://www.grer.cn/blog/2020/918c.html/</guid>
+      <description>这是一款功能非常强大的物理仿真实验室软件，该软件由Algoryx Simulation AB公司推出，为用户推出一个卡通、好玩的创作</description>
+    </item>
+    <item>
+      <title>Gravatar头像接口</title>
+      <link>http://www.grer.cn/blog/2020/9f22.html/</link>
+      <pubDate>Sat, 11 Apr 2020 17:20:34 +0000</pubDate>
+      <guid>http://www.grer.cn/blog/2020/9f22.html/</guid>
+      <description>全球都在用的Gravatar头像接口，目前正常的几个Gravatar头像接口，最后一个是QQ头像接口。 http://fdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee https://sdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee http://cn.gravatar.com/avatar/e23163bb2fc9da09505510cc1e5c02ee https://cdn.v2ex.com/gravatar/e23163bb2fc9da09505510cc1e5c02ee</description>
+    </item>
+    <item>
+      <title>PHPCUSTOM-优秀的win平台下php环境套件</title>
+      <link>http://www.grer.cn/blog/2020/4f9c.html/</link>
+      <pubDate>Sat, 11 Apr 2020 17:16:58 +0000</pubDate>
+      <guid>http://www.grer.cn/blog/2020/4f9c.html/</guid>
+      <description>windows下的php环境套件也是比较多的，比如护卫神、宝塔等，有的要么是很久没更新了，有的是占用资源比较多</description>
+    </item>
+    <item>
+      <title>安卓神器X-plore 4.19.03捐赠版 局域网映射</title>
+      <link>http://www.grer.cn/blog/2020/8b44.html/</link>
+      <pubDate>Mon, 30 Mar 2020 22:46:27 +0000</pubDate>
+      <guid>http://www.grer.cn/blog/2020/8b44.html/</guid>
+      <description>什么是X-plore文字 X-plore，是Lonely Cat Games公司的一款经典作品，X-plore 功能也异常</description>
+    </item>
+  </channel>
+</rss>

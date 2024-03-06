@@ -1,0 +1,197 @@
+baseURL: "http://www.grer.cn/"
+languageCode: en
+defaultContentLanguage: zh # 最顶部首先展示的语言页面
+defaultContentLanguageInSubdir: false
+title: 故人笔记 - 甲拉古日的自留地
+paginate: 8
+theme: PaperMod
+
+HasCJKLanguage: true #包含中日韩字符
+isCJKLanguage: true
+summaryLength: 55 #显示描述最大值0不显示
+enableRobotsTXT: true # 允许爬虫抓取到搜索引擎，建议 true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+googleAnalytics:
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+frontmatter:
+  date: [":filename", ":default"]
+permalinks:
+  blog: "/blog/:year/:slug.html"
+  page: "/:slug/"
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  title: 故人笔记 - 甲拉古日的自留地 
+  keywords: [故人笔记, 甲拉古日, 个人网站]
+  description: 故人笔记 - 甲拉古日的自留地; 甲拉古日的个人网站——故人笔记会将甲拉古日的生活点滴和新鲜事分享，同时也会记录灵感瞬间与创作。
+  author: 甲拉古日 #["Me", "You"] # multiple authors
+  images: "/images/logo.gif" # <link or path of image for opengraph, twitter-cards>
+  DateFormat: "2006-01-02"
+  ShowWordCounts: true # 显示字数
+  ShowLastMod: false # 显示更新时间
+  defaultTheme: light # auto, dark, light
+  disableThemeToggle: false
+
+  ShowReadingTime: false # 显示阅读时间
+  ShowShareButtons: false # 显示分享
+  ShowPostNavLinks: true # 显示帖子导航链接
+  ShowBreadCrumbs: true # 显示面包屑
+  ShowCodeCopyButtons: true # 显示复制按钮
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false # 评论
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+
+  xieshu: true # 底下统计数字single.html
+  notice: true # 自建-文章底部声明layouts/partials/notice.html
+
+  assets:
+    # disableHLJS: true # to disable highlight.js
+    # disableFingerprinting: true
+    favicon: "//grer.cn/images/favicon.ico" # <link / abs url>
+    favicon16x16: "//grer.cn/images/favicon.ico"
+    favicon32x32: "//grer.cn/images/favicon.ico"
+    apple_touch_icon: "//grer.cn/images/favicon.ico"
+    safari_pinned_tab: "//grer.cn/images/favicon.ico"
+
+  label:
+    text: "~ & cd /home"
+    # icon: ""
+    # iconHeight: 30
+
+  # profile-mode
+  profileMode:
+    enabled: false # 首页coder样式
+    title: JialaGuri
+    subtitle: "当 下 ， 快 乐 就 好 </br>Now, just be happy"
+    # subtitleurl: "//v1.hitokoto.cn/?encode=js&select=%23hitokoto"  # 一言api输出
+    imageUrl: "/images/logo.gif"
+    imageWidth: 130
+    imageHeight: 130
+    imageTxt: 关于我
+    imageTitle: my image
+    buttons:
+    #   - name: 阅读
+    #     url: posts
+    #   - name: Tags
+    #     url: tags
+
+  # home-info mode
+  homeInfoParams:
+    Title: 故人笔记
+    Content: "Now, just be happy"
+    # subtitleurl: ""  # 一言api输出
+    
+  socialIcons:
+    # - name: blog
+    #   url: "/posts/"
+    - name: github
+      url: "//github.com/grinxxoo/"
+    - name: rss
+      url: "/index.xml"
+    - name: photo
+      url: "/photos"
+    - name: about
+      url: "/about"
+    
+
+  # analytics:
+  #   google:
+  #     SiteVerificationTag: "XYZabc"
+  #   bing:
+  #     SiteVerificationTag: "XYZabc"
+  #   yandex:
+  #     SiteVerificationTag: "XYZabc"
+
+  cover:
+    responsiveImages: true # 仅仅用在Page Bundle情况下，此处不讨论
+    hidden: false # 是否隐藏
+    hiddenInList: false # 文章列表隐藏
+    hiddenInSingle: true # 在内容页内隐藏
+
+  editPost:
+    URL: "https://github.com/grinxxoo/grinxxoo.github.io/blob/master/content"
+    Text: "编辑" # edit text
+    appendFilePath: true # to append file path to Edit link
+
+  # for search
+  # https://fusejs.io/api/options.html
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
+    
+menu:
+  main:
+    - 
+      identifier: categories
+      name: 分类
+      url: "/categories/"
+      weight: 20
+    - 
+      identifier: tags
+      name: 标签
+      url: "/tags/"
+      weight: 30
+    - 
+      identifier: archives
+      name: 归档
+      url: "/archives/"
+      weight: 40
+    -   
+      identifier: links
+      name: 友链
+      url: "/links/"
+      weight: 50
+    - 
+      identifier: search
+      name: 搜索
+      url: "/search/"
+      weight: 60
+# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
+# pygmentsUseClasses: true
+Copyright: 
+  <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备 51343702000108号</a>
+    <br />
+  <a href="//beian.miit.gov.cn/" target="_blank" rel="noopener">蜀ICP备 2021023818号-2</a>
+    <br />
+  <a href="//icp.gov.moe/?keyword=20223334/" target="_blank" rel="noopener">萌ICP备 20223334号</a>
+    <br />
+markup:
+  goldmark:
+      renderer:
+          unsafe: true # HUGO 默认转义 Markdown 文件中的 HTML 代码，如需开启的话
+  highlight:
+      anchorLineNos: false
+      codeFences: true
+      guessSyntax: true
+      hl_Lines: "0"
+      lineAnchors: ""
+      lineNoStart: 1
+      lineNos: false
+      lineNumbersInTable: false
+      noClasses: true
+      noHl: false
+      tabWidth: 4
+      style: monokai
+      # style: darcula
+
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON
