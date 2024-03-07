@@ -1,4 +1,5 @@
 ---
+title: 隐私政策
 hidemeta: true
 notice: false
 comments: false

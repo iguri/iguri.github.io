@@ -1,0 +1,62 @@
+.friendurl {
+  text-decoration: none !important;
+  color: black;
+  box-shadow: none !important;
+}
+
+.myfriend {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  padding: 2px;
+  margin-top: 20px !important;
+  margin-left: 14px !important;
+  background-color: #fff;
+}
+
+.frienddiv {
+  overflow: auto;
+  height: 100px;
+  display: flex;
+  border-radius: 5px;
+  background: none;
+
+  -webkit-transition: all ease-out 0.3s;
+  -moz-transition: all ease-out 0.3s;
+  -o-transition: all ease-out 0.3s;
+  transition: all ease-out 0.3s;
+}
+
+.frienddiv:hover {
+  background: var(--code-bg);
+  transition: transform 0.3s;
+
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.1);
+}
+
+.frienddivleft {
+  width: 92px;
+  float: left;
+  margin-right: -5px;
+}
+
+.frienddivright {
+  margin-top: 18px;
+  margin-right: 18px;
+}
+
+.friendname {
+  text-overflow: ellipsis;
+  font-size: 100%;
+  margin-bottom: 5px;
+  color: var(--primary);
+}
+
+.friendinfo {
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: var(--primary);
+}

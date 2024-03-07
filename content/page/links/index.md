@@ -1,5 +1,7 @@
 ---
+title: 友链
 hidemeta: true
+ShowBreadCrumbs: false
 layout: "links"
 notice: false
 showtoc: false
@@ -11,19 +13,19 @@ slug: "links"
 ### **我的小伙伴们:**
 <hr />
 {{<friend
-name="故人笔记" url="//grer.cn/" 
-logo="/images/logo.gif" 
+name="故人笔记" url="#"
+logo="//grer.cn/images/favicon.ico" 
 word="随手记录生活点滴和灵感笔记"
 >}}
 
 {{<friend
-name="GRTask自动任务" url="//task.grer.cn/" 
-logo="/images/links.gif" 
-word="一个可以自动化完成签到托管等任务的系统"
+name="唯爱忆" url="//521404.xyz#grer.cn"
+logo="//file.grer.cn/images/favicon.ico" 
+word="记录和Ta的点滴日常与美好瞬间"
 >}}
 
 {{<friend
-name="迷失博客" url="//www.mishi23.com/#www.grer.cn/" 
+name="迷失博客" url="//www.mishi23.com#www.grer.cn/" 
 logo="//www.mishi23.com/favicon.png" 
 word="一个基于软件和源码分享,创作与抄袭结合的博客"
 >}}

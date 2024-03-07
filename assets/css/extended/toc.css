@@ -1,0 +1,73 @@
+:root {
+  --hljs-bg: rgb(40, 44, 52);
+  --nav-width: 1380px;
+  --article-width: 720px;
+  --toc-width: 200px;
+}
+
+.toc {
+  display: block;
+  margin: 0 2px 40px 2px;
+  border: 1px solid var(--border);
+  background: var(--entry);
+  border-radius: var(--radius);
+  padding: 0.4em;
+}
+
+.toc details summary {
+  cursor: zoom-in;
+  margin-inline-start: 20px;
+}
+
+.toc details[open] summary {
+  cursor: zoom-out;
+}
+
+.toc summary:focus {
+  outline: 0;
+}
+
+.toc span.details {
+  display: inline;
+  font-weight: 500;
+}
+
+.toc .inner {
+  margin: 0 0 0 20px;
+  padding: 0px 15px 15px 20px;
+  font-size: 16px;
+}
+
+.toc ul {
+  list-style-type: circle;
+}
+
+.toc li ul {
+  margin-inline-start: calc(var(--gap) * 0.5);
+  list-style-type: none;
+}
+
+@media (min-width: 1117px) {
+  .toc-container {
+    position: absolute;
+    height: 100%;
+    border-right: var(--border);
+    left: calc((var(--toc-width) + var(--gap)) * -1);
+    top: calc(var(--gap) * 2);
+    width: var(--toc-width);
+  }
+
+  .toc-container .toc {
+    position: sticky;
+    top: var(--gap);
+    border: unset;
+    background: unset;
+    border-radius: unset;
+    width: 100%;
+    margin: 0 2px 40px 2px;
+  }
+
+  .toc-container .toc .inner {
+    margin: 0;
+  }
+}

@@ -11,15 +11,15 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; &lt;br /&gt; &lt;a href=&#34;//beian.miit.gov.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; &lt;br /&gt; &lt;a href=&#34;//icp.gov.moe/?keyword=20223334/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;br /&gt;</copyright>
-    <lastBuildDate>Tue, 10 May 2022 13:19:23 +0800</lastBuildDate>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 甲拉古日 .</copyright>
+    <lastBuildDate>Wed, 06 Mar 2024 00:19:23 +0800</lastBuildDate>
     <atom:link href="http://www.grer.cn/tags/papermod/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>折腾主题PaperMod</title>
       <link>http://www.grer.cn/blog/2022/papermod1.html/</link>
       <pubDate>Tue, 10 May 2022 13:19:23 +0800</pubDate>
       <guid>http://www.grer.cn/blog/2022/papermod1.html/</guid>
-      <description>PaperMod主题是一个优雅简洁的Hugo主题，也是我入坑Hugo就使用的主题，其阅读体验和布局都是我喜欢的</description>
+      <description>更新 2024-03-06. 时隔一年我胡汉三由回来了，好久没更新博客了，发现不管是hugo还是papermod主题都迭代了好几个版本</description>
     </item>
   </channel>
 </rss>

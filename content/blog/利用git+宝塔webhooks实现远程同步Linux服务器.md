@@ -18,9 +18,9 @@ slug: 581720
 draft: false
 ---
 
-### 化简为繁
+## 化简为繁
 
-目前写文章的顺序有三个步骤；
+### 目前写文章的顺序有三个步骤；
 
 1. 本地写好md文件
 2. push到GitHub，利用GitHub Action实现自动部署到分支`gh-pages`
@@ -28,9 +28,55 @@ draft: false
 
 之前更多，用上GitHub Action了还是省下了不少时间，那么可不可以再挤挤呢...当然可以，利用宝塔软件商店的webhooks就可以省下在服务器上pull的步骤。
 
-### 充分利用GitHub Action和WebHook
+## 充分利用GitHub Action和WebHook
 
-GitHub 你已经是个大人了，应该学会自己推送到服务器！！！
+### GitHub 你已经是个大人了，应该学会自己推送到服务器！！！
+首先还是跟本地环境一样配置好，git服务就不用说了，服务器应该是自己就有的...吧。
+
+1. 查看已安装的的git版本号：
+```
+root@VM-12-10-debian:~# git --version
+git version 2.39.2
+```
+
+如果没有就安装：
+```
+apt install git
+```
+
+2. 生成密钥并添加到GitHub：
+```
+root@VM-12-10-debian:~# ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:DsvSMbNBFwo5VGDmhBOJOMF0vjqiW02ekRVkMjKLhvo root@VM-12-10-debian
+The key's randomart image is:
++---[RSA 3072]----+
+|=++*X== .        |
+|=o*Oo= o .       |
+|oo.o..+ .        |
+|o   .+ .         |
+|.  .+ * S        |
+| ..+ = X         |
+|.oE = = .        |
+|o..  .           |
+|o.               |
++----[SHA256]-----+
+```
+
+上面可以看出证书生成到了 `/root/.ssh/`目录，接着我们查看并复制到GitHub：
+```
+root@VM-12-10-debian:~# cd ~/.ssh
+root@VM-12-10-debian:~/.ssh# ls
+authorized_keys  id_ed25519  id_ed25519.pub  id_rsa  id_rsa.pub
+root@VM-12-10-debian:~/.ssh# cat id_rsa.pub
+ssh-rsa ****** root@VM-12-10-debian
+```
 
 宝塔软件安装`宝塔WebHook 2.0`，设置 > 添加；名称随意，执行脚本如下：
 

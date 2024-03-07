@@ -1,5 +1,5 @@
 ---
-title:
+title: 关于
 hidemeta: true
 notice: false
 comments: false
