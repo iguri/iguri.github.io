@@ -32,6 +32,6 @@ jobs:
 
     - name: webhook
       uses: distributhor/workflow-webhook@v3
-      with:
+      env:
         webhook_url: ${{ secrets.WEBHOOK_URL }}
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
