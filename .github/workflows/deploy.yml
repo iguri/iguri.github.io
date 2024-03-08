@@ -30,8 +30,3 @@ jobs:
         PUBLISH_DIR: ./
         commit_message: ${{ github.event.head_commit.message }}
 
-    - name: webhook
-      uses: distributhor/workflow-webhook@v3
-      env:
-        webhook_url: ${{ secrets.WEBHOOK_URL }}
-        webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
