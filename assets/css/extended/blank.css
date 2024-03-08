@@ -1,5 +1,6 @@
 /*日夜切换特效*/
 .logo-switches {
+    z-index: 999;
     position:fixed;
     bottom:100px;
     right:18px;
@@ -28,6 +29,16 @@
 /*底部除下横线*/
 .footer a {
     border-bottom: hidden;
+}
+
+/* 链接样式 */
+.post-content a {
+    color: #45688b;
+    box-shadow: none;
+    text-decoration: none;
+}
+.post-content a:hover {
+    color: #a6da95;
 }
 
 /* 图片居中 */
@@ -99,49 +110,5 @@ table {
 
     100% {
         box-shadow: 0 0 4px #696969;
-    }
-}
-
-/* 动态颜色字体 */
-.profile .profile_inner span {
-    height: 120px;
-    opacity: 0.8;
-    background: linear-gradient(-45deg, #ee7752, #ce3e75, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    -webkit-animation: Gradient 21s ease infinite;              
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-@-moz-keyframes Gradient {
-    0% {
-        background-position: 0 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0 50%;
-    }
-}
-@-webkit-keyframes Gradient {
-    0% {
-        background-position: 0 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0 50%;
-    }
-}
-@keyframes Gradient {
-    0% {
-        background-position: 0 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0 50%;
     }
 }

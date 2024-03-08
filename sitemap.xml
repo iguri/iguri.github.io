@@ -14,18 +14,6 @@
     <loc>http://www.grer.cn/</loc>
     <lastmod>2024-03-06T00:19:23+08:00</lastmod>
   </url><url>
-    <loc>http://www.grer.cn/blog/2022/221121.html/</loc>
-    <lastmod>2023-11-21T09:09:54+00:00</lastmod>
-  </url><url>
-    <loc>http://www.grer.cn/categories/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2023-11-21T09:09:54+00:00</lastmod>
-  </url><url>
-    <loc>http://www.grer.cn/tags/%E5%BF%83%E6%83%85/</loc>
-    <lastmod>2023-11-21T09:09:54+00:00</lastmod>
-  </url><url>
-    <loc>http://www.grer.cn/tags/%E8%AF%AD%E5%BD%95/</loc>
-    <lastmod>2023-11-21T09:09:54+00:00</lastmod>
-  </url><url>
     <loc>http://www.grer.cn/tags/%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2022-07-29T15:56:17+00:00</lastmod>
   </url><url>
@@ -87,6 +75,9 @@
     <lastmod>2022-05-29T18:56:19+00:00</lastmod>
   </url><url>
     <loc>http://www.grer.cn/tags/%E5%A4%B1%E7%9C%A0/</loc>
+    <lastmod>2022-05-29T18:56:19+00:00</lastmod>
+  </url><url>
+    <loc>http://www.grer.cn/tags/%E8%AF%AD%E5%BD%95/</loc>
     <lastmod>2022-05-29T18:56:19+00:00</lastmod>
   </url><url>
     <loc>http://www.grer.cn/tags/valorant/</loc>
@@ -479,9 +470,6 @@
     <loc>http://www.grer.cn/blog/2020/2355.html/</loc>
     <lastmod>2020-03-30T01:54:19+00:00</lastmod>
   </url><url>
-    <loc>http://www.grer.cn/blog/2020/hexo.html/</loc>
-    <lastmod>2020-03-03T15:30:00+00:00</lastmod>
-  </url><url>
     <loc>http://www.grer.cn/blog/2017/3b1b.html/</loc>
     <lastmod>2017-11-04T00:00:00+00:00</lastmod>
   </url><url>
@@ -491,11 +479,16 @@
     <loc>http://www.grer.cn/tags/%E5%88%91%E6%B3%95/</loc>
     <lastmod>2017-11-04T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://www.grer.cn/blog/2017/hexo.html/</loc>
+    <lastmod>2017-03-03T15:30:00+00:00</lastmod>
+  </url><url>
+    <loc>http://www.grer.cn/links/</loc>
+  </url><url>
+    <loc>http://www.grer.cn/about/</loc>
+  </url><url>
     <loc>http://www.grer.cn/page/</loc>
   </url><url>
     <loc>http://www.grer.cn/%E6%A0%87%E7%AD%BE/</loc>
-  </url><url>
-    <loc>http://www.grer.cn/about/</loc>
   </url><url>
     <loc>http://www.grer.cn/archives/</loc>
   </url><url>
@@ -505,7 +498,5 @@
     <loc>http://www.grer.cn/photos/</loc>
   </url><url>
     <loc>http://www.grer.cn/agreement/</loc>
-  </url><url>
-    <loc>http://www.grer.cn/links/</loc>
   </url>
 </urlset>

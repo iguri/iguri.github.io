@@ -19,35 +19,35 @@
       <link>http://www.grer.cn/blog/2022/papermod1.html/</link>
       <pubDate>Tue, 10 May 2022 13:19:23 +0800</pubDate>
       <guid>http://www.grer.cn/blog/2022/papermod1.html/</guid>
-      <description>更新 2024-03-06. 时隔一年我胡汉三由回来了，好久没更新博客了，发现不管是hugo还是papermod主题都迭代了好几个版本</description>
+      <description>更新 2024-03-06. 时隔一年我胡汉三由回来了，好久没更新博客了，发现不管是hugo还是papermod主题都迭代了好几个版本，本着博客</description>
     </item>
     <item>
       <title>首行缩进提升阅读体验</title>
       <link>http://www.grer.cn/blog/2022/51020.html/</link>
       <pubDate>Tue, 10 May 2022 02:16:56 +0000</pubDate>
       <guid>http://www.grer.cn/blog/2022/51020.html/</guid>
-      <description>首行缩进一般是将段落的第一行从左向右缩进一定的距离，首行外的各行都保持不变，便于阅读和区分文章整体结构。 那么我</description>
+      <description>首行缩进一般是将段落的第一行从左向右缩进一定的距离，首行外的各行都保持不变，便于阅读和区分文章整体结构。 那么我们怎么样在</description>
     </item>
     <item>
       <title>复习GitHub并使用Actions自动化部署</title>
       <link>http://www.grer.cn/blog/2022/414a.html/</link>
       <pubDate>Thu, 14 Apr 2022 11:14:21 +0800</pubDate>
       <guid>http://www.grer.cn/blog/2022/414a.html/</guid>
-      <description>一直使用GitHub Pages作为境外托管平台，在墙外GitHub是真的强，ms从不超过两位数，但是墙内还是会</description>
+      <description>一直使用GitHub Pages作为境外托管平台，在墙外GitHub是真的强，ms从不超过两位数，但是墙内还是会抽风，所以</description>
     </item>
     <item>
       <title>Hugo简单添加相册页面</title>
       <link>http://www.grer.cn/blog/2022/413a754.html/</link>
       <pubDate>Wed, 13 Apr 2022 17:54:48 +0800</pubDate>
       <guid>http://www.grer.cn/blog/2022/413a754.html/</guid>
-      <description>给hugo添加相册页面 今天逛木木博客的时候看到的，实现方法和效果都是简单又美观，搞起来~~ 1，创建html页面</description>
+      <description>给hugo添加相册页面 今天逛木木博客的时候看到的，实现方法和效果都是简单又美观，搞起来~~ 1，创建html页面 在主题文件</description>
     </item>
     <item>
       <title>Hugo开启新标签打开链接</title>
       <link>http://www.grer.cn/blog/2022/47wa.html/</link>
       <pubDate>Thu, 07 Apr 2022 15:25:02 +0800</pubDate>
       <guid>http://www.grer.cn/blog/2022/47wa.html/</guid>
-      <description>从hexo来到hugo才觉得各种配置写法都不一样了，之前因为都是基于markdown应该差不多，实则差太多了，</description>
+      <description>从hexo来到hugo才觉得各种配置写法都不一样了，之前因为都是基于markdown应该差不多，实则差太多了，不过有1说</description>
     </item>
   </channel>
 </rss>

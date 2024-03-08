@@ -1,6 +1,6 @@
 ---
 title: "我的相册"
-layout: "photos"
-xieshu: false
+layout: "gallery"
 slug: "photos"
 ---
+{{< gallery "photos">}}

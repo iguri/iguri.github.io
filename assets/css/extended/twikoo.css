@@ -1,5 +1,5 @@
 .tc-container {
-  margin-top: 15px;
+  margin-top: 8px;
   background-color: var(--code-bg);
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -22,9 +22,9 @@
 
 .c-title {
   display: block;
-  font-size: 1.25em;
+  font-size: 1.2em;
   font-weight: bold;
-  padding: 1rem 0 .5rem 0;
+  padding: 1rem 0rem ;
 }
 
 .tk-comments-title {

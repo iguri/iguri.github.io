@@ -19,7 +19,7 @@
       <link>http://www.grer.cn/blog/2020/e685.html/</link>
       <pubDate>Tue, 07 Apr 2020 17:24:50 +0000</pubDate>
       <guid>http://www.grer.cn/blog/2020/e685.html/</guid>
-      <description>在腾讯云上申请到了免费的SSL证书，于是开始了折腾网站切换到了https，这时如果在使用http访问，即出现H</description>
+      <description>在腾讯云上申请到了免费的SSL证书，于是开始了折腾网站切换到了https，这时如果在使用http访问，即出现HTTP 40</description>
     </item>
   </channel>
 </rss>

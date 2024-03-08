@@ -19,7 +19,7 @@
       <link>http://www.grer.cn/blog/2022/581720.html/</link>
       <pubDate>Sun, 08 May 2022 16:36:06 +0800</pubDate>
       <guid>http://www.grer.cn/blog/2022/581720.html/</guid>
-      <description>化简为繁 目前写文章的顺序有三个步骤； 本地写好md文件 push到GitHub，利用GitHub Action实现自</description>
+      <description>化简为繁 目前写文章的顺序有三个步骤； 本地写好md文件 push到GitHub，利用GitHub Action实现自动部署到分</description>
     </item>
   </channel>
 </rss>

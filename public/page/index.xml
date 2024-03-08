@@ -14,6 +14,13 @@
     <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 甲拉古日 .</copyright>
     <atom:link href="http://www.grer.cn/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>about</title>
+      <link>http://www.grer.cn/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://www.grer.cn/about/</guid>
+      <description>本站由强大的go语言——Hugo静态博客系统，和PaperMod主题模块为基础的个人博客，目前由Github Action</description>
+    </item>
+    <item>
       <title>标签</title>
       <link>http://www.grer.cn/%E6%A0%87%E7%AD%BE/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -21,32 +28,18 @@
       <description></description>
     </item>
     <item>
-      <title>关于</title>
-      <link>http://www.grer.cn/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://www.grer.cn/about/</guid>
-      <description>关 于 我 ？ 一个除了Ctrl+C和Ctrl+V外啥都不会的搬运工， 联 系 我 E-mail： jialaguri@gmail.com Qq： 1522575015 未完待续 . . .</description>
-    </item>
-    <item>
       <title>我的相册</title>
       <link>http://www.grer.cn/photos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://www.grer.cn/photos/</guid>
-      <description></description>
+      <description>JPEG 草原 黄叶 灰袋鼠 绿色 实例1 实例2 水滴 向日葵 向日葵 向日葵配蓝天 向往的神迹 星河 薰衣草</description>
     </item>
     <item>
       <title>隐私政策</title>
       <link>http://www.grer.cn/agreement/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://www.grer.cn/agreement/</guid>
-      <description>隐私政策 最近修訂日期：2020年07月04日 引言 本站尊重并保护所有使用用户的个人隐私权。为了给您提供更准确、更</description>
-    </item>
-    <item>
-      <title>友链</title>
-      <link>http://www.grer.cn/links/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://www.grer.cn/links/</guid>
-      <description>我的小伙伴们: 故人笔记 随手记录生活点滴和灵感笔记 唯爱忆 记录和Ta的点滴日常与美好瞬间 迷失博客 一个基于软件和源码</description>
+      <description>隐私政策 最近修訂日期：2020年07月04日 引言 本站尊重并保护所有使用用户的个人隐私权。为了给您提供更准确、更有个性化的</description>
     </item>
   </channel>
 </rss>
