@@ -1,0 +1,51 @@
+# .github/workflows/douban.yml
+name: douban
+on: 
+  schedule:
+  - cron: "59 0,12 * * *"
+
+jobs:
+  douban:
+    name: Douban mark data sync
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: movie
+      uses: lizheming/doumark-action@master
+      with:
+        id: grer
+        type: movie
+        format: csv
+        dir: ./data/douban
+
+    - name: book
+      uses: lizheming/doumark-action@master
+      with:
+        id: grer
+        type: book
+        format: csv
+        dir: ./data/douban
+
+    - name: game
+      uses: lizheming/doumark-action@master
+      with:
+        id: grer
+        type: game
+        format: csv
+        dir: ./data/douban
+
+    - name: music
+      uses: lizheming/doumark-action@master
+      with:
+        id: grer
+        type: music
+        format: csv
+        dir: ./data/douban
+  
+    - name: Commit
+      uses: EndBug/add-and-commit@v8
+      with:
+        message: 'chore: update douban data'
+        add: './data/douban'
