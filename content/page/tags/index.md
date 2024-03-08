@@ -1,5 +1,5 @@
 ---
-title: "标签"
+Title: "标签"
 layout: "terms"
 hidemeta: true
 ---
