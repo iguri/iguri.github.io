@@ -7,7 +7,7 @@ weight: # 置顶数字代替越小越前
 tags:
   - webhooks
   - git
-categories: 折腾记
+categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 cover:
     image: "" # 封面url
     alt: # 替换文本

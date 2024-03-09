@@ -28,11 +28,25 @@
       <description></description>
     </item>
     <item>
+      <title>我的观影</title>
+      <link>http://www.grer.cn/movies/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://www.grer.cn/movies/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>我的相册</title>
       <link>http://www.grer.cn/photos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://www.grer.cn/photos/</guid>
-      <description>JPEG 草原 黄叶 灰袋鼠 绿色 实例1 实例2 水滴 向日葵 向日葵 向日葵配蓝天 向往的神迹 星河 薰衣草</description>
+      <description>纵意游肆，名山胜川靡不穷究。 ————《晋书·孙统传》 三张 五张 两张 四张 六张 两张 全屏自适应</description>
+    </item>
+    <item>
+      <title>我的阅读</title>
+      <link>http://www.grer.cn/books/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://www.grer.cn/books/</guid>
+      <description></description>
     </item>
     <item>
       <title>隐私政策</title>

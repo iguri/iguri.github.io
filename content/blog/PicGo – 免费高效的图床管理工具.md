@@ -6,7 +6,7 @@ tags:
   - github图床
 author: GRer
 slug: 03p6
-categories: 高效工具
+categories: 分享安利
 cover:
     image: "/img/2020/07/09/wxu5IcEGvrMWHVy.png" # 封面url
     alt: # 替换文本

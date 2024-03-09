@@ -6,7 +6,7 @@ tags:
   - 简体中文
 author: GRer
 slug: jgh1
-categories: 高效工具
+categories: 分享安利 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 cover:
     image: "/img/2020/08/05/1596623430.jpg" # 封面url
     alt: # 替换文本

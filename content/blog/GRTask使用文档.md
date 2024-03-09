@@ -6,7 +6,7 @@ tags:
   - GRTask
 author: GRer
 slug: tuog
-categories: 文档
+categories: 灵感记录 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 date: 2022-04-04 18:34:35
 ---
 

@@ -5,7 +5,7 @@ tags:
   - 文件管理
 author: GRer
 slug: 8b44
-categories: 高效工具
+categories: 分享安利 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 cover:
     image: "/img/2020/03/30/dfsdfsr76575.jpg" # 封面url
     alt: # 替换文本

@@ -6,7 +6,7 @@ weight: # 置顶数字代替越小越前
 tags: # 标签
   - valorant
   - 竞技游戏
-categories: 游戏相关 # 分类
+categories: 日常水文 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 cover:
     image: "/img/2022/05/15/valorant.jpg" # 封面url
     alt: valorant # 替换文本

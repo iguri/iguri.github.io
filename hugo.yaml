@@ -34,20 +34,20 @@ params:
   author: 甲拉古日 #["Me", "You"] # multiple authors
   images: "/images/logo.gif" # <link or path of image for opengraph, twitter-cards>
   DateFormat: "2006-01-02"
+  hidemeta: false
   ShowWordCounts: false # 显示字数
   ShowLastMod: true # 显示更新时间
-  defaultTheme: auto # auto, dark, light
-  disableThemeToggle: false
-
   ShowReadingTime: false # 显示阅读时间
   ShowShareButtons: false # 显示分享
   ShowPostNavLinks: true # 显示帖子导航链接
   ShowBreadCrumbs: true # 显示面包屑
   ShowCodeCopyButtons: true # 显示复制按钮
-  disableSpecial1stPost: false
-  disableScrollToTop: false
-  hidemeta: false
   hideSummary: false
+  disableSpecial1stPost: true
+  disableScrollToTop: false
+  
+  defaultTheme: auto # auto, dark, light
+  disableThemeToggle: false
   showtoc: true
   tocopen: true
   comments: true # 评论
@@ -64,20 +64,20 @@ params:
     safari_pinned_tab: "//grer.cn/images/favicon.ico"
 
   label:
-    text: "故人笔记"
+    text: 故人笔记
     # icon: ""
     # iconHeight: 30
 
   # profile-mode
   profileMode:
     enabled: true # 首页coder样式
-    title: </>
-    subtitle: "Now, just be happy"
+    title: <h5>&nbsp;</h5>
+    subtitle: Now, just be happy
     imageUrl: "/images/logo.gif"
-    imageWidth: 130
-    imageHeight: 130
+    imageWidth: 135
+    imageHeight: 135
     imageTxt:
-    imageTitle:
+    imageTitle: Welcome To My BLOG
     buttons:
       - name: Enter
         url: blog
@@ -98,6 +98,8 @@ params:
       url: "//weibo.com/u/5898165577"
     - name: bilibili
       url: "//space.bilibili.com/477119718/"
+    - name: steam
+      url: "//steamcommunity.com/id/migrer/"
     - name: links
       url: "/about/#link"
     - name: rss
