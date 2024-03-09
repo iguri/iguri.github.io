@@ -5,7 +5,7 @@ tags:
   - 高通
 author: GRer
 slug: 9qc1
-categories: 新闻事件
+categories: 日常水文 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 img: https://cdn.jsdelivr.net/gh/grinxxoo/bed/images/e4dde71190ef76c658265e216f4ff7fdae5167a1.jpeg
 date: 2020-07-28 23:22:53
 ---

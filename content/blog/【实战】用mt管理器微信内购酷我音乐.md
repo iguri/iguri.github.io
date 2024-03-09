@@ -5,7 +5,7 @@ tags:
   - mt管理
   - 安卓
 author: GRer
-categories: 实用教程
+categories: 灵感记录 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 slug: '7e38'
 date: 2020-09-12 16:45:35
 ---

@@ -4,7 +4,7 @@ tags:
   - wordpress
   - 网站日记
 slug: '2355'
-categories: 折腾记
+categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 cover:
     image: "/img/2020/03/30/wordpress.jpg" # 封面url
     alt: # 替换文本

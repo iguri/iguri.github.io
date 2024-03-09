@@ -4,7 +4,7 @@ tags:
   - wordpress
   - 网站日记
 slug: '2d3f'
-categories: 折腾记
+categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 date: 2020-04-15 15:04:38
 ---
 

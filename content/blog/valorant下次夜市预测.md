@@ -8,7 +8,7 @@ tags:
   - valorant
   - 竞技游戏
   -
-categories: 游戏相关
+categories: 日常水文 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 cover:
     image: "" # 封面url
     alt: # 替换文本

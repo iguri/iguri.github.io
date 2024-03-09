@@ -6,7 +6,7 @@ tags:
   - 网站日记
 id: '415'
 slug: e685
-categories: 折腾记
+categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 date: 2020-04-07 17:24:50
 ---
 在腾讯云上申请到了免费的SSL证书，于是开始了折腾网站切换到了https，这时如果在使用http访问，即出现HTTP 400错误，所以需要设置Nginx将http请求跳转到https。
