@@ -3,7 +3,7 @@ title: 高通推出Quick Charge 5快充 你还在乎电池容量吗？
 tags:
   - QC快充
   - 高通
-author: GRer
+author: "甲拉古日"
 slug: 9qc1
 categories: 日常水文 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 img: https://cdn.jsdelivr.net/gh/grinxxoo/bed/images/e4dde71190ef76c658265e216f4ff7fdae5167a1.jpeg

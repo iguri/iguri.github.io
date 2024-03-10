@@ -4,7 +4,7 @@ tags:
   - PICgo
   - 图床管理
   - github图床
-author: GRer
+author: "甲拉古日"
 slug: 03p6
 categories: 分享安利
 cover:

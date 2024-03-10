@@ -1,7 +1,7 @@
 ---
 title: "dome"
 date: 2024-03-09T16:14:33+08:00
-author: "GRer"
+author: "甲拉古日"
 weight: # 置顶数字代替越小越前
 tags: # 标签
   - 

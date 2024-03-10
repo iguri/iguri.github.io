@@ -4,7 +4,7 @@ tags:
   - 影子系统
   - 系统安全
   - 简体中文
-author: GRer
+author: 甲拉古日
 slug: jgh1
 categories: 分享安利 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 cover:

@@ -1,7 +1,7 @@
 ---
 title: "Valorant真好玩"
 date: 2022-05-15T09:43:13+08:00
-author: "GRer"
+author: "甲拉古日"
 weight: # 置顶数字代替越小越前
 tags: # 标签
   - valorant

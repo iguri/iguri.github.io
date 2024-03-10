@@ -1,7 +1,7 @@
 ---
 title: "折腾主题PaperMod"
 date: 2022-05-10T13:19:23+08:00
-author: "GRer"
+author: "甲拉古日"
 weight: # 置顶数字代替越小越前
 tags: # 标签
   - hugo

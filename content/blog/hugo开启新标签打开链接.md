@@ -7,7 +7,7 @@ tags:
 slug: 47wa
 categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 lastmod: 2022-04-07T15:25:02+08:00
-author: "GRer"
+author: "甲拉古日"
 ---
 
 从hexo来到hugo才觉得各种配置写法都不一样了，之前因为都是基于markdown应该差不多，实则差太多了，不过有1说1，hugo比hexo要好用一点。

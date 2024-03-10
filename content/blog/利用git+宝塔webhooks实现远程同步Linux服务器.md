@@ -1,7 +1,7 @@
 ---
 title: "利用git+宝塔webhooks实现远程同步Linux服务器"
 date: 2022-05-08T16:36:06+08:00
-author: "GRer"
+author: "甲拉古日"
 comments: # 评论
 weight: # 置顶数字代替越小越前
 tags:

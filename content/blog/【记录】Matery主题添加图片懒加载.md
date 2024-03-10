@@ -1,7 +1,7 @@
 ---
 title: 【记录】Matery主题添加图片懒加载
 date: 2020-08-30 20:05:00
-author: GRer
+author: "甲拉古日"
 summary: 让所有图片元素src指向一个小的站位图片比如loading，并新增一个属性(如data-original)存放真实图片地址。每当页面加载（或者滚动条滚动），使用JS脚本将可视区域内的图片src替换回真实地址，并做请求重新加载。
 slug: 33ef
 categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
