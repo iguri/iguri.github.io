@@ -3,11 +3,12 @@
 {{- /* twikoo.js => https://twikoo.js.org/ */ -}}
 <!-- Twikoo -->
 <footer class="tc-container" >
-  <details id="comment">
+  <details id="comment" {{if (.Param "commentOpen") }} open{{ end }}>
     <summary class="tc-title">
       <P class="c-title">Discussion</P>
     </summary>
-      <div id="tcomment"></div>
+  <dl>
+    <dd><div id="tcomment"></div></dd>
   </details>
 </footer>
 <script src="https://cdn.staticfile.net/twikoo/{{ .Site.Params.twikoo.version }}/twikoo.all.min.js">

@@ -3,12 +3,14 @@ title: about
 hidemeta: true
 ShowBreadCrumbs: false
 comments: true
+commentopen: true
+ShowShareButtons: false
 slug: "about"
 ---
 
 本站由强大的go语言——<a href="https://gohugo.io/">Hugo</a>静态博客系统驱动，使用<a href="https://github.com/adityatelange/hugo-PaperMod/">PaperMod</a>主题模块为基础的个人博客，目前由<a href="https://github.com/actions">Github Actions</a>部署构建，托管于<a href="https://pages.github.com/">Github Pages</a>和<a href="https://cloud.tencent.com/">腾讯云</a>服务器。本站源码全部托管于公开仓库 <a href="https://github.com/iguri/iguri.github.io" target="_blank" rel="noopener">源码仓库</a>，如有需要可自行参考 。
 
-本站内容以原创、分享和记录为主，如本站的言论侵犯了你的权益，请携相关资料联系我处理。本站没有任何盈利行为和捐赠通道，如果您喜欢我拙劣的表达方式，烦请多多来访。
+本站内容以原创、分享和记录为主，如本站的言论侵犯了你的权益，请携相关资料联系我处理。本站没有任何盈利行为和捐赠通道，如果您喜欢我拙劣的表达方式，请多多来访。
 
 域名历程：
 <del><a href="#">muyixi.cn</a></del>
@@ -26,6 +28,7 @@ slug: "about"
 <a href="#">521404.xyz</a>
 
 ## me
+
 ```html
 姓名：甲拉古日
 爱好：探险·骑行·游戏(Vlorant)...
