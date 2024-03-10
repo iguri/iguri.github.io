@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="post">
+  <h2 class="post-title">{{.Title}}</h2>
+</div>
+<h3 align="center">纵意游肆，名山胜川靡不穷究。</h3><p align="right"> ————《晋书·孙统传》</p>
+<hr />
+<div class="fullscreen">
+  {{ range (readDir "./static/photos") }}
+  <figure>
+    <img src="{{"photos/" | absURL }}{{ .Name }}" alt="{{ .Name }}" />
+  </figure>
+  {{ end }}
+<script src="//cdn.grer.cn/js/view-image.js"></script>
+<script>
+  window.ViewImage && ViewImage.init('.fullscreen img')
+</script>
+  </div>
+{{ end }}

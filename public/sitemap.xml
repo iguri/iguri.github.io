@@ -505,6 +505,8 @@
   </url><url>
     <loc>http://www.grer.cn/links/</loc>
   </url><url>
+    <loc>http://www.grer.cn/photos/</loc>
+  </url><url>
     <loc>http://www.grer.cn/about/</loc>
   </url><url>
     <loc>http://www.grer.cn/page/</loc>
@@ -517,8 +519,6 @@
     <priority>0.1</priority>
   </url><url>
     <loc>http://www.grer.cn/movies/</loc>
-  </url><url>
-    <loc>http://www.grer.cn/photos/</loc>
   </url><url>
     <loc>http://www.grer.cn/books/</loc>
   </url><url>

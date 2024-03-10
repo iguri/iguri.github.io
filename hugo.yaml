@@ -38,7 +38,8 @@ params:
   ShowWordCounts: false # 显示字数
   ShowLastMod: true # 显示更新时间
   ShowReadingTime: false # 显示阅读时间
-  ShowShareButtons: false # 显示分享
+  ShowShareButtons: true # 显示分享
+  shareButtons: ["weibo", "qzone", "qq", "linkedin", "telegram"]
   ShowPostNavLinks: true # 显示帖子导航链接
   ShowBreadCrumbs: true # 显示面包屑
   ShowCodeCopyButtons: true # 显示复制按钮
@@ -51,6 +52,7 @@ params:
   showtoc: true
   tocopen: true
   comments: true # 评论
+  commentopen: false
   twikoo: 
     version: 1.6.30
 
