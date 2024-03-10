@@ -81,8 +81,10 @@ params:
     buttons:
       - name: Enter
         url: blog
-    #   - name: Tags
-    #     url: tags
+      - name: Links
+        url: "/about/#link"
+      - name: Rss
+        url: /index.xml
 
   # home-info mode
   homeInfoParams:
@@ -90,20 +92,16 @@ params:
     Content: "Now, just be happy"
     
   socialIcons:
-    - name: twitter
-      url: "//twitter.com/grinxxoo"
     - name: github
-      url: "//github.com/iguri"
+      url: "//github.com/iguri/"
     - name: weibo
-      url: "//weibo.com/u/5898165577"
+      url: "//weibo.com/u/5898165577/"
     - name: bilibili
       url: "//space.bilibili.com/477119718/"
     - name: steam
       url: "//steamcommunity.com/id/migrer/"
-    - name: links
-      url: "/about/#link"
-    - name: rss
-      url: "/index.xml"
+    - name: telegram
+      url: "//t.me/grlol"
     
 
   # analytics:
@@ -154,7 +152,7 @@ menu:
 # pygmentsUseClasses: true
 Copyright: <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备 51343702000108号</a> |
   <a href="//beian.miit.gov.cn/" target="_blank" rel="noopener">蜀ICP备 2021023818号-2</a> |
-  <a href="//icp.gov.moe/?keyword=20223334/" target="_blank" rel="noopener">萌ICP备 20223334号</a> </br>&copy; 2024 甲拉古日 . 
+  <a href="//icp.gov.moe/?keyword=20223334/" target="_blank" rel="noopener">萌ICP备 20223334号</a> </br>&copy; 2024 <a href="/about/#me">甲拉古日</a>
 markup:
   goldmark:
       renderer:

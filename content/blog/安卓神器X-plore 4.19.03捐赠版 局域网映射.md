@@ -3,7 +3,7 @@ title: 安卓神器X-plore 4.19.03捐赠版 局域网映射
 tags:
   - 安卓
   - 文件管理
-author: GRer
+author: "甲拉古日"
 slug: 8b44
 categories: 分享安利 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 cover:

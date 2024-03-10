@@ -1,5 +1,6 @@
 ---
 title: 关掉WordPress顶部管理条
+author: "甲拉古日"
 tags:
   - wordpress
   - 网站日记

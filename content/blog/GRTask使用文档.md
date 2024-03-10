@@ -4,7 +4,7 @@ tags:
   - 自动化
   - 云任务
   - GRTask
-author: GRer
+author: "甲拉古日"
 slug: tuog
 categories: 灵感记录 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
 date: 2022-04-04 18:34:35
