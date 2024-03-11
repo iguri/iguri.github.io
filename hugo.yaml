@@ -24,13 +24,13 @@ frontmatter:
   date: [":filename", ":default"]
 permalinks:
   blog: "/blog/:year/:slug.html"
-  page: "/:slug/"
+  page: "/:slug"
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: 故人笔记 - 甲拉古日的自留地 
-  keywords: [故人笔记, 甲拉古日, 个人网站]
-  description: 故人笔记 - 甲拉古日的自留地; 甲拉古日的个人网站——故人笔记会将甲拉古日的生活点滴和新鲜事分享，同时也会记录灵感瞬间与创作。
+  keywords: [故人笔记, 甲拉古日, 个人网站, 灵感创作]
+  description: 故人笔记 - 甲拉古日的自留地; 随手记录生活与灵感瞬间的创作。
   author: 甲拉古日 #["Me", "You"] # multiple authors
   images: "/images/logo.gif" # <link or path of image for opengraph, twitter-cards>
   DateFormat: "2006-01-02"
@@ -59,11 +59,11 @@ params:
   assets:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
-    favicon: "//grer.cn/images/favicon.ico" # <link / abs url>
-    favicon16x16: "//grer.cn/images/favicon.ico"
-    favicon32x32: "//grer.cn/images/favicon.ico"
-    apple_touch_icon: "//grer.cn/images/favicon.ico"
-    safari_pinned_tab: "//grer.cn/images/favicon.ico"
+    favicon: "/favicon.ico" # <link / abs url>
+    favicon16x16: "/favicon.ico"
+    favicon32x32: "/favicon.ico"
+    apple_touch_icon: "/favicon.ico"
+    safari_pinned_tab: "/favicon.ico"
 
   label:
     text: 故人笔记
@@ -75,7 +75,7 @@ params:
     enabled: true # 首页coder样式
     title: <h5>&nbsp;</h5>
     subtitle: Now, just be happy
-    imageUrl: "/images/logo.gif"
+    imageUrl: "/logo.gif"
     imageWidth: 135
     imageHeight: 135
     imageTxt:
@@ -95,13 +95,13 @@ params:
     
   socialIcons:
     - name: github
-      url: "//github.com/iguri/"
+      url: "//github.com/iguri"
     - name: weibo
-      url: "//weibo.com/u/5898165577/"
+      url: "//weibo.com/u/5898165577"
     - name: bilibili
-      url: "//space.bilibili.com/477119718/"
+      url: "//space.bilibili.com/477119718"
     - name: steam
-      url: "//steamcommunity.com/id/migrer/"
+      url: "//steamcommunity.com/id/migrer"
     - name: telegram
       url: "//t.me/grlol"
     
@@ -153,8 +153,8 @@ menu:
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 # pygmentsUseClasses: true
 Copyright: <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备 51343702000108号</a> |
-  <a href="//beian.miit.gov.cn/" target="_blank" rel="noopener">蜀ICP备 2021023818号-2</a> |
-  <a href="//icp.gov.moe/?keyword=20223334/" target="_blank" rel="noopener">萌ICP备 20223334号</a> </br>&copy; 2024 <a href="/about/#me">甲拉古日</a>
+  <a href="//beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备 2021023818号-2</a> |
+  <a href="//icp.gov.moe/?keyword=20223334" target="_blank" rel="noopener">萌ICP备 20223334号</a> </br>&copy; 2024 <a href="/about/#me">甲拉古日</a>
 markup:
   goldmark:
       renderer:

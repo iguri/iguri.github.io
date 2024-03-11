@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;http://www.grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;http://www.grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
     <atom:link href="http://www.grer.cn/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
@@ -25,7 +25,7 @@
       <link>http://www.grer.cn/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://www.grer.cn/about/</guid>
-      <description>本站由强大的go语言——Hugo静态博客系统驱动，使用PaperMod主题模块为基础的个人博客，目前由Github Act</description>
+      <description>本站由强大的go语言——Hugo静态博客生成器生成，并基于PaperMod主题模块为基础的个人博客，目前由Github A</description>
     </item>
     <item>
       <title>标签</title>

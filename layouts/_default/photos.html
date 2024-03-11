@@ -2,17 +2,37 @@
 <div class="post">
   <h2 class="post-title">{{.Title}}</h2>
 </div>
-<h3 align="center">纵意游肆，名山胜川靡不穷究。</h3><p align="right"> ————《晋书·孙统传》</p>
+<h3 align="center">纵意游肆，名山胜川靡不穷究。</h3> <p align="right"> ————《晋书·孙统传》</p>
 <hr />
 <div class="fullscreen">
   {{ range (readDir "./static/photos") }}
   <figure>
-    <img src="{{"photos/" | absURL }}{{ .Name }}" alt="{{ .Name }}" />
+    <img loading="lazy" decoding="async" src="{{"photos/" | absURL }}{{ .Name }}" alt="{{ .Name }}" />
+    <figcaption>{{ .Name | replaceRE "(.*)[.].*" "$1"}}</figcaption>
   </figure>
   {{ end }}
 <script src="//cdn.grer.cn/js/view-image.js"></script>
 <script>
   window.ViewImage && ViewImage.init('.fullscreen img')
 </script>
-  </div>
+</div>
+<style type="text/css">
+figure {
+  opacity: 0.7;
+}
+figure:hover {
+  position: relative;
+  transform: scale(1.025);
+  opacity: 1;
+  transition: transform 0.3s; opacity: 0.1S;
+}
+  figcaption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0.8;
+  }
+</style>
 {{ end }}
