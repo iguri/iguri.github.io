@@ -26,11 +26,6 @@
   }
 }
 
-/*底部除下横线*/
-.footer a {
-    border-bottom: hidden;
-}
-
 /* 滚动条 */
 ::-webkit-scrollbar {
     width: 5px;
@@ -39,12 +34,14 @@
 
 /* 链接样式 */
 .post-content a {
-    color: #45688b;
     box-shadow: none;
     text-decoration: none;
+    border-bottom: 2px solid skyblue;
+    padding-bottom: 1.5px;
 }
 .post-content a:hover {
-    color: #a6da95;
+    color: #263a43;
+    border-bottom: hidden; 
 }
 
 /* 图片居中 */
@@ -52,13 +49,18 @@
     margin: auto;
 }
 
-/*首行缩进两个字符 */
-.post-content p {
-    text-indent: 2rem;
-}
+.post-content p:has(> img:nth-child(2)){column-count:2;column-gap:8px;margin:6px 0;}
+.post-content p:has(> img:nth-child(3)){column-count:3;}
+.post-content p:has(> img:nth-child(4)){column-count:4;}
+.post-content p:has(> img:nth-child(5)){column-count:5;}
+.post-content p:has(> img:nth-child(6)){column-count:4;}
+.post-content p:has(> img:nth-child(2)) img{display:inherit;}
+.post-content p:has(> img:nth-child(6)) img{margin-bottom:8px;}
 
-.post-content ul, ol, dl {
-    margin-left: 2rem;
+.fullscreen{margin-left:calc(360px - 50vw);width:calc(100vw - 20px);column-count:4;column-gap:6px;}
+.fullscreen img{display:inherit;margin-bottom:8px;}
+@media (max-width: 720px){
+    .fullscreen{margin-left: 0;width:auto;column-count:3;}
 }
 
 /*首行缩进两个字符 */
@@ -93,7 +95,7 @@ table {
     gap: 10px;
     border-radius: 50%; 
     /*logo呼吸*/
-    animation: light 4s ease-in-out infinite;
+    animation: light 5s ease-in-out infinite;
 }
 
 /* logo呼吸控件 */
@@ -119,10 +121,11 @@ table {
     }
 }
 
+/**按钮效果**/
 .profile_inner a :hover {
     animation: animate 0.5s linear infinite;
 }
-/**按钮效果**/
+
 @keyframes animate {
     0%,
     25% {
@@ -137,19 +140,4 @@ table {
         100% {
         text-shadow: -2px -2px 2px #ff6384;
         }
-}
-
-/** 相册 **/
-.post-content p:has(> img:nth-child(2)){column-count:2;column-gap:8px;margin:6px 0;}
-.post-content p:has(> img:nth-child(3)){column-count:3;}
-.post-content p:has(> img:nth-child(4)){column-count:4;}
-.post-content p:has(> img:nth-child(5)){column-count:5;}
-.post-content p:has(> img:nth-child(6)){column-count:4;}
-.post-content p:has(> img:nth-child(2)) img{display:inherit;}
-.post-content p:has(> img:nth-child(6)) img{margin-bottom:8px;}
-
-.fullscreen{margin-left:calc(360px - 50vw);width:calc(100vw - 20px);column-count:4;column-gap:6px;}
-.fullscreen img{display:inherit;margin-bottom:8px;}
-@media (max-width: 720px){
-    .fullscreen{margin-left: 0;width:auto;column-count:3;}
 }
