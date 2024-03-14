@@ -1,17 +1,8 @@
 /* toc放侧边 */
 :root {
-    --main-width: 700px;
     --article-width: 600px;
     --toc-width: 268px;
     --gap: 16px;
-}
-
-.toc {
-    margin: 0 2px 40px 2px;
-    border: 1.2px solid var(--border);
-    background: var(--entry);
-    border-radius: var(--radius);
-    padding: 0.4em;
 }
 
 .toc-container {
@@ -22,8 +13,8 @@
     position: absolute;
     height: 100%;
     /*border-right: 1px solid var(--border);*/
-    left: calc((var(--toc-width) + var(--gap)) * -0.92);
-    top: calc(var(--gap) * 1);
+    right: calc((var(--toc-width) + var(--gap)) * -0.92);
+    top: calc(var(--gap) * 10);
     width: var(--toc-width);
 }
 
