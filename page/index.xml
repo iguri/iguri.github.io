@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Pages on 故人笔记 - 甲拉古日的自留地</title>
-    <link>http://www.grer.cn/page/</link>
+    <link>http://grer.cn/page/</link>
     <description>Recent content in Pages on 故人笔记 - 甲拉古日的自留地</description>
     <image>
       <title>故人笔记 - 甲拉古日的自留地</title>
-      <url>http://www.grer.cn/47</url>
-      <link>http://www.grer.cn/47</link>
+      <url>http://grer.cn/47</url>
+      <link>http://grer.cn/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;http://www.grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
-    <atom:link href="http://www.grer.cn/page/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;http://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <atom:link href="http://grer.cn/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>http://www.grer.cn/photos/</link>
+      <link>http://grer.cn/photos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://www.grer.cn/photos/</guid>
+      <guid>http://grer.cn/photos/</guid>
       <description></description>
     </item>
     <item>
       <title>about</title>
-      <link>http://www.grer.cn/about/</link>
+      <link>http://grer.cn/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://www.grer.cn/about/</guid>
+      <guid>http://grer.cn/about/</guid>
       <description>本站由强大的go语言——Hugo静态博客生成器生成，并基于PaperMod主题模块为基础的个人博客，目前由Github A</description>
     </item>
     <item>
       <title>标签</title>
-      <link>http://www.grer.cn/%E6%A0%87%E7%AD%BE/</link>
+      <link>http://grer.cn/%E6%A0%87%E7%AD%BE/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://www.grer.cn/%E6%A0%87%E7%AD%BE/</guid>
+      <guid>http://grer.cn/%E6%A0%87%E7%AD%BE/</guid>
       <description></description>
     </item>
     <item>
       <title>我的观影</title>
-      <link>http://www.grer.cn/movies/</link>
+      <link>http://grer.cn/movies/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://www.grer.cn/movies/</guid>
+      <guid>http://grer.cn/movies/</guid>
       <description></description>
     </item>
     <item>
       <title>我的阅读</title>
-      <link>http://www.grer.cn/books/</link>
+      <link>http://grer.cn/books/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://www.grer.cn/books/</guid>
+      <guid>http://grer.cn/books/</guid>
       <description></description>
     </item>
     <item>
       <title>隐私政策</title>
-      <link>http://www.grer.cn/agreement/</link>
+      <link>http://grer.cn/agreement/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://www.grer.cn/agreement/</guid>
+      <guid>http://grer.cn/agreement/</guid>
       <description>隐私政策 最近修訂日期：2020年07月04日 引言 本站尊重并保护所有使用用户的个人隐私权。为了给您提供更准确、更有个性化的</description>
     </item>
   </channel>

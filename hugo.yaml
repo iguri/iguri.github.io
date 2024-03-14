@@ -1,4 +1,4 @@
-baseURL: "http://www.grer.cn"
+baseURL: "http://grer.cn"
 languageCode: en
 defaultContentLanguage: zh # 最顶部首先展示的语言页面
 defaultContentLanguageInSubdir: false
@@ -39,7 +39,7 @@ params:
   ShowLastMod: true # 显示更新时间
   ShowReadingTime: false # 显示阅读时间
   ShowShareButtons: true # 显示分享
-  shareButtons: ["weibo", "qzone", "qq", "linkedin", "telegram"]
+  shareButtons: ["wechat", "weibo", "qzone", "qq", "linkedin", "telegram", "link"]
   ShowPostNavLinks: true # 显示帖子导航链接
   ShowBreadCrumbs: true # 显示面包屑
   ShowCodeCopyButtons: true # 显示复制按钮
