@@ -2,135 +2,135 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>折腾笔记 on 故人笔记 - 甲拉古日的自留地</title>
-    <link>grer.cn/categories/%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/</link>
+    <link>//grer.cn/categories/%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/</link>
     <description>Recent content in 折腾笔记 on 故人笔记 - 甲拉古日的自留地</description>
     <image>
       <title>故人笔记 - 甲拉古日的自留地</title>
-      <url>grer.cn/47</url>
-      <link>grer.cn/47</link>
+      <url>//grer.cn/47</url>
+      <link>//grer.cn/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;//grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
     <lastBuildDate>Sun, 10 Mar 2024 12:13:08 +0800</lastBuildDate>
-    <atom:link href="grer.cn/categories/%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//grer.cn/categories/%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>折腾主题PaperMod</title>
-      <link>grer.cn/blog/2022/papermod1.html/</link>
+      <link>//grer.cn/blog/2022/papermod1.html/</link>
       <pubDate>Tue, 10 May 2022 13:19:23 +0800</pubDate>
-      <guid>grer.cn/blog/2022/papermod1.html/</guid>
+      <guid>//grer.cn/blog/2022/papermod1.html/</guid>
       <description>更新 2024-03-06. 时隔一年我胡汉三由回来了，好久没更新博客了，发现不管是hugo还是papermod主题都迭代了好几个版本，本着博客</description>
     </item>
     <item>
       <title>首行缩进提升阅读体验</title>
-      <link>grer.cn/blog/2022/51020.html/</link>
+      <link>//grer.cn/blog/2022/51020.html/</link>
       <pubDate>Tue, 10 May 2022 02:16:56 +0000</pubDate>
-      <guid>grer.cn/blog/2022/51020.html/</guid>
+      <guid>//grer.cn/blog/2022/51020.html/</guid>
       <description>首行缩进一般是将段落的第一行从左向右缩进一定的距离，首行外的各行都保持不变，便于阅读和区分文章整体结构。 那么我们怎么样在</description>
     </item>
     <item>
       <title>利用git&#43;宝塔webhooks实现远程同步Linux服务器</title>
-      <link>grer.cn/blog/2022/581720.html/</link>
+      <link>//grer.cn/blog/2022/581720.html/</link>
       <pubDate>Sun, 08 May 2022 16:36:06 +0800</pubDate>
-      <guid>grer.cn/blog/2022/581720.html/</guid>
+      <guid>//grer.cn/blog/2022/581720.html/</guid>
       <description>化简为繁 目前写文章的顺序有三个步骤； 本地写好md文件 push到GitHub，利用GitHub Action实现自动部署到分</description>
     </item>
     <item>
       <title>利用宝塔自动计划主动推送sitemap</title>
-      <link>grer.cn/blog/2022/50619.html/</link>
+      <link>//grer.cn/blog/2022/50619.html/</link>
       <pubDate>Fri, 06 May 2022 19:16:28 +0800</pubDate>
-      <guid>grer.cn/blog/2022/50619.html/</guid>
+      <guid>//grer.cn/blog/2022/50619.html/</guid>
       <description>今天分享可以利用宝塔计划任务实现百度自动推送代码实例及教程 在网站根目录新建一个文件夹或直接新建php，我的是在根目录新建</description>
     </item>
     <item>
       <title>复习GitHub并使用Actions自动化部署</title>
-      <link>grer.cn/blog/2022/414a.html/</link>
+      <link>//grer.cn/blog/2022/414a.html/</link>
       <pubDate>Thu, 14 Apr 2022 11:14:21 +0800</pubDate>
-      <guid>grer.cn/blog/2022/414a.html/</guid>
+      <guid>//grer.cn/blog/2022/414a.html/</guid>
       <description>一直使用GitHub Pages作为境外托管平台，在墙外GitHub是真的强，ms从不超过两位数，但是墙内还是会抽风，所以</description>
     </item>
     <item>
       <title>Hugo简单添加相册页面</title>
-      <link>grer.cn/blog/2022/413a754.html/</link>
+      <link>//grer.cn/blog/2022/413a754.html/</link>
       <pubDate>Wed, 13 Apr 2022 17:54:48 +0800</pubDate>
-      <guid>grer.cn/blog/2022/413a754.html/</guid>
+      <guid>//grer.cn/blog/2022/413a754.html/</guid>
       <description>给hugo添加相册页面 今天逛木木博客的时候看到的，实现方法和效果都是简单又美观，搞起来~~ 1，创建html页面 在主题文件</description>
     </item>
     <item>
       <title>Hugo开启新标签打开链接</title>
-      <link>grer.cn/blog/2022/47wa.html/</link>
+      <link>//grer.cn/blog/2022/47wa.html/</link>
       <pubDate>Thu, 07 Apr 2022 15:25:02 +0800</pubDate>
-      <guid>grer.cn/blog/2022/47wa.html/</guid>
+      <guid>//grer.cn/blog/2022/47wa.html/</guid>
       <description>从hexo来到hugo才觉得各种配置写法都不一样了，之前因为都是基于markdown应该差不多，实则差太多了，不过有1说</description>
     </item>
     <item>
       <title>Hugo博客随机访问站内文章</title>
-      <link>grer.cn/blog/2022/hugo-random.html/</link>
+      <link>//grer.cn/blog/2022/hugo-random.html/</link>
       <pubDate>Wed, 26 Jan 2022 12:13:08 +0800</pubDate>
-      <guid>grer.cn/blog/2022/hugo-random.html/</guid>
+      <guid>//grer.cn/blog/2022/hugo-random.html/</guid>
       <description>引言 为了增加用户与你的Hugo博客的互动性，添加一个随机访问文章的功能是非常有意义的。这种功能可以让用户轻松地发现和阅读</description>
     </item>
     <item>
       <title>【记录】Matery主题添加图片懒加载</title>
-      <link>grer.cn/blog/2020/33ef.html/</link>
+      <link>//grer.cn/blog/2020/33ef.html/</link>
       <pubDate>Sun, 30 Aug 2020 20:05:00 +0000</pubDate>
-      <guid>grer.cn/blog/2020/33ef.html/</guid>
+      <guid>//grer.cn/blog/2020/33ef.html/</guid>
       <description>让所有图片元素src指向一个小的站位图片比如loading，并新增一个属性(如data-original)存放真实图片地址。每当页面加载（或者滚动条滚动），使用JS脚本将可视区域内的图片src替换回真实地址，并做请求重新加载。</description>
     </item>
     <item>
       <title>让网站底部显示百度收录精准数量</title>
-      <link>grer.cn/blog/2020/ga12.html/</link>
+      <link>//grer.cn/blog/2020/ga12.html/</link>
       <pubDate>Wed, 05 Aug 2020 23:18:53 +0000</pubDate>
-      <guid>grer.cn/blog/2020/ga12.html/</guid>
+      <guid>//grer.cn/blog/2020/ga12.html/</guid>
       <description>给网站添加百度收录 给自己网站或者博客的底部加个显示百度收录精准数量，下图是效果图，很直观的看到详细的收录数量。 效果图 通用</description>
     </item>
     <item>
       <title>WordPress自定义文章浏览数和阅读量</title>
-      <link>grer.cn/blog/2020/2d3f.html/</link>
+      <link>//grer.cn/blog/2020/2d3f.html/</link>
       <pubDate>Wed, 15 Apr 2020 15:04:38 +0000</pubDate>
-      <guid>grer.cn/blog/2020/2d3f.html/</guid>
+      <guid>//grer.cn/blog/2020/2d3f.html/</guid>
       <description>wordpress自定义文章的浏览数（阅读量）教程，支持自定义其实阅读量和随意编辑，用来假装人气再好不过了。 WordPress 站点统计文</description>
     </item>
     <item>
       <title>WordPress 5.4 注册跳转 wp-login.php?</title>
-      <link>grer.cn/blog/2020/75bd.html/</link>
+      <link>//grer.cn/blog/2020/75bd.html/</link>
       <pubDate>Sat, 11 Apr 2020 17:32:46 +0000</pubDate>
-      <guid>grer.cn/blog/2020/75bd.html/</guid>
+      <guid>//grer.cn/blog/2020/75bd.html/</guid>
       <description>前几天升级了下 5.4，也是忘了之前用的是什么古老的版本，完事后也没发现什么问题，今天看到了个有关注册的评论，拿自己站试了</description>
     </item>
     <item>
       <title>我加入萌国国籍了，一次不错的申请萌国ICP体验</title>
-      <link>grer.cn/blog/2020/5d83.html/</link>
+      <link>//grer.cn/blog/2020/5d83.html/</link>
       <pubDate>Fri, 10 Apr 2020 09:33:09 +0000</pubDate>
-      <guid>grer.cn/blog/2020/5d83.html/</guid>
+      <guid>//grer.cn/blog/2020/5d83.html/</guid>
       <description>一次很不错的萌国icp备案申请，也欢迎你来加入萌国哦 icp202020520 下面说下流程吧: 准备一份邮件： 标题：加入萌备 内容（示例）： 站名： 你</description>
     </item>
     <item>
       <title>WordPress博客域名完美更换详细教程</title>
-      <link>grer.cn/blog/2020/cec8.html/</link>
+      <link>//grer.cn/blog/2020/cec8.html/</link>
       <pubDate>Wed, 08 Apr 2020 20:37:00 +0000</pubDate>
-      <guid>grer.cn/blog/2020/cec8.html/</guid>
+      <guid>//grer.cn/blog/2020/cec8.html/</guid>
       <description>WordPress 网站域名完美更换详细教程 网站域名更换这是站长们经常遇到的问题，博主最近也遇到这个问题，操作记录下来以备不时之需。 不管是</description>
     </item>
     <item>
       <title>HTTP请求转发到HTTPS Nginx版</title>
-      <link>grer.cn/blog/2020/e685.html/</link>
+      <link>//grer.cn/blog/2020/e685.html/</link>
       <pubDate>Tue, 07 Apr 2020 17:24:50 +0000</pubDate>
-      <guid>grer.cn/blog/2020/e685.html/</guid>
+      <guid>//grer.cn/blog/2020/e685.html/</guid>
       <description>在腾讯云上申请到了免费的SSL证书，于是开始了折腾网站切换到了https，这时如果在使用http访问，即出现HTTP 40</description>
     </item>
     <item>
       <title>关掉WordPress顶部管理条</title>
-      <link>grer.cn/blog/2020/1731.html/</link>
+      <link>//grer.cn/blog/2020/1731.html/</link>
       <pubDate>Thu, 02 Apr 2020 00:58:39 +0000</pubDate>
-      <guid>grer.cn/blog/2020/1731.html/</guid>
+      <guid>//grer.cn/blog/2020/1731.html/</guid>
       <description>在functions.php里找个合适的位置加上下面代码 function wpbeginner\_remove\_version(){ return; 就这样又水了一帖&amp;hellip;</description>
     </item>
     <item>
       <title>给WordPress博客系统评论框显示用户UA</title>
-      <link>grer.cn/blog/2020/2355.html/</link>
+      <link>//grer.cn/blog/2020/2355.html/</link>
       <pubDate>Mon, 30 Mar 2020 01:54:19 +0000</pubDate>
-      <guid>grer.cn/blog/2020/2355.html/</guid>
+      <guid>//grer.cn/blog/2020/2355.html/</guid>
       <description>User Agent，简称 UA，通过HPPT头连同访问请求传递给服务器，使得服务器能够识别客户使用的操作系统及版本、CPU 类型、</description>
     </item>
   </channel>
