@@ -32,7 +32,7 @@ params:
   keywords: [故人笔记, 甲拉古日, 个人网站, 灵感创作]
   description: 故人笔记 - 甲拉古日的自留地; 随手记录生活与灵感瞬间的创作。
   author: 甲拉古日 #["Me", "You"] # multiple authors
-  images: "/images/logo.gif" # <link or path of image for opengraph, twitter-cards>
+  images: "/img/logo.gif" # <link or path of image for opengraph, twitter-cards>
   DateFormat: "2006-01-02"
   hidemeta: false
   ShowWordCounts: false # 显示字数
@@ -59,11 +59,11 @@ params:
   assets:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
-    favicon: "/favicon.ico" # <link / abs url>
-    favicon16x16: "/favicon.ico"
-    favicon32x32: "/favicon.ico"
-    apple_touch_icon: "/favicon.ico"
-    safari_pinned_tab: "/favicon.ico"
+    favicon: "/img/favicon.ico" # <link / abs url>
+    favicon16x16: "/img/favicon.ico"
+    favicon32x32: "/img/favicon.ico"
+    apple_touch_icon: "/img/favicon.ico"
+    safari_pinned_tab: "/img/favicon.ico"
 
   label:
     text: 故人笔记
@@ -75,7 +75,7 @@ params:
     enabled: true # 首页coder样式
     title: <h5>&nbsp;</h5>
     subtitle: Now, just be happy
-    imageUrl: "/logo.gif"
+    imageUrl: "/img/logo.gif"
     imageWidth: 135
     imageHeight: 135
     imageTxt:

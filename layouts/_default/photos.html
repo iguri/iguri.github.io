@@ -5,10 +5,10 @@
 <h3 align="center">纵意游肆，名山胜川靡不穷究。</h3> <p align="right"> ————《晋书·孙统传》</p>
 <hr />
 <div class="fullscreen">
-  {{ range (readDir "./static/photos") }}
+  {{ range (readDir "./content/img/photos") }}
   <figure>
     <img loading="lazy" decoding="async" src="{{"photos/" | absURL }}{{ .Name }}" alt="{{ .Name }}" />
-    <figcaption>{{ .Name | replaceRE "(.*)[.].*" "$1"}}</figcaption>
+
   </figure>
   {{ end }}
 <script src="//cdn.grer.cn/js/view-image.js"></script>
@@ -18,7 +18,7 @@
 </div>
 <style type="text/css">
 figure {
-  opacity: 0.7;
+  opacity: 0.88;
 }
 figure:hover {
   position: relative;
