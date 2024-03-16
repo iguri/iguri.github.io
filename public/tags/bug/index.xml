@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>BUG on 故人笔记 - 甲拉古日的自留地</title>
+    <link>grer.cn/tags/bug/</link>
+    <description>Recent content in BUG on 故人笔记 - 甲拉古日的自留地</description>
+    <image>
+      <title>故人笔记 - 甲拉古日的自留地</title>
+      <url>grer.cn/47</url>
+      <link>grer.cn/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 11 Apr 2020 17:32:46 +0000</lastBuildDate>
+    <atom:link href="grer.cn/tags/bug/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WordPress 5.4 注册跳转 wp-login.php?</title>
+      <link>grer.cn/blog/2020/75bd.html/</link>
+      <pubDate>Sat, 11 Apr 2020 17:32:46 +0000</pubDate>
+      <guid>grer.cn/blog/2020/75bd.html/</guid>
+      <description>前几天升级了下 5.4，也是忘了之前用的是什么古老的版本，完事后也没发现什么问题，今天看到了个有关注册的评论，拿自己站试了</description>
+    </item>
+  </channel>
+</rss>

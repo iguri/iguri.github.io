@@ -1,0 +1,181 @@
+baseURL: "grer.cn"
+languageCode: en
+defaultContentLanguage: zh # 最顶部首先展示的语言页面
+defaultContentLanguageInSubdir: false
+title: 故人笔记 - 甲拉古日的自留地
+paginate: 8
+theme: PaperMod
+
+HasCJKLanguage: true #包含中日韩字符
+isCJKLanguage: true
+summaryLength: 60 #显示描述最大值0不显示
+enableRobotsTXT: true # 允许爬虫抓取到搜索引擎，建议 true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+googleAnalytics:
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+frontmatter:
+  date: [":filename", ":default"]
+permalinks:
+  blog: "/blog/:year/:slug.html"
+  page: "/:slug"
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  title: 故人笔记 - 甲拉古日的自留地 
+  keywords: [故人笔记, 甲拉古日, 个人网站, 灵感创作]
+  description: 故人笔记 - 甲拉古日的自留地; 随手记录生活与灵感瞬间的创作。
+  author: 甲拉古日 #["Me", "You"] # multiple authors
+  images: "/logo.gif" # <link or path of image for opengraph, twitter-cards>
+  DateFormat: "2006-01-02"
+  hidemeta: false
+  ShowWordCounts: false # 显示字数
+  ShowLastMod: true # 显示更新时间
+  ShowReadingTime: false # 显示阅读时间
+  ShowShareButtons: true # 显示分享
+  shareButtons: ["wechat", "weibo", "qzone", "qq", "linkedin", "telegram", "link"]
+  ShowPostNavLinks: true # 显示帖子导航链接
+  ShowBreadCrumbs: true # 显示面包屑
+  ShowCodeCopyButtons: true # 显示复制按钮
+  hideSummary: false
+  disableSpecial1stPost: true
+  disableScrollToTop: false
+  
+  defaultTheme: auto # auto, dark, light
+  disableThemeToggle: false
+  showtoc: true
+  tocopen: true
+  comments: true # 评论
+  commentopen: false
+  twikoo: 
+    version: 1.6.30
+
+  assets:
+    # disableHLJS: true # to disable highlight.js
+    # disableFingerprinting: true
+    favicon: "/favicon.ico" # <link / abs url>
+    favicon16x16: "/favicon.ico"
+    favicon32x32: "/favicon.ico"
+    apple_touch_icon: "/favicon.ico"
+    safari_pinned_tab: "/favicon.ico"
+
+  label:
+    text: 故人笔记
+    # icon: ""
+    # iconHeight: 30
+
+  # profile-mode
+  profileMode:
+    enabled: true # 首页coder样式
+    title: <h5>&nbsp;</h5>
+    subtitle: Now, just be happy
+    imageUrl: "/logo.gif"
+    imageWidth: 135
+    imageHeight: 135
+    imageTxt:
+    imageTitle: Welcome To My BLOG
+    buttons:
+      - name: Enter
+        url: blog
+      - name: Links
+        url: "/about/#link"
+      - name: Rss
+        url: /index.xml
+
+  # home-info mode
+  homeInfoParams:
+    Title: 故人笔记
+    Content: "Now, just be happy"
+    
+  socialIcons:
+    - name: github
+      url: "//github.com/iguri"
+    - name: weibo
+      url: "//weibo.com/u/5898165577"
+    - name: bilibili
+      url: "//space.bilibili.com/477119718"
+    - name: steam
+      url: "//steamcommunity.com/id/migrer"
+    - name: telegram
+      url: "//t.me/grlol"
+    
+
+  # analytics:
+  #   google:
+  #     SiteVerificationTag: "XYZabc"
+  #   bing:
+  #     SiteVerificationTag: "XYZabc"
+  #   yandex:
+  #     SiteVerificationTag: "XYZabc"
+
+  cover:
+    responsiveImages: false # 仅仅用在Page Bundle情况下，此处不讨论
+    hidden: false # 是否隐藏
+    hiddenInList: false # 文章列表隐藏
+    hiddenInSingle: false # 在内容页内隐藏
+
+  editPost:
+    URL: "//github.com/iguri/iguri.github.io/blob/master/content"
+    Text: "edit" # edit text
+    appendFilePath: true # to append file path to Edit link
+
+  # for search
+  # https://fusejs.io/api/options.html
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
+    
+menu:
+  main:
+    - identifier: search
+      name: search
+      url: /search
+      weight: 20
+    - identifier: archives
+      name: archives
+      url: /archives
+      weight: 30
+    - identifier: about
+      name: about
+      url: /about
+      weight: 40
+# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
+# pygmentsUseClasses: true
+Copyright: <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备 51343702000108号</a> |
+  <a href="//beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备 2021023818号-2</a> |
+  <a href="//icp.gov.moe/?keyword=20223334" target="_blank" rel="noopener">萌ICP备 20223334号</a> </br>&copy; 2024 <a href="/about/#me">甲拉古日</a>
+markup:
+  goldmark:
+      renderer:
+          unsafe: true # HUGO 默认转义 Markdown 文件中的 HTML 代码，如需开启的话
+  highlight:
+      anchorLineNos: false
+      codeFences: true
+      guessSyntax: true
+      hl_Lines: "0"
+      lineAnchors: ""
+      lineNoStart: 1
+      lineNos: false
+      lineNumbersInTable: false
+      noClasses: true
+      noHl: false
+      tabWidth: 4
+      style: monokai
+      # style: darcula
+
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON

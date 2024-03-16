@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>GitHub Actions on 故人笔记 - 甲拉古日的自留地</title>
+    <link>grer.cn/tags/github-actions/</link>
+    <description>Recent content in GitHub Actions on 故人笔记 - 甲拉古日的自留地</description>
+    <image>
+      <title>故人笔记 - 甲拉古日的自留地</title>
+      <url>grer.cn/47</url>
+      <link>grer.cn/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <lastBuildDate>Thu, 14 Apr 2022 11:14:21 +0800</lastBuildDate>
+    <atom:link href="grer.cn/tags/github-actions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>复习GitHub并使用Actions自动化部署</title>
+      <link>grer.cn/blog/2022/414a.html/</link>
+      <pubDate>Thu, 14 Apr 2022 11:14:21 +0800</pubDate>
+      <guid>grer.cn/blog/2022/414a.html/</guid>
+      <description>一直使用GitHub Pages作为境外托管平台，在墙外GitHub是真的强，ms从不超过两位数，但是墙内还是会抽风，所以</description>
+    </item>
+  </channel>
+</rss>

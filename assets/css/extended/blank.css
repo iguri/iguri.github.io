@@ -1,0 +1,137 @@
+/*日夜切换特效*/
+.logo-switches {
+    z-index: 999;
+    position:fixed;
+    bottom:100px;
+    right:18px;
+    animation: breathe 5s infinite;
+}
+
+.lang-switch {
+    visibility: hidden;
+}
+
+@keyframes breathe {
+  0% {
+    opacity: 0.1;
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.3);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1.2);
+  }
+}
+
+/* 链接样式 */
+.post-content a {
+    box-shadow: none;
+    text-decoration: none;
+    border-bottom: 2px solid skyblue;
+    padding-bottom: 1.5px;
+}
+.post-content a:hover {
+    color: #263a43;
+    border-bottom: hidden; 
+}
+
+/* 图片居中 */
+.post-content img {
+    margin: auto;
+}
+
+.post-content p:has(> img:nth-child(2)){column-count:2;column-gap:8px;margin:6px 0;}
+.post-content p:has(> img:nth-child(3)){column-count:3;}
+.post-content p:has(> img:nth-child(4)){column-count:4;}
+.post-content p:has(> img:nth-child(5)){column-count:5;}
+.post-content p:has(> img:nth-child(6)){column-count:4;}
+.post-content p:has(> img:nth-child(2)) img{display:inherit;}
+.post-content p:has(> img:nth-child(6)) img{margin-bottom:8px;}
+
+.fullscreen{margin-left:calc(360px - 50vw);width:calc(100vw - 10px);column-count:4;column-gap:6px;}
+.fullscreen img{display:inherit;margin-bottom:8px;}
+@media (max-width: 720px){
+    .fullscreen{margin-left: 0;width:auto;column-count:3;}
+}
+
+/*首行缩进两个字符 */
+.post-content p {
+    text-indent: 2rem;
+}
+.post-content ul, ol, dl {
+    margin-left: 2rem;
+}
+
+/* GitHub 样式的表格 */
+table {
+    margin: auto;
+    }
+.post-content table tr {
+    border: 1px solid #979da3 !important;
+}
+.post-content table tr:nth-child(2n),
+.post-content thead {
+    background-color: var(--code-bg);
+}
+.post-content table th {
+    border: 1px solid #979da3 !important;
+}
+.post-content table td {
+    border: 1px solid #979da3 !important;
+}
+
+/**logo呼吸**/
+.profile img {
+    display: inline-table;
+    gap: 10px;
+    border-radius: 50%; 
+    /*logo呼吸*/
+    animation: light 5s ease-in-out infinite;
+}
+
+/* logo呼吸控件 */
+@keyframes light {
+    0% {
+        box-shadow: 0 0 4px #696969;
+    }
+
+    25% {
+        box-shadow: 0 0 23px #696969;
+    }
+
+    50% {
+        box-shadow: 0 0 4px #696969;
+    }
+
+    75% {
+        box-shadow: 0 0 23px #696969;
+    }
+
+    100% {
+        box-shadow: 0 0 4px #696969;
+    }
+}
+
+/**按钮效果**/
+.profile_inner a :hover {
+    animation: animate 0.5s linear infinite;
+}
+
+@keyframes animate {
+    0%,
+    25% {
+        text-shadow: 2px 2px 2px #ff6384;
+        }
+        50% {
+        text-shadow: 2px -2px 2px #ff6384;
+        }
+        75% {
+        text-shadow: -2px 2px 2px #ff6384;
+        }
+        100% {
+        text-shadow: -2px -2px 2px #ff6384;
+        }
+}

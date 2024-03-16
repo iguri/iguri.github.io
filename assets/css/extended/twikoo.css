@@ -1,0 +1,59 @@
+.tc-container {
+  margin-top: 8px;
+  background-color: var(--code-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.twikoo {
+  font-size: .75em;
+  padding: 1rem 0.5rem 0rem 0.5rem;
+}
+
+.twikoo ol,
+.twikoo ul {
+  padding-inline-start: 20px;
+}
+
+.tc-title {
+  display: block;
+  text-align: center;
+}
+
+.c-title {
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 1rem 0rem ;
+}
+
+.tk-comments-title {
+  font-size: 1em;
+}
+
+.tk-owo-emotion {
+  max-width: 25px !important;
+  vertical-align: middle !important;
+  margin: 0 1px !important;
+  display: inline-block !important;
+}
+
+.OwO .OwO-body {
+  color: var(--content) !important;
+  background-color: var(--theme) !important;
+}
+
+.el-input__inner {
+  color: var(--content) !important;
+  background-color: var(--theme) !important;
+}
+
+.el-textarea__inner {
+  color: var(--content) !important;
+  background-color: var(--theme) !important;
+}
+
+.bottom-comment {
+  bottom: 155px;
+  right: 30px;
+}
