@@ -6,7 +6,7 @@ weight: # 置顶数字代替越小越前
 tags: # 标签
   - 随机访问
   - Hugo
-categories: 折腾日记 # 分类
+categories: 折腾笔记 # 分类
 cover:
     image: "" # 封面url
     alt: # 替换文本

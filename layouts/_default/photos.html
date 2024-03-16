@@ -1,11 +1,11 @@
 {{ define "main" }}
 <div class="post">
-  <h2 class="post-title">{{.Title}}</h2>
+  
 </div>
 <h3 align="center">纵意游肆，名山胜川靡不穷究。</h3> <p align="right"> ————《晋书·孙统传》</p>
 <hr />
 <div class="fullscreen">
-  {{ range (readDir "./content/img/photos") }}
+  {{ range (readDir "./static/photos") }}
   <figure>
     <img loading="lazy" decoding="async" src="{{"photos/" | absURL }}{{ .Name }}" alt="{{ .Name }}" />
 

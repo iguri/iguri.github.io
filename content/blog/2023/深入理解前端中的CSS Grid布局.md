@@ -7,7 +7,7 @@ tags: # 标签
   - 前端
   - GridView
   - Css
-categories: 灵感笔记 # 分类
+categories: 灵感记录 # 分类
 cover:
     image: "" # 封面url
     alt: # 替换文本

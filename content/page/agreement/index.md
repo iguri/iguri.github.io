@@ -1,10 +1,7 @@
 ---
 title: 隐私政策
-hidemeta: true
-notice: false
+hideSummary: true
 comments: false
-showtoc: false
-xieshu: false
 slug: "agreement"
 ---
 # 隐私政策
