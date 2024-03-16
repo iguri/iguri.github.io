@@ -26,12 +26,6 @@
   }
 }
 
-/* 滚动条 */
-::-webkit-scrollbar {
-    width: 5px;
-    height: 3px;
-}
-
 /* 链接样式 */
 .post-content a {
     box-shadow: none;
@@ -57,7 +51,7 @@
 .post-content p:has(> img:nth-child(2)) img{display:inherit;}
 .post-content p:has(> img:nth-child(6)) img{margin-bottom:8px;}
 
-.fullscreen{margin-left:calc(360px - 50vw);width:calc(100vw - 20px);column-count:4;column-gap:6px;}
+.fullscreen{margin-left:calc(360px - 50vw);width:calc(100vw - 10px);column-count:4;column-gap:6px;}
 .fullscreen img{display:inherit;margin-bottom:8px;}
 @media (max-width: 720px){
     .fullscreen{margin-left: 0;width:auto;column-count:3;}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>百度收录 on 故人笔记 - 甲拉古日的自留地</title>
+    <link>http://localhost:1313/tags/%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95/</link>
+    <description>Recent content in 百度收录 on 故人笔记 - 甲拉古日的自留地</description>
+    <image>
+      <title>故人笔记 - 甲拉古日的自留地</title>
+      <url>http://localhost:1313/47</url>
+      <link>http://localhost:1313/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;http://localhost:1313/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 05 Aug 2020 23:18:53 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>让网站底部显示百度收录精准数量</title>
+      <link>http://localhost:1313/blog/2020/ga12.html/</link>
+      <pubDate>Wed, 05 Aug 2020 23:18:53 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2020/ga12.html/</guid>
+      <description>给网站添加百度收录 给自己网站或者博客的底部加个显示百度收录精准数量，下图是效果图，很直观的看到详细的收录数量。 效果图 通用</description>
+    </item>
+  </channel>
+</rss>

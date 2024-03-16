@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>资源分享 on 故人笔记 - 甲拉古日的自留地</title>
+    <link>http://localhost:1313/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/</link>
+    <description>Recent content in 资源分享 on 故人笔记 - 甲拉古日的自留地</description>
+    <image>
+      <title>故人笔记 - 甲拉古日的自留地</title>
+      <url>http://localhost:1313/47</url>
+      <link>http://localhost:1313/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;http://localhost:1313/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 11 Apr 2020 17:16:58 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PHPCUSTOM-优秀的win平台下php环境套件</title>
+      <link>http://localhost:1313/blog/2020/4f9c.html/</link>
+      <pubDate>Sat, 11 Apr 2020 17:16:58 +0000</pubDate>
+      <guid>http://localhost:1313/blog/2020/4f9c.html/</guid>
+      <description>windows下的php环境套件也是比较多的，比如护卫神、宝塔等，有的要么是很久没更新了，有的是占用资源比较多，有的是使</description>
+    </item>
+  </channel>
+</rss>

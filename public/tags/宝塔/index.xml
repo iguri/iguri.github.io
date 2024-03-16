@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>宝塔 on 故人笔记 - 甲拉古日的自留地</title>
+    <link>http://localhost:1313/tags/%E5%AE%9D%E5%A1%94/</link>
+    <description>Recent content in 宝塔 on 故人笔记 - 甲拉古日的自留地</description>
+    <image>
+      <title>故人笔记 - 甲拉古日的自留地</title>
+      <url>http://localhost:1313/47</url>
+      <link>http://localhost:1313/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;http://localhost:1313/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 06 May 2022 19:16:28 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E5%AE%9D%E5%A1%94/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用宝塔自动计划主动推送sitemap</title>
+      <link>http://localhost:1313/blog/2022/50619.html/</link>
+      <pubDate>Fri, 06 May 2022 19:16:28 +0800</pubDate>
+      <guid>http://localhost:1313/blog/2022/50619.html/</guid>
+      <description>今天分享可以利用宝塔计划任务实现百度自动推送代码实例及教程 在网站根目录新建一个文件夹或直接新建php，我的是在根目录新建</description>
+    </item>
+  </channel>
+</rss>
