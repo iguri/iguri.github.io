@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Wordpress on 故人笔记 - 甲拉古日的自留地</title>
-    <link>//grer.cn/tags/wordpress/</link>
+    <link>http://grer.cn/tags/wordpress/</link>
     <description>Recent content in Wordpress on 故人笔记 - 甲拉古日的自留地</description>
     <image>
       <title>故人笔记 - 甲拉古日的自留地</title>
-      <url>//grer.cn/47</url>
-      <link>//grer.cn/47</link>
+      <url>http://grer.cn/47</url>
+      <link>http://grer.cn/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;//grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;http://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
     <lastBuildDate>Wed, 15 Apr 2020 15:04:38 +0000</lastBuildDate>
-    <atom:link href="//grer.cn/tags/wordpress/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grer.cn/tags/wordpress/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WordPress自定义文章浏览数和阅读量</title>
-      <link>//grer.cn/blog/2020/2d3f.html/</link>
+      <link>http://grer.cn/blog/2020/2d3f.html/</link>
       <pubDate>Wed, 15 Apr 2020 15:04:38 +0000</pubDate>
-      <guid>//grer.cn/blog/2020/2d3f.html/</guid>
+      <guid>http://grer.cn/blog/2020/2d3f.html/</guid>
       <description>wordpress自定义文章的浏览数（阅读量）教程，支持自定义其实阅读量和随意编辑，用来假装人气再好不过了。 WordPress 站点统计文</description>
     </item>
     <item>
       <title>WordPress 5.4 注册跳转 wp-login.php?</title>
-      <link>//grer.cn/blog/2020/75bd.html/</link>
+      <link>http://grer.cn/blog/2020/75bd.html/</link>
       <pubDate>Sat, 11 Apr 2020 17:32:46 +0000</pubDate>
-      <guid>//grer.cn/blog/2020/75bd.html/</guid>
+      <guid>http://grer.cn/blog/2020/75bd.html/</guid>
       <description>前几天升级了下 5.4，也是忘了之前用的是什么古老的版本，完事后也没发现什么问题，今天看到了个有关注册的评论，拿自己站试了</description>
     </item>
     <item>
       <title>Gravatar头像接口</title>
-      <link>//grer.cn/blog/2020/9f22.html/</link>
+      <link>http://grer.cn/blog/2020/9f22.html/</link>
       <pubDate>Sat, 11 Apr 2020 17:20:34 +0000</pubDate>
-      <guid>//grer.cn/blog/2020/9f22.html/</guid>
+      <guid>http://grer.cn/blog/2020/9f22.html/</guid>
       <description>全球都在用的Gravatar头像接口，目前正常的几个Gravatar头像接口，最后一个是QQ头像接口。 http://fdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee https://sdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee http://cn.gravatar.com/avatar/e23163bb2fc9da09505510cc1e5c02ee https://cdn.v2ex.com/gravatar/e23163bb2fc9da09505510cc1e5c02ee https://dn-qiniu-avatar.qbox.me/avatar/e23163bb2fc9da09505510cc1e5c02ee https://gravatar.loli.net/avatar/e23163bb2fc9da09505510cc1e5c02ee htt</description>
     </item>
     <item>
       <title>HTTP请求转发到HTTPS Nginx版</title>
-      <link>//grer.cn/blog/2020/e685.html/</link>
+      <link>http://grer.cn/blog/2020/e685.html/</link>
       <pubDate>Tue, 07 Apr 2020 17:24:50 +0000</pubDate>
-      <guid>//grer.cn/blog/2020/e685.html/</guid>
+      <guid>http://grer.cn/blog/2020/e685.html/</guid>
       <description>在腾讯云上申请到了免费的SSL证书，于是开始了折腾网站切换到了https，这时如果在使用http访问，即出现HTTP 40</description>
     </item>
     <item>
       <title>关掉WordPress顶部管理条</title>
-      <link>//grer.cn/blog/2020/1731.html/</link>
+      <link>http://grer.cn/blog/2020/1731.html/</link>
       <pubDate>Thu, 02 Apr 2020 00:58:39 +0000</pubDate>
-      <guid>//grer.cn/blog/2020/1731.html/</guid>
+      <guid>http://grer.cn/blog/2020/1731.html/</guid>
       <description>在functions.php里找个合适的位置加上下面代码 function wpbeginner\_remove\_version(){ return; 就这样又水了一帖&amp;hellip;</description>
     </item>
     <item>
       <title>给WordPress博客系统评论框显示用户UA</title>
-      <link>//grer.cn/blog/2020/2355.html/</link>
+      <link>http://grer.cn/blog/2020/2355.html/</link>
       <pubDate>Mon, 30 Mar 2020 01:54:19 +0000</pubDate>
-      <guid>//grer.cn/blog/2020/2355.html/</guid>
+      <guid>http://grer.cn/blog/2020/2355.html/</guid>
       <description>User Agent，简称 UA，通过HPPT头连同访问请求传递给服务器，使得服务器能够识别客户使用的操作系统及版本、CPU 类型、</description>
     </item>
   </channel>
