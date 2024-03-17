@@ -1,4 +1,4 @@
-baseURL: "//grer.cn"
+baseURL: "http://grer.cn"
 languageCode: en
 defaultContentLanguage: zh # 最顶部首先展示的语言页面
 defaultContentLanguageInSubdir: false
