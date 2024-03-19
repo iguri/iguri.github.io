@@ -21,12 +21,28 @@ jobs:
         type: movie
         format: csv
         dir: ./data/douban
+
+    - name: music
+      uses: lizheming/doumark-action@master
+      with:
+        id: grer
+        type: music
+        format: csv
+        dir: ./data/douban
         
     - name: book
       uses: lizheming/doumark-action@master
       with:
         id: grer
         type: book
+        format: csv
+        dir: ./data/douban
+
+    - name: game
+      uses: lizheming/doumark-action@master
+      with:
+        id: grer
+        type: mage
         format: csv
         dir: ./data/douban
         
