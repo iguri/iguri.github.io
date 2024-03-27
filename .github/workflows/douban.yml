@@ -29,14 +29,6 @@ jobs:
         type: music
         format: csv
         dir: ./data/douban
-    
-    - name: game
-      uses: lizheming/doumark-action@master
-      with:
-        id: grer
-        type: game
-        format: csv
-        dir: ./data/douban
         
     - name: book
       uses: lizheming/doumark-action@master

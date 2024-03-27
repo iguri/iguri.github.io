@@ -1,3 +1,9 @@
+@media screen and (max-width: 900px) {
+    .list .top-link {
+        transform: translateY(0rem);
+    }
+}
+
 /*日夜切换特效*/
 .logo-switches {
     z-index: 999;
