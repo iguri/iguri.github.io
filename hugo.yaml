@@ -51,7 +51,7 @@ params:
   disableThemeToggle: false
   showtoc: true
   tocopen: true
-  comments: true # 评论
+  comments: false # 评论
   commentopen: false
   twikoo: 
     version: 1.6.30
