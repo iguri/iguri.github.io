@@ -2,7 +2,7 @@
 title: about
 hidemeta: true
 ShowBreadCrumbs: false
-comments: false
+comments: true
 commentopen: true
 ShowShareButtons: false
 slug: "about"
