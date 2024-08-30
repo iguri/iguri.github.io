@@ -30,11 +30,11 @@ slug: "about"
 ## me
 
 ```html
-姓名：甲拉古日
-爱好：探险·骑行·游戏(Vlorant)...
-技能：前后端通了六窍 —— 一窍不通
+姓名：甲拉古日（jia la gu ri）
+爱好：探险·骑行·游戏•夜跑
+技能：本人不才，所有技能都有涉猎，通了六窍，最后一窍不通
 电话：MTk4NzY1NDQ1NDk=
-Email:jialaguri@outlook.com or G@grer.cn
+Email:jialaguri@outlook.com
 ```
 
 <hr />

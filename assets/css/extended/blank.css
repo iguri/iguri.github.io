@@ -73,6 +73,7 @@
 
 /* GitHub 样式的表格 */
 table {
+    table-layout: fixed;
     margin: auto;
     }
 .post-content table tr {
