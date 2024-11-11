@@ -10,7 +10,7 @@
     <div id="tcomment"></div>
   </details>
 </footer>
-<script src="//registry.npmmirror.com/twikoo/{{ .Site.Params.twikoo.version }}/files/dist/twikoo.min.js">
+<script src="https://cdn.jsdelivr.net/npm/twikoo@{{ .Site.Params.twikoo.version }}/dist/twikoo.all.min.js">
 </script>
 <script>
   twikoo.init({
