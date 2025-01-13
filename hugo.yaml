@@ -3,7 +3,7 @@ languageCode: en
 defaultContentLanguage: zh # 最顶部首先展示的语言页面
 defaultContentLanguageInSubdir: false
 title: 故人笔记 - 甲拉古日的自留地
-paginate: 8
+pagination.pagerSize: 8
 theme: PaperMod
 
 HasCJKLanguage: true #包含中日韩字符
