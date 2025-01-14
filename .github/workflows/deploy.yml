@@ -13,7 +13,7 @@ jobs:
           submodules: false
           fetch-depth: 0
     - name: Set up Hugo
-      uses: peaceiris/actions-hugo@v3
+      uses: peaceiris/actions-hugo@v2
       with:
         hugo-version: "latest"
     - name: Build and Deploy
