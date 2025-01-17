@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2025 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
     <lastBuildDate>Tue, 10 May 2022 02:16:56 +0000</lastBuildDate>
     <atom:link href="https://grer.cn/tags/%E4%B8%AD%E6%96%87%E9%98%85%E8%AF%BB/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -19,7 +19,8 @@
       <link>https://grer.cn/blog/2022/51020.html/</link>
       <pubDate>Tue, 10 May 2022 02:16:56 +0000</pubDate>
       <guid>https://grer.cn/blog/2022/51020.html/</guid>
-      <description>首行缩进一般是将段落的第一行从左向右缩进一定的距离，首行外的各行都保持不变，便于阅读和区分文章整体结构。 那么我们怎么样在</description>
+      <description>&lt;p&gt;首行缩进一般是将段落的第一行从左向右缩进一定的距离，首行外的各行都保持不变，便于阅读和区分文章整体结构。
+那么我们怎么样在现在的hugo博客中实现呢？除了纸质排版外，我们的博客网站是否需要首行缩进？从视觉习惯方面考虑，我仍然更喜欢约定俗成的首行缩进。 一般，末行自然有行尾空格，所以，添加首行缩进，有一种中心对称的美感，虽然我好像写不出什么好文&amp;hellip;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

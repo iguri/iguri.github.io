@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2025 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
     <lastBuildDate>Sat, 11 Apr 2020 17:20:34 +0000</lastBuildDate>
     <atom:link href="https://grer.cn/tags/%E5%A4%B4%E5%83%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -19,7 +19,30 @@
       <link>https://grer.cn/blog/2020/9f22.html/</link>
       <pubDate>Sat, 11 Apr 2020 17:20:34 +0000</pubDate>
       <guid>https://grer.cn/blog/2020/9f22.html/</guid>
-      <description>全球都在用的Gravatar头像接口，目前正常的几个Gravatar头像接口，最后一个是QQ头像接口。 http://fdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee https://sdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee http://cn.gravatar.com/avatar/e23163bb2fc9da09505510cc1e5c02ee https://cdn.v2ex.com/gravatar/e23163bb2fc9da09505510cc1e5c02ee https://dn-qiniu-avatar.qbox.me/avatar/e23163bb2fc9da09505510cc1e5c02ee https://gravatar.loli.net/avatar/e23163bb2fc9da09505510cc1e5c02ee htt</description>
+      <description>&lt;p&gt;全球都在用的&lt;strong&gt;Gravatar&lt;/strong&gt;头像接口，目前正常的几个Gravatar头像接口，最后一个是QQ头像接口。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://fdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;http://fdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://sdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;https://sdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://cn.gravatar.com/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;http://cn.gravatar.com/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cdn.v2ex.com/gravatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;https://cdn.v2ex.com/gravatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://dn-qiniu-avatar.qbox.me/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;https://dn-qiniu-avatar.qbox.me/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://gravatar.loli.net/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;https://gravatar.loli.net/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://q1.qlogo.cn/g?b=qq&amp;amp;nk=QQ&#34;&gt;http://q1.qlogo.cn/g?b=qq&amp;amp;nk=QQ&lt;/a&gt;号码&amp;amp;s=640&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
   </channel>
 </rss>

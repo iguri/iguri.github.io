@@ -3,7 +3,7 @@ languageCode: en
 defaultContentLanguage: zh # 最顶部首先展示的语言页面
 defaultContentLanguageInSubdir: false
 title: 故人笔记 - 甲拉古日的自留地
-paginate: 8
+pagination.pagerSize: 8
 theme: PaperMod
 
 HasCJKLanguage: true #包含中日韩字符
@@ -54,7 +54,7 @@ params:
   comments: true # 评论
   commentopen: false
   twikoo: 
-    version: 1.6.38
+    version: 1.6.39
 
   assets:
     # disableHLJS: true # to disable highlight.js
@@ -154,7 +154,7 @@ menu:
 # pygmentsUseClasses: true
 Copyright: <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备 51343702000108号</a> |
   <a href="//beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备 2021023818号-2</a> |
-  <a href="//icp.gov.moe/?keyword=20223334" target="_blank" rel="noopener">萌ICP备 20223334号</a> </br>&copy; 2024 <a href="/about/#me">甲拉古日</a>
+  <a href="//icp.gov.moe/?keyword=20223334" target="_blank" rel="noopener">萌ICP备 20223334号</a> </br>&copy; 2025 <a href="/about/#me">甲拉古日</a>
 markup:
   goldmark:
       renderer:

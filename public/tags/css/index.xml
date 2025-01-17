@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2025 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
     <lastBuildDate>Sun, 10 Mar 2024 03:49:44 +0800</lastBuildDate>
     <atom:link href="https://grer.cn/tags/css/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -19,7 +19,8 @@
       <link>https://grer.cn/blog/2023/css-grid.html/</link>
       <pubDate>Fri, 10 Mar 2023 15:49:44 +0800</pubDate>
       <guid>https://grer.cn/blog/2023/css-grid.html/</guid>
-      <description>前言 在前端开发中，页面布局是非常重要的一环。而近年来，CSS Grid布局的出现为我们提供了更加灵活和强大的页面布局方式。</description>
+      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;在前端开发中，页面布局是非常重要的一环。而近年来，CSS Grid布局的出现为我们提供了更加灵活和强大的页面布局方式。本文将会详细讲解CSS Grid布局的原理以及如何使用它进行页面布局。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

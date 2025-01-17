@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2024 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2025 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
     <lastBuildDate>Mon, 04 Apr 2022 18:34:35 +0000</lastBuildDate>
     <atom:link href="https://grer.cn/tags/%E4%BA%91%E4%BB%BB%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -19,7 +19,8 @@
       <link>https://grer.cn/blog/2022/tuog.html/</link>
       <pubDate>Mon, 04 Apr 2022 18:34:35 +0000</pubDate>
       <guid>https://grer.cn/blog/2022/tuog.html/</guid>
-      <description>GRTask是什么？ 这是一个自动化的托管系统，目前支持网易云签到刷歌，bilibili赚经验+自动赛事预测，米游社原神签</description>
+      <description>&lt;h3 id=&#34;grtask是什么&#34;&gt;GRTask是什么？&lt;/h3&gt;
+&lt;p&gt;这是一个自动化的托管系统，目前支持网易云签到刷歌，bilibili赚经验+自动赛事预测，米游社原神签到，部署至服务器和你的小伙伴一起赚经验吧。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
