@@ -9,7 +9,7 @@
     z-index: 999;
     position:fixed;
     bottom:100px;
-    right:18px;
+    right:30px;
     animation: breathe 5s infinite;
 }
 
@@ -120,25 +120,4 @@ table {
     100% {
         box-shadow: 0 0 4px #696969;
     }
-}
-
-/**按钮效果**/
-.profile_inner a :hover {
-    animation: animate 0.5s linear infinite;
-}
-
-@keyframes animate {
-    0%,
-    25% {
-        text-shadow: 2px 2px 2px #ff6384;
-        }
-        50% {
-        text-shadow: 2px -2px 2px #ff6384;
-        }
-        75% {
-        text-shadow: -2px 2px 2px #ff6384;
-        }
-        100% {
-        text-shadow: -2px -2px 2px #ff6384;
-        }
 }
