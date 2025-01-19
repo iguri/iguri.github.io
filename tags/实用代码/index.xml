@@ -4,14 +4,9 @@
     <title>实用代码 on 故人笔记 - 甲拉古日的自留地</title>
     <link>https://grer.cn/tags/%E5%AE%9E%E7%94%A8%E4%BB%A3%E7%A0%81/</link>
     <description>Recent content in 实用代码 on 故人笔记 - 甲拉古日的自留地</description>
-    <image>
-      <title>故人笔记 - 甲拉古日的自留地</title>
-      <url>https://grer.cn/47</url>
-      <link>https://grer.cn/47</link>
-    </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2025 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <generator>Hugo -- 0.141.0</generator>
+    <language>zh</language>
+    <copyright>川公网安备 51343702000108号 | 蜀ICP备 2021023818号-2 | 萌ICP备 20223334号 © 2025 甲拉古日</copyright>
     <lastBuildDate>Wed, 05 Aug 2020 23:18:53 +0000</lastBuildDate>
     <atom:link href="https://grer.cn/tags/%E5%AE%9E%E7%94%A8%E4%BB%A3%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -22,8 +17,7 @@
       <description>&lt;h3 id=&#34;给网站添加百度收录&#34;&gt;给网站添加百度收录&lt;/h3&gt;
 &lt;p&gt;给自己网站或者博客的底部加个显示百度收录精准数量，下图是效果图，很直观的看到详细的收录数量。&lt;/p&gt;
 &lt;h3 id=&#34;效果图&#34;&gt;效果图&lt;/h3&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://grer.cn/img/2020/08/05/dibu1231241541.jpg&#34; alt=&#34;效果浏览&#34;  /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;效果浏览&#34; loading=&#34;lazy&#34; src=&#34;https://grer.cn/img/2020/08/05/dibu1231241541.jpg&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;通用方法&#34;&gt;通用方法&lt;/h3&gt;
 &lt;p&gt;在想要显示的地方直接加上以下代码：&lt;/p&gt;</description>
     </item>

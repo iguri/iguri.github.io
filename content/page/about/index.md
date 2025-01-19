@@ -1,5 +1,5 @@
 ---
-title: about
+title: 关于
 hidemeta: true
 ShowBreadCrumbs: false
 comments: true
@@ -7,7 +7,7 @@ commentopen: true
 ShowShareButtons: false
 slug: "about"
 ---
-
+## 本站
 本站由强大的go语言——<a href="https://gohugo.io/">Hugo</a>静态博客生成器生成，并基于<a href="https://github.com/adityatelange/hugo-PaperMod/">PaperMod</a>主题模块为基础的个人博客，目前由<a href="https://github.com/actions">Github Actions</a>部署构建，托管于<a href="https://pages.github.com/">Github Pages</a>和<a href="https://cloud.tencent.com/">腾讯云</a>服务器。本站源码全部托管于公开仓库 <a href="https://github.com/iguri/iguri.github.io" target="_blank" rel="noopener">源码仓库</a>，如有需要可自行参考 。
 
 本站内容以原创、分享和记录为主，如本站的言论侵犯了你的权益，请携相关资料联系我处理。本站没有任何盈利行为和捐赠通道，如果您喜欢我拙劣的表达方式，请多多来访。
@@ -27,19 +27,18 @@ slug: "about"
  |
 <a href="https://521404.xyz">521404.xyz</a>
 
-## me
+## 我？
+一个来自大山深处的<del>少</del>中年矮穷矬，喜欢户外运动（骑行、爬山、徒步、慢跑...），也喜欢宅窝打游戏（单机剧情、角色养成、体育竞技都有涉猎，钟爱fps且反应迟钝的手残党。
 
-```html
-姓名：甲拉古日（jia la gu ri）
-爱好：探险·骑行·游戏•夜跑
-技能：本人不才，所有技能都有涉猎，通了六窍，最后一窍不通
-电话：MTk4NzY1NDQ1NDk=
-Email:jialaguri@outlook.com
-```
+**↓↓↓联系我↓↓↓**
+
+手持电话：<a href="tel:19876544549">MTk4NzY1NDQ1NDk=</a>
+
+Email: <a href="jialaguri@outlook.com">jialaguri@outlook.com</a>
 
 <hr />
 
-## **link**
+## **友链**
 
 {{<friend
 name="唯爱忆" url="//521404.xyz"

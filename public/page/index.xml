@@ -4,42 +4,24 @@
     <title>Pages on 故人笔记 - 甲拉古日的自留地</title>
     <link>https://grer.cn/page/</link>
     <description>Recent content in Pages on 故人笔记 - 甲拉古日的自留地</description>
-    <image>
-      <title>故人笔记 - 甲拉古日的自留地</title>
-      <url>https://grer.cn/47</url>
-      <link>https://grer.cn/47</link>
-    </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>&lt;a href=&#34;//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;川公网安备 51343702000108号&lt;/a&gt; | &lt;a href=&#34;//beian.miit.gov.cn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;蜀ICP备 2021023818号-2&lt;/a&gt; | &lt;a href=&#34;//icp.gov.moe/?keyword=20223334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;萌ICP备 20223334号&lt;/a&gt; &lt;/br&gt;&amp;copy; 2025 &lt;a href=&#34;https://grer.cn/about/#me&#34;&gt;甲拉古日&lt;/a&gt;</copyright>
+    <generator>Hugo -- 0.141.0</generator>
+    <language>zh</language>
+    <copyright>川公网安备 51343702000108号 | 蜀ICP备 2021023818号-2 | 萌ICP备 20223334号 © 2025 甲拉古日</copyright>
     <atom:link href="https://grer.cn/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>about</title>
+      <title>关于</title>
       <link>https://grer.cn/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://grer.cn/about/</guid>
-      <description>&lt;p&gt;本站由强大的go语言——&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;静态博客生成器生成，并基于&lt;a href=&#34;https://github.com/adityatelange/hugo-PaperMod/&#34;&gt;PaperMod&lt;/a&gt;主题模块为基础的个人博客，目前由&lt;a href=&#34;https://github.com/actions&#34;&gt;Github Actions&lt;/a&gt;部署构建，托管于&lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt;和&lt;a href=&#34;https://cloud.tencent.com/&#34;&gt;腾讯云&lt;/a&gt;服务器。本站源码全部托管于公开仓库 &lt;a href=&#34;https://github.com/iguri/iguri.github.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;源码仓库&lt;/a&gt;，如有需要可自行参考 。&lt;/p&gt;
+      <description>&lt;h2 id=&#34;本站&#34;&gt;本站&lt;/h2&gt;
+&lt;p&gt;本站由强大的go语言——&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;静态博客生成器生成，并基于&lt;a href=&#34;https://github.com/adityatelange/hugo-PaperMod/&#34;&gt;PaperMod&lt;/a&gt;主题模块为基础的个人博客，目前由&lt;a href=&#34;https://github.com/actions&#34;&gt;Github Actions&lt;/a&gt;部署构建，托管于&lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt;和&lt;a href=&#34;https://cloud.tencent.com/&#34;&gt;腾讯云&lt;/a&gt;服务器。本站源码全部托管于公开仓库 &lt;a href=&#34;https://github.com/iguri/iguri.github.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;源码仓库&lt;/a&gt;，如有需要可自行参考 。&lt;/p&gt;
 &lt;p&gt;本站内容以原创、分享和记录为主，如本站的言论侵犯了你的权益，请携相关资料联系我处理。本站没有任何盈利行为和捐赠通道，如果您喜欢我拙劣的表达方式，请多多来访。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>我的观影</title>
-      <link>https://grer.cn/movies/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://grer.cn/movies/</guid>
-      <description></description>
     </item>
     <item>
       <title>我的相册</title>
       <link>https://grer.cn/photos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://grer.cn/photos/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>我的阅读</title>
-      <link>https://grer.cn/books/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://grer.cn/books/</guid>
       <description></description>
     </item>
     <item>

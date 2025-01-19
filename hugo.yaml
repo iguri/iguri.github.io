@@ -1,8 +1,8 @@
 baseURL: "https://grer.cn"
+title: 故人笔记 - 甲拉古日的自留地
 languageCode: en
 defaultContentLanguage: zh # 最顶部首先展示的语言页面
 defaultContentLanguageInSubdir: false
-title: 故人笔记 - 甲拉古日的自留地
 pagination.pagerSize: 8
 theme: PaperMod
 
@@ -15,10 +15,15 @@ buildFuture: false
 buildExpired: false
 
 googleAnalytics:
+BaiduAnalytics: "xqDP7owQ6bJEDs9g"
 
 minify:
   disableXML: true
   minifyOutput: true
+
+Copyright: <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备 51343702000108号</a> |
+  <a href="//beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备 2021023818号-2</a> |
+  <a href="//icp.gov.moe/?keyword=20223334" target="_blank" rel="noopener">萌ICP备 20223334号</a> </br>&copy; 2025 <a href="/about/#我">甲拉古日</a>
 
 frontmatter:
   date: [":filename", ":default"]
@@ -32,7 +37,7 @@ params:
   keywords: [故人笔记, 甲拉古日, 个人网站, 灵感创作]
   description: 故人笔记 - 甲拉古日的自留地; 随手记录生活与灵感瞬间的创作。
   author: 甲拉古日 #["Me", "You"] # multiple authors
-  images: "/logo.gif" # <link or path of image for opengraph, twitter-cards>
+  # images: "/logo.gif" # <link or path of image for opengraph, twitter-cards>
   DateFormat: "2006-01-02"
   hidemeta: false
   ShowWordCounts: false # 显示字数
@@ -46,7 +51,10 @@ params:
   hideSummary: false
   disableSpecial1stPost: true
   disableScrollToTop: false
-  
+  hideFooter: false
+  footer: 
+    text: ""
+    
   defaultTheme: auto # auto, dark, light
   disableThemeToggle: false
   showtoc: true
@@ -55,7 +63,7 @@ params:
   commentopen: false
   twikoo: 
     version: 1.6.39
-
+    
   assets:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
@@ -73,20 +81,16 @@ params:
   # profile-mode
   profileMode:
     enabled: true # 首页coder样式
-    title: <h5>&nbsp;</h5>
-    subtitle: Now, just be happy
+    title: <h4>我站在死亡的边缘，嘲笑着死神的无能。</h4>
+    subtitle:
     imageUrl: "/logo.gif"
-    imageWidth: 135
-    imageHeight: 135
+    imageWidth: 140
+    imageHeight: 140
     imageTxt:
     imageTitle: Welcome To My BLOG
     buttons:
       - name: Enter
         url: blog
-      - name: Links
-        url: "/about/#link"
-      - name: Rss
-        url: /index.xml
 
   # home-info mode
   homeInfoParams:
@@ -135,26 +139,25 @@ params:
     threshold: 0.4
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
-    
-menu:
-  main:
-    - identifier: search
-      name: search
-      url: /search
-      weight: 20
-    - identifier: archives
-      name: archives
-      url: /archives
-      weight: 30
-    - identifier: about
-      name: about
-      url: /about
-      weight: 40
+
+languages:
+  zh:
+    menu:
+      main:
+        - identifier: search
+          name: 搜索
+          url: /search
+          weight: 20
+        - identifier: archives
+          name: 归档
+          url: /archives
+          weight: 30
+        - identifier: about
+          name: 关于
+          url: /about
+          weight: 40
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 # pygmentsUseClasses: true
-Copyright: <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备 51343702000108号</a> |
-  <a href="//beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备 2021023818号-2</a> |
-  <a href="//icp.gov.moe/?keyword=20223334" target="_blank" rel="noopener">萌ICP备 20223334号</a> </br>&copy; 2025 <a href="/about/#me">甲拉古日</a>
 markup:
   goldmark:
       renderer:
