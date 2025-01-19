@@ -9,7 +9,7 @@
     z-index: 999;
     position:fixed;
     bottom:100px;
-    right:30px;
+    right:32px;
     animation: breathe 5s infinite;
 }
 
@@ -91,7 +91,7 @@ table {
 }
 
 /**logo呼吸**/
-.profile img {
+.profile img{
     display: inline-table;
     gap: 10px;
     border-radius: 50%; 
