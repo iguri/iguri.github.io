@@ -47,6 +47,12 @@ word="记录和Ta的点滴日常与美好瞬间"
 >}}
 
 {{<friend
+name="绘影旅忆" url="//pic.grer.cn"
+logo="//grer.cn/img/favicon.ico" 
+word="旅途中的吉光片羽被提炼为诗意的影像，最终沉淀为内心深处的情感地图。"
+>}}
+
+{{<friend
 name="迷失博客" url="//www.mishi23.com" 
 logo="//www.mishi23.com/favicon.png" 
 word="一个基于软件和源码分享,创作与抄袭结合的博客"
