@@ -15,7 +15,7 @@ jobs:
     - name: Set up Hugo
       uses: peaceiris/actions-hugo@v2
       with:
-        hugo-version: "v0.145.0"
+        hugo-version: "v0.100.0"
     - name: Build and Deploy
       run: |
         hugo -F --cleanDestinationDir
