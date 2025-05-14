@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Wordpress on 故人笔记 - 甲拉古日的自留地</title>
+    <link>https://grer.cn/tags/wordpress/</link>
+    <description>Recent content in Wordpress on 故人笔记 - 甲拉古日的自留地</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh</language>
+    <copyright>川公网安备51343702000108号 | 蜀ICP备2021023818号-2 | 萌ICP备20223334号 © 2025 甲拉古日</copyright>
+    <lastBuildDate>Wed, 15 Apr 2020 15:04:38 +0000</lastBuildDate>
+    <atom:link href="https://grer.cn/tags/wordpress/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WordPress自定义文章浏览数和阅读量</title>
+      <link>https://grer.cn/blog/2020/2d3f.html/</link>
+      <pubDate>Wed, 15 Apr 2020 15:04:38 +0000</pubDate>
+      <guid>https://grer.cn/blog/2020/2d3f.html/</guid>
+      <description>&lt;h5 id=&#34;wordpress自定义文章的浏览数阅读量教程支持自定义其实阅读量和随意编辑用来假装人气再好不过了&#34;&gt;wordpress自定义文章的浏览数（阅读量）教程，支持自定义其实阅读量和随意编辑，用来假装人气再好不过了。&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;WordPress&lt;/strong&gt; 站点统计文章浏览数（阅读量）大多数默认都是安装 &lt;a href=&#34;https://github.com/lesterchan/wp-postviews/&#34;&gt;WP-PostViews 插件&lt;/a&gt;（&lt;strong&gt;PS：不安装这个插件而是用纯代码实现统计的，更简单了，直接修改你所用的代码即可&lt;/strong&gt;），所以本文就以这个插件的 ****the_views()****函数为例进行说明如何设置一个基数。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>WordPress 5.4 注册跳转 wp-login.php?</title>
+      <link>https://grer.cn/blog/2020/75bd.html/</link>
+      <pubDate>Sat, 11 Apr 2020 17:32:46 +0000</pubDate>
+      <guid>https://grer.cn/blog/2020/75bd.html/</guid>
+      <description>&lt;p&gt;前几天升级了下 5.4，也是忘了之前用的是什么古老的版本，完事后也没发现什么问题，今天看到了个有关注册的评论，拿自己站试了下，发现注册后跳转到了 ***&lt;a href=&#34;https://wp-login.php/?checkemail=registered&#34;&gt;https://wp-login.php/?checkemail=registered&lt;/a&gt; ，**What the F**k? 域名被你吃了啊？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gravatar头像接口</title>
+      <link>https://grer.cn/blog/2020/9f22.html/</link>
+      <pubDate>Sat, 11 Apr 2020 17:20:34 +0000</pubDate>
+      <guid>https://grer.cn/blog/2020/9f22.html/</guid>
+      <description>&lt;p&gt;全球都在用的&lt;strong&gt;Gravatar&lt;/strong&gt;头像接口，目前正常的几个Gravatar头像接口，最后一个是QQ头像接口。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://fdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;http://fdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://sdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;https://sdn.geekzu.org/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://cn.gravatar.com/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;http://cn.gravatar.com/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cdn.v2ex.com/gravatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;https://cdn.v2ex.com/gravatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://dn-qiniu-avatar.qbox.me/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;https://dn-qiniu-avatar.qbox.me/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://gravatar.loli.net/avatar/e23163bb2fc9da09505510cc1e5c02ee&#34;&gt;https://gravatar.loli.net/avatar/e23163bb2fc9da09505510cc1e5c02ee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://q1.qlogo.cn/g?b=qq&amp;amp;nk=QQ&#34;&gt;http://q1.qlogo.cn/g?b=qq&amp;nk=QQ&lt;/a&gt;号码&amp;amp;s=640&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>HTTP请求转发到HTTPS Nginx版</title>
+      <link>https://grer.cn/blog/2020/e685.html/</link>
+      <pubDate>Tue, 07 Apr 2020 17:24:50 +0000</pubDate>
+      <guid>https://grer.cn/blog/2020/e685.html/</guid>
+      <description>&lt;p&gt;在腾讯云上申请到了免费的SSL证书，于是开始了折腾网站切换到了https，这时如果在使用http访问，即出现HTTP 400错误，所以需要设置Nginx将http请求跳转到https。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>关掉WordPress顶部管理条</title>
+      <link>https://grer.cn/blog/2020/1731.html/</link>
+      <pubDate>Thu, 02 Apr 2020 00:58:39 +0000</pubDate>
+      <guid>https://grer.cn/blog/2020/1731.html/</guid>
+      <description>&lt;p&gt;在&lt;code&gt;functions.php&lt;/code&gt;里找个合适的位置加上下面代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function wpbeginner\_remove\_version(){
+return;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;就这样又水了一帖&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给WordPress博客系统评论框显示用户UA</title>
+      <link>https://grer.cn/blog/2020/2355.html/</link>
+      <pubDate>Mon, 30 Mar 2020 01:54:19 +0000</pubDate>
+      <guid>https://grer.cn/blog/2020/2355.html/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;User Agent&lt;/strong&gt;，简称 UA，通过HPPT头连同访问请求传递给服务器，使得服务器能够识别客户使用的操作系统及版本、CPU 类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等，并依此为依据返回针对相应设备适配的网页和数据。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Win on 故人笔记 - 甲拉古日的自留地</title>
+    <link>https://grer.cn/tags/win/</link>
+    <description>Recent content in Win on 故人笔记 - 甲拉古日的自留地</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh</language>
+    <copyright>川公网安备51343702000108号 | 蜀ICP备2021023818号-2 | 萌ICP备20223334号 © 2025 甲拉古日</copyright>
+    <lastBuildDate>Sat, 11 Apr 2020 17:16:58 +0000</lastBuildDate>
+    <atom:link href="https://grer.cn/tags/win/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PHPCUSTOM-优秀的win平台下php环境套件</title>
+      <link>https://grer.cn/blog/2020/4f9c.html/</link>
+      <pubDate>Sat, 11 Apr 2020 17:16:58 +0000</pubDate>
+      <guid>https://grer.cn/blog/2020/4f9c.html/</guid>
+      <description>&lt;p&gt;windows下的php环境套件也是比较多的，比如护卫神、宝塔等，有的要么是很久没更新了，有的是占用资源比较多，有的是使用起来不友好，所以就在网上继续搜寻其他的php环境套件，最后就发现了&lt;strong&gt;PHPCUSTOM&lt;/strong&gt;，总的来说功能强大，占用资源多，搭配的工具软件也多，值得一试。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

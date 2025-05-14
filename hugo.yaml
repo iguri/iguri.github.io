@@ -17,6 +17,8 @@ buildExpired: false
 googleAnalytics:
 BaiduAnalytics: "xqDP7owQ6bJEDs9g"
 
+ignoreLogs: warning-partial-superfluous-prefix
+
 minify:
   disableXML: true
   minifyOutput: true

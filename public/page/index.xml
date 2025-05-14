@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Pages on 故人笔记 - 甲拉古日的自留地</title>
+    <link>https://grer.cn/page/</link>
+    <description>Recent content in Pages on 故人笔记 - 甲拉古日的自留地</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh</language>
+    <copyright>川公网安备51343702000108号 | 蜀ICP备2021023818号-2 | 萌ICP备20223334号 © 2025 甲拉古日</copyright>
+    <atom:link href="https://grer.cn/page/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于</title>
+      <link>https://grer.cn/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://grer.cn/about/</guid>
+      <description>&lt;h2 id=&#34;本站&#34;&gt;本站&lt;/h2&gt;
+&lt;p&gt;本站由强大的go语言——&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;静态博客生成器生成，并基于&lt;a href=&#34;https://github.com/adityatelange/hugo-PaperMod/&#34;&gt;PaperMod&lt;/a&gt;主题模块为基础的个人博客，目前由&lt;a href=&#34;https://github.com/actions&#34;&gt;Github Actions&lt;/a&gt;部署构建，托管于&lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt;和&lt;a href=&#34;https://cloud.tencent.com/&#34;&gt;腾讯云&lt;/a&gt;服务器。本站源码全部托管于公开仓库 &lt;a href=&#34;https://github.com/iguri/iguri.github.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;源码仓库&lt;/a&gt;，如有需要可自行参考 。&lt;/p&gt;
+&lt;p&gt;本站内容以原创、分享和记录为主，如本站的言论侵犯了你的权益，请携相关资料联系我处理。本站没有任何盈利行为和捐赠通道，如果您喜欢我拙劣的表达方式，请多多来访。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>我的相册</title>
+      <link>https://grer.cn/photos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://grer.cn/photos/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>隐私政策</title>
+      <link>https://grer.cn/agreement/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://grer.cn/agreement/</guid>
+      <description>&lt;h1 id=&#34;隐私政策&#34;&gt;隐私政策&lt;/h1&gt;
+&lt;h5 id=&#34;最近修訂日期2020年07月04日&#34;&gt;最近修訂日期：2020年07月04日&lt;/h5&gt;
+&lt;h3 id=&#34;引言&#34;&gt;引言&lt;/h3&gt;
+&lt;p&gt;本站尊重并保护所有使用用户的个人隐私权。为了给您提供更准确、更有个性化的服务，本应用会按照本&lt;a href=&#34;https://www.grins.top/agreement&#34;&gt;《隐私政策》&lt;/a&gt;的规定使用和披露您的个人信息。但本站将以高度的勤勉、审慎义务对待这些信息。除本&lt;a href=&#34;https://www.grins.top/agreement&#34;&gt;《隐私政策》&lt;/a&gt;另有规定外，在未征得您事先许可的情况下，本应用不会将这些信息对外披露或向第三方提供。本应用会不时更新本&lt;a href=&#34;https://www.grins.top/agreement&#34;&gt;《隐私政策》&lt;/a&gt;。 您在同意本应用服务使用协议之时，即视为您已经同意本&lt;a href=&#34;https://www.grins.top/agreement&#34;&gt;《隐私政策》&lt;/a&gt;全部内容。本&lt;a href=&#34;https://www.grins.top/agreement&#34;&gt;《隐私政策》&lt;/a&gt;属于本应用服务使用协议不可分割的一部分。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
