@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://grer.cn/sitemap.xml
