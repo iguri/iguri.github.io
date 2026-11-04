@@ -60,8 +60,10 @@ jobs:
           path: ./public/
           # 👇 请务必替换为你 1Panel 中该网站真实的绝对路径，末尾要保留斜杠！
           remote_path: /www/wwwroot/grer.cn/
-          remote_host: ${{ secrets.SERVER_HOST }}
-          remote_user: ${{ secrets.SERVER_USER }}
+          remote_host: 113.45.1.202
+          # ${{ secrets.SERVER_HOST }}
+          remote_user: root
+          # ${{ secrets.SERVER_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
   deploy:
