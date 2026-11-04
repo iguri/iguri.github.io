@@ -43,27 +43,20 @@ jobs:
         run: |
           hugo \
             --gc --minify \
-            --baseURL "https://grer.cn/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
-      # ========================================================
-      # 新增：通过 Rsync 将构建好的 public 目录推送到 1Panel 服务器
-      # ========================================================
       - name: Deploy to Server with Rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete
           path: ./public/
-          # 👇 请务必替换为你 1Panel 中该网站真实的绝对路径，末尾要保留斜杠！
           remote_path: /www/wwwroot/grer.cn/
-          remote_host: 113.45.1.202
-          # ${{ secrets.SERVER_HOST }}
-          remote_user: root
-          # ${{ secrets.SERVER_USER }}
+          remote_host: ${{ secrets.SERVER_HOST }}
+          remote_user: ${{ secrets.SERVER_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
   deploy:
