@@ -52,7 +52,7 @@ jobs:
       - name: Deploy to Server with Rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr --delete
+          switches: -rltvz --delete --chown=www:www
           path: ./public/
           remote_path: /www/wwwroot/grer.cn/
           remote_host: ${{ secrets.SERVER_HOST }}
