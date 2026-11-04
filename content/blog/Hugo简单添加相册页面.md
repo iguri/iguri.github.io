@@ -5,10 +5,12 @@ tags:
   - Hugo
   - 博客
 slug: 413a754
-categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 折腾笔记
 lastmod: 2022-04-13T17:54:48+08:00
 author: "甲拉古日"
 draft: false
+aliases:
+  - "/blog/2022/413a754.html/index.html"
 ---
 
 ## 给hugo添加相册页面

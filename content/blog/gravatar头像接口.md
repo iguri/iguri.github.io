@@ -5,10 +5,11 @@ tags:
   - wordpress
   - 头像
   - 网站日记
-id: '498'
 slug: 9f22
-categories: 分享安利 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 分享安利
 date: 2020-04-11 17:20:34
+aliases:
+  - "/blog/2020/9f22.html/index.html"
 ---
 全球都在用的**Gravatar**头像接口，目前正常的几个Gravatar头像接口，最后一个是QQ头像接口。 
 

@@ -2,6 +2,8 @@
 title: Hello World
 slug: hexo
 date: 2017-03-03 15:30:00
+aliases:
+  - "/blog/2017/hexo.html/index.html"
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 

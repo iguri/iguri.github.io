@@ -5,9 +5,15 @@ tags:
   - 高通
 author: "甲拉古日"
 slug: 9qc1
-categories: 日常水文 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
-img: https://cdn.jsdelivr.net/gh/grinxxoo/bed/images/e4dde71190ef76c658265e216f4ff7fdae5167a1.jpeg
+categories: 日常水文
 date: 2020-07-28 23:22:53
+aliases:
+  - "/blog/2020/9qc1.html/index.html"
+cover:
+    image: "https://cdn.jsdelivr.net/gh/grinxxoo/bed/images/e4dde71190ef76c658265e216f4ff7fdae5167a1.jpeg"
+    alt: ""
+    caption: ""
+
 ---
 
 7月28日早间传闻，高通正式宣布了面向安卓设备推出的商用快充技术QC 5（Quick Charge 5），该机技术可提供100W以上充电功率，据官方介绍，从0电量充至50%电量仅需5分钟。

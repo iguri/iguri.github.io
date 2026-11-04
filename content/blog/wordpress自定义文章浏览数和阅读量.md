@@ -4,8 +4,10 @@ tags:
   - wordpress
   - 网站日记
 slug: '2d3f'
-categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 折腾笔记
 date: 2020-04-15 15:04:38
+aliases:
+  - "/blog/2020/2d3f.html/index.html"
 ---
 
 ##### wordpress自定义文章的浏览数（阅读量）教程，支持自定义其实阅读量和随意编辑，用来假装人气再好不过了。

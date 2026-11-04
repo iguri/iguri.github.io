@@ -3,12 +3,11 @@ title: "利用宝塔自动计划主动推送sitemap"
 date: 2022-05-06T19:16:28+08:00
 author: "甲拉古日"
 comments: # 评论
-weight: # 置顶数字代替越小越前
 tags:
   - 宝塔
   - 自动计划
   -
-categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 折腾笔记
 cover:
     image: "" # 封面url
     alt: # 替换文本
@@ -17,6 +16,8 @@ lastmod: 2022-05-06T19:16:28+08:00
 summary: 
 slug: 50619
 draft: false
+aliases:
+  - "/blog/2022/50619.html/index.html"
 ---
 
 **今天分享可以利用宝塔计划任务实现百度自动推送代码实例及教程**

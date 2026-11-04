@@ -3,12 +3,11 @@ title: "Valorant下次夜市预测"
 date: 2022-05-07T00:14:37Z
 author: "甲拉古日"
 comments: # 评论
-weight: # 置顶数字代替越小越前
 tags:
   - valorant
   - 竞技游戏
   -
-categories: 日常水文 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 日常水文
 cover:
     image: "" # 封面url
     alt: # 替换文本
@@ -17,6 +16,8 @@ lastmod: 2022-05-07T00:14:37Z
 summary: 
 slug: 22578
 draft: false
+aliases:
+  - "/blog/2022/22578.html/index.html"
 ---
 valorant是同英雄联盟团队的riot制作的一款FPS竞技游戏，并不像csgo那样硬核，有较高的可玩性，每位特工都拥有专属的或偏防守、进攻、辅助等三个技能。
 ### 什么是夜市？

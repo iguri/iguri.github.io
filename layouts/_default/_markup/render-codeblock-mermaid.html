@@ -1,0 +1,17 @@
+{{- /*
+  Mermaid 代码块渲染钩子。
+  注意：主题的 footer 走 partialCached，extend_footer 里拿不到可靠的 .Content，
+  因此 mermaid.js 在这里按页面首次出现时就地注入，保证只在含图的页面加载。
+*/ -}}
+<pre class="mermaid">{{ .Inner | htmlEscape | safeHTML }}</pre>
+{{- if not (.Page.Scratch.Get "mermaidLoaded") }}
+{{- .Page.Scratch.Set "mermaidLoaded" true }}
+<script src="https://registry.npmmirror.com/mermaid/11.4.1/files/dist/mermaid.min.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.mermaid) {
+      mermaid.initialize({ startOnLoad: true, theme: 'auto', securityLevel: 'loose' });
+    }
+  });
+</script>
+{{- end }}

@@ -2,11 +2,10 @@
 title: "Valorant真好玩"
 date: 2022-05-15T09:43:13+08:00
 author: "甲拉古日"
-weight: # 置顶数字代替越小越前
 tags: # 标签
   - valorant
   - 竞技游戏
-categories: 日常水文 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 日常水文
 cover:
     image: "/img/2022/05/15/valorant.jpg" # 封面url
     alt: valorant # 替换文本
@@ -15,6 +14,8 @@ lastmod: 2022-05-15T09:43:13+08:00
 summary: # 描述
 slug: 51510 # 手动永久链接
 draft: false
+aliases:
+  - "/blog/2022/51510.html/index.html"
 ---
 
 对于竞技游戏爱好者 ，我特别热衷于fps，试问哪儿个靓仔不喜欢枪战呢，我是封测时接触的valorant，当时主要游戏是csgo，转valorant后竞技模式还能打到钻石（我当时的csgo国际服是ak段），然后从封测到公测的第一第二赛季都沉迷valorant无法自拔，然后去年没怎么玩游戏。

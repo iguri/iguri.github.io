@@ -5,10 +5,12 @@ tags:
   - GitHub Actions
   - Hugo
 slug: 414a
-categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 折腾笔记
 lastmod: 2022-04-14T11:14:21+08:00
 author: "甲拉古日"
 draft: false
+aliases:
+  - "/blog/2022/414a.html/index.html"
 ---
 
 一直使用GitHub Pages作为境外托管平台，在墙外GitHub是真的强，ms从不超过两位数，但是墙内还是会抽风，所以我的方案都是把GitHub解析到境外。

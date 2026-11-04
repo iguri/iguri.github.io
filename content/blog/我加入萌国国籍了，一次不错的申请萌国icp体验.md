@@ -4,10 +4,11 @@ tags:
   - 备案
   - 萌国ICP
   - 萌系
-id: '459'
 slug: 5d83
-categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 折腾笔记
 date: 2020-04-10 09:33:09
+aliases:
+  - "/blog/2020/5d83.html/index.html"
 ---
 **一次很不错的萌国icp备案申请，也欢迎你来加入萌国哦**
 

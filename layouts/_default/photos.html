@@ -5,11 +5,18 @@
 <h3 align="center">纵意游肆，名山胜川靡不穷究。</h3> <p align="right"> ————《晋书·孙统传》</p>
 <hr />
 <div class="fullscreen">
-  {{ range (readDir "./static/photos") }}
+  {{ range (os.ReadDir "static/photos") }}
+    {{- if not .IsDir }}
+    {{- $n := .Name }}
+    {{- if in (slice ".jpg" ".jpeg" ".png" ".webp" ".gif" ".jfif" ".avif") (lower (path.Ext $n)) }}
   <figure>
-    <img loading="lazy" decoding="async" src="{{"photos/" | absURL }}{{ .Name }}" alt="{{ .Name }}" />
-    <figcaption>{{ replaceRE "\\.[^.]+$" "" .Name }}</figcaption>
+    <img loading="lazy" decoding="async"
+         src="{{ (printf "photos/%s" $n) | absURL }}"
+         alt="{{ $n }}" />
+    <figcaption>{{ $n | replaceRE "\\.[^.]+$" "" }}</figcaption>
   </figure>
+    {{- end }}
+    {{- end }}
   {{ end }}
 <script src="//cdn.grer.cn/js/view-image.js"></script>
 <script>
@@ -25,7 +32,7 @@ figure:hover {
   position: relative;
   transform: scale(1.025);
   opacity: 1;
-  transition: transform 0.3s; opacity: 0.1S;
+  transition: transform 0.3s, opacity 0.3s;
 }
 figcaption {
   position: absolute;

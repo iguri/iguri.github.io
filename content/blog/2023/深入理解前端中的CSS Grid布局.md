@@ -2,12 +2,11 @@
 title: "深入理解前端中的CSS Grid布局"
 date: 2023-03-10T15:49:44+08:00
 author: "甲拉古日"
-weight: # 置顶数字代替越小越前
 tags: # 标签
   - 前端
   - GridView
   - Css
-categories: 灵感记录 # 分类
+categories: 灵感记录
 cover:
     image: "" # 封面url
     alt: # 替换文本
@@ -16,6 +15,8 @@ lastmod: 2024-03-10T03:49:44+08:00
 summary: # 描述
 slug: Css-Grid # 手动永久链接
 draft: false
+aliases:
+  - "/blog/2023/css-grid.html/index.html"
 ---
 
 ## 前言

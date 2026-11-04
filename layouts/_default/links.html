@@ -1,0 +1,15 @@
+{{- /* /links 跳转到关于页的友链区块；比裸 HTML 更可控，保留 canonical 且标记 noindex */ -}}
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale | default "zh-CN" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>正在跳转到「友链」…</title>
+  <link rel="canonical" href="{{ "about/" | absURL }}#友链">
+  <meta http-equiv="refresh" content="0; url={{ "about/" | absURL }}#友链">
+</head>
+<body>
+  <p>正在跳转到 <a href="{{ "about/" | absURL }}#友链">友链</a>…</p>
+</body>
+</html>

@@ -1,4 +1,5 @@
 ---
+date: 2022-01-01
 title: "搜索"
 hidemeta: true
 sitemap:

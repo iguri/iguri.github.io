@@ -3,57 +3,68 @@ title = "故人笔记 - 甲拉古日的自留地"
 locale = "zh-CN"
 defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = false
-"pagination.pagerSize" = 12
 theme = "PaperMod"
-HasCJKLanguage = true
-isCJKLanguage = true
+
+# 显式时区，避免无 TZ 的 date 在不同环境被解释成 UTC 而错位一天
+timeZone = "Asia/Shanghai"
+
+# CJK 分词：中文字数/摘要按字计算（有效键是 hasCJKLanguage，大小写不敏感）
+hasCJKLanguage = true
 summaryLength = 60
+
 enableRobotsTXT = true
 buildDrafts = false
 buildFuture = false
 buildExpired = false
-BaiduAnalytics = "xqDP7owQ6bJEDs9g"
-ignoreLogs = "warning-partial-superfluous-prefix"
-Copyright = '<a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备51343702000108号</a> | <a href="//beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备2021023818号-2</a> | <a href="//icp.gov.moe/?keyword=20223334" target="_blank" rel="noopener">萌ICP备20223334号</a> </br>&copy; 2025 <a href="/about/#我">甲拉古日</a>'
+
+# 站点底栏备案信息
+Copyright = '<a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备51343702000108号</a> | <a href="//beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备2021023818号-2</a> | <a href="//icp.gov.moe/?keyword=20223334" target="_blank" rel="noopener">萌ICP备20223334号</a> </br>&copy; 2026 <a href="/about/#我">甲拉古日</a>'
 
 [minify]
 disableXML = true
 minifyOutput = true
 
+# 项目里所有文章的文件名都不以 YYYY-MM-DD 开头，":filename" 永远命中不了，
+# 且会让缺 date 的页面（index.md 等）落到 0001-01-01。故只保留默认解析顺序。
 [frontmatter]
-date = [ ":filename", ":default" ]
+date = [ ":default" ]
 
 [permalinks]
 blog = "/blog/:slug.html"
 page = "/:slug"
 
+[pagination]
+pagerSize = 12
+path = "page"
+
 [params]
-env = "duction"
+env = "production"
 title = "故人笔记 - 甲拉古日的自留地"
-keywords = [ "故人笔记", "甲拉古日", "个人网站", "灵感创作" ]
 description = "故人笔记 - 甲拉古日的自留地; 随手记录生活与灵感瞬间的创作。"
+keywords = [ "故人笔记", "甲拉古日", "个人网站", "灵感创作" ]
 author = "甲拉古日"
 DateFormat = "2006-01-02"
-showHomeInfo = false
-hidemeta = false
-ShowWordCounts = false
-ShowLastMod = true
+
+# 以下开关按 PaperMod v8 模板实际读取的键名书写（.Param 调用大小写不敏感）
+ShowToc = true
+TocOpen = true
+ShowCodeCopyButtons = true
 ShowReadingTime = false
-ShowShareButtons = true
+ShowWordCount = false
 ShowPostNavLinks = true
 ShowBreadCrumbs = true
-ShowCodeCopyButtons = true
+ShowShareButtons = true
+ShowRssButtonInSectionTermList = false
+hideMeta = false
 hideSummary = false
+hideFooter = false
+hideAuthor = false
 disableSpecial1stPost = true
 disableScrollToTop = false
-hideFooter = false
-defaultTheme = "auto"
 disableThemeToggle = false
-showtoc = true
-tocopen = true
+defaultTheme = "auto"
 comments = true
-commentopen = false
-homeInfoMode = false
+
 shareButtons = [
   "wechat",
   "weibo",
@@ -79,13 +90,11 @@ shareButtons = [
 
   [params.label]
   text = "故人笔记"
-  # icon = "/images/icon.png/"
-  iconSVG = """weibo"""
-  iconheight = 30
+  # icon = "/images/icon.png"   # 主题只认 label.icon（assets 资源路径）；iconSVG 并非有效键
+  # iconHeight = 30
 
   [params.profileMode]
   enabled = true
-  # subtitle = "<h5>审阅自己 、 超越自己 、 取悦自己</h5>" # 个人资料副标题
   title = "<h5>审阅自己 、 超越自己 、 取悦自己</h5>"
   imageUrl = "/logo.png"
   imageWidth = 180
@@ -123,7 +132,7 @@ shareButtons = [
   hiddenInSingle = true
 
   [params.editPost]
-  URL = "//github.com/iguri/iguri.github.io/blob/master/content"
+  URL = "//github.com/iguri/iguri.github.io/blob/main/content"
   Text = "edit"
   appendFilePath = true
 
@@ -131,7 +140,7 @@ shareButtons = [
   isCaseSensitive = false
   shouldSort = true
   location = 0
-  distance = 1_000
+  distance = 1000
   threshold = 0.4
   minMatchCharLength = 2
   keys = [ "title", "permalink", "summary", "content" ]
@@ -158,21 +167,20 @@ weight = 40
 unsafe = true
 
 [markup.highlight]
-anchorLineNos = false
+# noClasses = false：交给主题内置的 Chroma CSS（暗色系），比内联样式体积小且可随主题切换
+# style 无需设置：PaperMod 自带 chroma-styles.css 会覆盖这里的取值
+noClasses = false
 codeFences = true
-guessSyntax = true
-hl_Lines = "0"
+guessSyntax = false      # 关闭语法猜测，避免 mermaid 等非代码块被误判着色
+hl_Lines = ""
 lineAnchors = ""
 lineNoStart = 1
 lineNos = false
 lineNumbersInTable = false
-noClasses = true
-noHl = false
 tabWidth = 4
-style = "monokai"
 
 [outputs]
 home = [ "HTML", "RSS", "JSON" ]
 
 [security]
-  allowContent = ['text/markdown', 'text/html']
+  allowContent = [ 'text/markdown', 'text/html' ]

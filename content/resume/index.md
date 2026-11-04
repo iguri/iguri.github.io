@@ -1,3 +1,16 @@
+---
+title: 个人简历
+date: 2022-02-01
+slug: "resume"
+hidemeta: true
+aliases:
+  - "/about/resume/index.html"
+  - "/about/resume/pdf/index.html"
+comments: false
+ShowToc: false
+showSummary: false
+---
+
 ### 个人信息
 
 - 甲拉古日(Jia La Gu Ri)

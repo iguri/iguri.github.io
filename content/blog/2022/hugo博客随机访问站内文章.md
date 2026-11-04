@@ -2,11 +2,10 @@
 title: "Hugo博客随机访问站内文章"
 date: 2022-01-26T12:13:08+08:00
 author: "甲拉古日"
-weight: # 置顶数字代替越小越前
 tags: # 标签
   - 随机访问
   - Hugo
-categories: 折腾笔记 # 分类
+categories: 折腾笔记
 cover:
     image: "" # 封面url
     alt: # 替换文本
@@ -15,6 +14,8 @@ lastmod: 2024-03-10T12:13:08+08:00
 summary: # 描述
 slug: hugo-random # 手动永久链接
 draft: false
+aliases:
+  - "/blog/2022/hugo-random.html/index.html"
 ---
 
 ## 引言

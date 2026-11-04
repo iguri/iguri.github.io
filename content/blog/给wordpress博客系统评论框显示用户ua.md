@@ -4,12 +4,14 @@ tags:
   - wordpress
   - 网站日记
 slug: '2355'
-categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 折腾笔记
 cover:
     image: "/img/2020/03/30/wordpress.jpg" # 封面url
     alt: # 替换文本
     caption: # 封面标题
 date: 2020-03-30 01:54:19
+aliases:
+  - "/blog/2020/2355.html/index.html"
 ---
 **User Agent**，简称 UA，通过HPPT头连同访问请求传递给服务器，使得服务器能够识别客户使用的操作系统及版本、CPU 类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等，并依此为依据返回针对相应设备适配的网页和数据。
 

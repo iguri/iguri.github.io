@@ -12,6 +12,8 @@ cover:
     alt: # 替换文本
     caption: # 封面标题
 date: 2020-07-09 18:34:35
+aliases:
+  - "/blog/2020/03p6.html/index.html"
 ---
 
 

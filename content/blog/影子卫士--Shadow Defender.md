@@ -6,12 +6,14 @@ tags:
   - 简体中文
 author: 甲拉古日
 slug: jgh1
-categories: 分享安利 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 分享安利
 cover:
     image: "/img/2020/08/05/1596623430.jpg" # 封面url
     alt: # 替换文本
     caption: # 封面标题
 date: 2020-08-05 18:42:23
+aliases:
+  - "/blog/2020/jgh1.html/index.html"
 ---
 
 

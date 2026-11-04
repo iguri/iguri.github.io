@@ -1,4 +1,5 @@
 ---
+date: 2020-07-04
 title: 隐私政策
 hideSummary: true
 comments: false

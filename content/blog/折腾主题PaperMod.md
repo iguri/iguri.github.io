@@ -2,11 +2,10 @@
 title: "折腾主题PaperMod"
 date: 2022-05-10T13:19:23+08:00
 author: "甲拉古日"
-weight: # 置顶数字代替越小越前
 tags: # 标签
   - hugo
   - PaperMod
-categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 折腾笔记
 cover:
     image: "" # 封面url
     alt: # 替换文本
@@ -15,6 +14,8 @@ lastmod: 2024-03-06T00:19:23+08:00
 summary: # 描述
 slug: PaperMod1 # 手动永久链接
 draft: false
+aliases:
+  - "/blog/2022/papermod1.html/index.html"
 ---
 **更新**
 2024-03-06. 时隔一年我胡汉三由回来了，好久没更新博客了，发现不管是hugo还是papermod主题都迭代了好几个版本，本着博客不折腾就不会有更新的原则，我开始从零开始用新版搭建，这就是静态博客的好处，不管怎么折腾只要数据不丢一切好说。

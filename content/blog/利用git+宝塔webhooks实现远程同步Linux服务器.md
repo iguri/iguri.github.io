@@ -3,11 +3,10 @@ title: "利用git+宝塔webhooks实现远程同步Linux服务器"
 date: 2022-05-08T16:36:06+08:00
 author: "甲拉古日"
 comments: # 评论
-weight: # 置顶数字代替越小越前
 tags:
   - webhooks
   - git
-categories: 折腾笔记 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 折腾笔记
 cover:
     image: "" # 封面url
     alt: # 替换文本
@@ -16,6 +15,8 @@ lastmod: 2022-05-08T16:36:06+08:00
 summary: 
 slug: 581720
 draft: false
+aliases:
+  - "/blog/2022/581720.html/index.html"
 ---
 
 ## 化简为繁
