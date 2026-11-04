@@ -4,15 +4,8 @@
     }
 }
 
-/*日夜切换特效*/
-.logo-switches {
-    z-index: 999;
-    position:fixed;
-    bottom:100px;
-    right:32px;
-    opacity: 0.8;
-    animation: breathe 5s infinite;
-}
+/* 主题切换按钮与右下角按钮组样式已迁到 theme-toggle.css
+   （.logo-switches 不再承担浮动定位，恢复主题原生的 header 内布局） */
 
 .lang-switch {
     visibility: hidden;
@@ -122,4 +115,41 @@ table {
   transition: all 0.3s ease; /* 过渡更丝滑 */
   transform: scale(1.1); /* 悬浮轻微放大 */
   filter: brightness(1.1); /* 悬浮亮度提升 */
+}
+
+/* Mermaid 图容器：底色与代码块保持一致（--code-block-bg，浅色/深色两套都是深底），
+   同时把 mermaid 自己生成的 SVG 背景置透明，否则会盖一层它自己的底色 */
+.mermaid-wrap {
+    margin-bottom: var(--content-gap);
+    padding: 10px;
+    border-radius: var(--radius);
+    background: var(--code-block-bg) !important;
+    overflow-x: auto;
+}
+
+.mermaid-wrap pre.mermaid {
+    background: transparent !important;
+    margin: 0;
+}
+
+/* mermaid 生成的 svg 带 width:100% + max-width:XXXpx，
+   竖排窄图只占 max-width，剩余空间落在右侧 → 看着像居左。
+   给 svg 水平 auto margin 即可整体居中；宽图仍会撑满容器，不受影响。 */
+.mermaid-wrap pre.mermaid svg {
+    background: transparent !important;
+    display: block;
+    margin-inline: auto;
+    /* 覆盖 mermaid 内联的 margin:0（部分版本会写死） */
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* 图文在深底上统一用代码块的文字色，保持和代码块一致的观感 */
+.mermaid-wrap pre.mermaid {
+    color: rgb(213, 213, 214);
+}
+
+.mermaid-wrap svg text,
+.mermaid-wrap svg tspan {
+    fill: #d5d8de;
 }

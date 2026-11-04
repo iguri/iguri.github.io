@@ -1,0 +1,140 @@
+{{- /*
+  Mermaid 代码块渲染钩子。
+
+  两个要点：
+  1) mermaid 的 theme:'auto' 跟的是「操作系统深浅色」，不是本站的 data-theme。
+     系统是浅色、而用户手动把站点切到深色时，图会用浅色主题画在深色容器上 → 看不清。
+     这里改为显式按 data-theme 传 theme，并配合 themeVariables 用柔和的暗色系。
+
+  2) mermaid 渲染后会把 <pre> 的原始文本替换成生成的 SVG，源码就丢了。
+     所以先把源码存进 data-src，主题切换时据此重新渲染，颜色才能跟着变。
+
+  另外 mermaid.js 只在含图的页面注入一次（主题 footer 走 partialCached，拿不到可靠 .Content，
+  故在钩子内就地注入）。
+*/ -}}
+<div class="mermaid-wrap">
+  {{- /* .Inner 在 codeblock 钩子里是安全 HTML，直接塞进属性会被判为 #ZgotmplZ；
+       改用 <template> 存一份源码副本，渲染后可从 DOM 取回，主题切换时用它重绘 */ -}}
+  {{- $raw := .Inner | strings.TrimSpace }}
+  <pre class="mermaid">{{ $raw | safeHTML }}</pre>
+  <template class="mermaid-src">{{ $raw | safeHTML }}</template>
+</div>
+{{- if not (.Page.Scratch.Get "mermaidLoaded") }}
+{{- .Page.Scratch.Set "mermaidLoaded" true }}
+<script src="https://registry.npmmirror.com/mermaid/11.4.1/files/dist/mermaid.min.js" defer></script>
+<script>
+( function () {
+    /* 代码块底色是 --code-block-bg（浅色 rgb(28,29,33) / 深色 rgb(46,46,51)），
+       两种模式下都是深底。因此 mermaid 统一走一套深底配色，只是把
+       画布底色分别对齐到两种模式对应的代码块底色，保持观感一致。 */
+    var COMMON = {
+        primaryColor: "#40444c",         /* 节点填充：比两种底色都亮出层次 */
+        primaryTextColor: "#d5d8de",     /* 节点文字 */
+        primaryBorderColor: "#737c8a",   /* 节点描边：对两种底色对比均 ≥3 */
+        secondaryColor: "#40444c",
+        tertiaryColor: "#34363c",
+        lineColor: "#8b929e",            /* 连线 */
+        textColor: "#d5d8de",
+        mainBkg: "#40444c",
+        nodeBorder: "#737c8a",
+        clusterBkg: "#26282e",
+        clusterBorder: "#5a6270",
+        edgeLabelBackground: "#1c1d21",
+        noteBkgColor: "#40444c",
+        noteTextColor: "#d5d8de",
+        noteBorderColor: "#737c8a",
+        fontSize: "15px"
+    };
+
+    /* 浅色模式：底色取 rgb(28,29,33) */
+    var THEME_LIGHT = Object.assign( {}, COMMON, {
+        background: "#1c1d21",
+        edgeLabelBackground: "#1c1d21"
+    } );
+
+    /* 深色模式：底色取 rgb(46,46,51) */
+    var THEME_DARK = Object.assign( {}, COMMON, {
+        background: "#2e2e33",
+        edgeLabelBackground: "#2e2e33",
+        clusterBkg: "#282a30"
+    } );
+
+    function isDark() {
+        return document.documentElement.dataset.theme === "dark";
+    }
+
+    function cfg() {
+        return {
+            startOnLoad: false,
+            securityLevel: "loose",
+            theme: "base",                       /* base 主题才会完整应用 themeVariables */
+            themeVariables: isDark() ? THEME_DARK : THEME_LIGHT
+        };
+    }
+
+    /* 从紧邻的 <template> 取回原始源码 */
+    function sourceOf( node ) {
+        var wrap = node.closest( ".mermaid-wrap" );
+        var tpl = wrap && wrap.querySelector( "template.mermaid-src" );
+        /* template 内容在 DocumentFragment 里，textContent 取不到，要用 innerHTML */
+        return tpl ? tpl.innerHTML : node.dataset.src || node.textContent;
+    }
+
+    /* 把所有 mermaid 块还原成源码后按当前主题重新绘制 */
+    function redraw() {
+        if ( ! window.mermaid ) return;
+        var nodes = document.querySelectorAll( "pre.mermaid" );
+        if ( ! nodes.length ) return;
+
+        nodes.forEach( function ( n ) {
+            var src = sourceOf( n );
+            if ( ! src ) return;
+            n.removeAttribute( "data-processed" );
+            n.textContent = src;
+        } );
+
+        try {
+            mermaid.initialize( cfg() );
+            mermaid.run( { nodes: nodes } );
+        } catch ( e ) {
+            console.warn( "mermaid redraw failed:", e );
+        }
+    }
+
+    function init() {
+        if ( ! window.mermaid ) return false;
+        try {
+            mermaid.initialize( cfg() );
+            mermaid.run( { nodes: document.querySelectorAll( "pre.mermaid" ) } );
+            return true;
+        } catch ( e ) {
+            console.warn( "mermaid init failed:", e );
+            return false;
+        }
+    }
+
+    /* mermaid.min.js 带 defer，会在 DOMContentLoaded 之前执行完，
+       而本内联脚本在解析阶段就运行了（此时 mermaid 还未定义）。
+       因此不能只监听 DOMContentLoaded：改用 load + 轮询兜底，确保库一定已就绪 */
+    function boot() {
+        if ( init() ) return;
+        var tries = 0;
+        var timer = setInterval( function () {
+            if ( init() || ++tries > 40 ) {   /* 最多等约 4s */
+                clearInterval( timer );
+                if ( tries > 40 ) console.warn( "mermaid 未能加载，图表保持为源码文本" );
+            }
+        }, 100 );
+    }
+
+    if ( document.readyState === "complete" ) {
+        boot();
+    } else {
+        window.addEventListener( "load", boot, { once: true } );
+    }
+
+    /* 暴露给主题切换脚本调用（见 _partials/footer.html 的 applyTheme） */
+    window.__mermaidRedraw = redraw;
+} )();
+</script>
+{{- end }}

@@ -1,0 +1,15 @@
+{{ $md := false }}
+
+{{ if .IsNamedParams }}
+{{ $md = .Get "md" }}
+{{ else }}
+{{ $md = .Get 0 }}
+{{ end }}
+
+<div dir="rtl">
+  {{ if eq $md false }}
+    {{ .Inner }}
+  {{ else }}
+    {{ .Inner | markdownify }}
+  {{ end }}
+</div>

@@ -1,0 +1,238 @@
+/* ==========================================================================
+   浮动按钮组 / 主题切换动画 / 首页高度修正
+   说明：
+   - 本文件位于 assets/css/extended/，会被主题按通配匹配后拼进 stylesheet
+   - 依赖 layouts/_partials/header.html 里的 .corner-actions 容器
+   ========================================================================== */
+
+/* ------------------------------------------------------------------
+   1. 右下角按钮组的垂直排布
+   原实现把 .logo-switches 用 position:fixed 塞到右下角，同时页面上还有
+   .top-link(回到顶部, bottom:4rem) 和 .bottom-comment(评论区, bottom:155px)。
+   三个 fixed 元素各自写死 bottom 值，一旦主题改了按钮尺寸就会互相压住。
+   这里改为统一由一组 --corner-* 变量推导，只排布一次：
+       评论区(最上) -> 主题切换(中间) -> 回到顶部(最下)
+   ------------------------------------------------------------------ */
+:root {
+    --corner-size: 2.5rem;   /* 与主题 .top-link 的宽高一致 */
+    --corner-right: 2rem;    /* 与主题 .top-link 的 right 一致 */
+    --corner-gap: 14px;      /* 按钮之间的间距 */
+    --corner-bottom: 4rem;   /* 最下面按钮的 bottom */
+}
+
+/* 主题切换按钮：夹在「回到顶部」和「评论区」之间 */
+.corner-actions {
+    position: fixed;
+    right: var(--corner-right);
+    bottom: calc(var(--corner-bottom) + var(--corner-size) + var(--corner-gap));
+    z-index: 99;             /* 与 .top-link 同层 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.corner-actions .corner-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--corner-size);
+    height: var(--corner-size);
+    padding: 0;
+    border-radius: 64px;      /* 与 .top-link 的胶囊形一致 */
+    background: var(--tertiary);
+    color: var(--secondary);
+    line-height: 1;
+    transition: color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.corner-actions .corner-btn:hover {
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.corner-actions .corner-btn:active {
+    transform: translateY(0) scale(.96);
+}
+
+/* 键盘焦点可见性（无障碍） */
+.corner-actions .corner-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* 评论区按钮：跟着同一套变量走，不再写死 155px */
+.bottom-comment {
+    right: var(--corner-right);
+    bottom: calc(var(--corner-bottom) + (var(--corner-size) + var(--corner-gap)) * 2);
+}
+
+/* 窄屏时三个按钮整体下移，避免和正文重叠 */
+@media screen and (max-width: 900px) {
+    :root {
+        --corner-bottom: 5.5rem;
+    }
+}
+
+/* ------------------------------------------------------------------
+   2. 太阳 / 月亮图标：旋转 + 缩放互换
+   主题原来用 display:none 直接硬切，这里改成两层绝对定位叠放，
+   通过 rotate + scale + opacity 过渡成"转出来"的效果。
+   ------------------------------------------------------------------ */
+.tt-icon-wrap {
+    position: relative;
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex: none;
+}
+
+.tt-icon-wrap svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: block;
+    transform-origin: 50% 50%;
+    transition:
+        transform .45s cubic-bezier(.4, 0, .2, 1),
+        opacity   .30s ease;
+    /* 覆盖主题的 display:none 硬切规则 */
+    display: block !important;
+}
+
+/* 图标语义沿用 PaperMod 原约定：显示的是"点一下会切换到的目标"
+   亮色下显示月亮（点击进入暗色），暗色下显示太阳（点击进入亮色）。
+   这里只是把原来的 display:none 硬切换成旋转+缩放+淡入淡出的过渡。 */
+
+/* 亮色主题：月亮正立，太阳转到上方并缩小隐藏 */
+[data-theme="light"] .tt-icon-wrap .moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+[data-theme="light"] .tt-icon-wrap .sun {
+    opacity: 0;
+    transform: rotate(90deg) scale(.4);
+}
+
+/* 暗色主题：太阳正立，月亮转到下方并缩小隐藏 */
+[data-theme="dark"] .tt-icon-wrap .sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+[data-theme="dark"] .tt-icon-wrap .moon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(.4);
+}
+
+/* auto 主题（脚本接管前的瞬时状态）：按亮色处理，显示月亮。
+   不要做成"两个都不显示"，否则在 JS 执行前的首帧会出现按钮空白 */
+[data-theme="auto"] .tt-icon-wrap .moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+[data-theme="auto"] .tt-icon-wrap .sun {
+    opacity: 0;
+    transform: rotate(90deg) scale(.4);
+}
+
+/* ------------------------------------------------------------------
+   3. View Transitions：以按钮为圆心的圆形扩散遮罩
+   JS 在点击时把 --vt-x / --vt-y / --vt-r / --vt-duration 写到 :root 上。
+   默认的旧快照与根容器过渡都关掉，只让"新主题"这一层从圆心长出来。
+   ------------------------------------------------------------------ */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+/* 只有新主题做 clip-path 圆形扩张；旧主题原地不动，形成擦除效果 */
+::view-transition-new(root) {
+    animation: theme-circle-reveal var(--vt-duration, 800ms) cubic-bezier(.4, 0, .2, 1) both;
+    will-change: clip-path;
+}
+
+@keyframes theme-circle-reveal {
+    from {
+        clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
+    }
+    to {
+        clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 50%));
+    }
+}
+
+/* 尊重系统"减少动态效果"：不做扩散，直接换主题 */
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-new(root) {
+        animation: none;
+    }
+
+    .tt-icon-wrap svg {
+        transition: none;
+    }
+}
+
+/* ------------------------------------------------------------------
+   4. 首页高度溢出修正
+   原因：.main 用了
+       min-height: calc(100vh - var(--header-height) - var(--footer-height))
+   而 .main 自身还有 padding: var(--gap)。
+   虽然全局 box-sizing:border-box 已包含 padding，但页面里还有
+       .profile { min-height: calc(100vh - header - footer - gap*2) }
+   再加上 header（行高 60px + 换行）与 footer（padding 撑高后 > 60px）的实际
+   高度都超过主题假设值，累计后整页恒比视口高一截，出现"永远差一点、内容显示不全"。
+
+   做法：让 body 成为满高 flex 列，header/footer 按内容自适应，
+   中间的 .main 用 flex 撑满剩余空间；.main 内部用 100% 而不是 100vh。
+   这样无论 header/footer 实际多高，首页都刚好占满一屏、不溢出。
+   ------------------------------------------------------------------ */
+html {
+    /* 让 100% 高度链生效 */
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;      /* 旧浏览器兜底 */
+    min-height: 100dvh;     /* 移动端动态视口，避免地址栏高度误差 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* header / footer 保持自身高度，不参与拉伸 */
+body > .header {
+    flex: 0 0 auto;
+}
+
+body > .footer {
+    flex: 0 0 auto;
+    /* 主题用 margin:auto 做水平居中；在 flex 列里四向 auto 会抢占剩余空间，
+       这里明确成仅水平居中，垂直交由 flex 分配 */
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* 主内容吃掉剩余空间 */
+body > .main {
+    flex: 1 1 auto;
+    /* 关键：覆盖主题基于 100vh 的 min-height 计算，改为跟随 flex 分配 */
+    min-height: 0;
+    /* 同理，只保留水平 auto 居中 */
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* 首页 profile 区域：填满 .main 而不是再算一遍视口高度。
+   注意：.profile 只在 profileMode 首页出现（文章页没有该元素），
+   用 body.list 限定范围，避免影响其它页面的 .main 高度计算 */
+body.list > .main .profile {
+    min-height: 100%;
+}
+
+/* 屏幕较高时给上下留一点呼吸空间，避免内容贴边 */
+@media screen and (min-height: 700px) {
+    body.list > .main .profile {
+        padding-block: var(--gap);
+    }
+}

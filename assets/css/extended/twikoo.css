@@ -53,7 +53,5 @@
   background-color: var(--theme) !important;
 }
 
-.bottom-comment {
-  bottom: 155px;
-  right: 30px;
-}
+/* .bottom-comment 的位置已统一由 theme-toggle.css 中的 --corner-* 变量推导，
+   三个浮动按钮（评论/主题/回顶）据此等距排列，此处不再写死偏移 */
