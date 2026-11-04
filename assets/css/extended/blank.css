@@ -10,6 +10,7 @@
     position:fixed;
     bottom:100px;
     right:32px;
+    opacity: 0.8;
     animation: breathe 5s infinite;
 }
 
@@ -90,34 +91,35 @@ table {
     border: 1px solid #979da3 !important;
 }
 
-/**logo呼吸**/
-.profile img{
-    display: inline-table;
-    gap: 10px;
-    border-radius: 50%; 
-    /*logo呼吸*/
-    animation: light 5s ease-in-out infinite;
+/** logo 渐变呼吸特效（光源向上偏移+颜色渐变）**/
+.profile img {
+  border-radius: 50%; /* 圆形图片适配 */
+  animation: breathColor 3s ease-in-out infinite alternate;
+  transform: translateZ(0); /* 开启硬件加速，动画更流畅 */
 }
 
-/* logo呼吸控件 */
-@keyframes light {
-    0% {
-        box-shadow: 0 0 4px #696969;
-    }
+/* 呼吸动画：向上偏移+多色渐变+光晕缩放 */
+@keyframes breathColor {
+  0% { 
+    filter: drop-shadow(-2px -2px 3px rgba(148, 218, 218, 0.2)); /* 浅青 */
+  }
+  33% { 
+    filter: drop-shadow(-2px -2px 5px rgba(167, 139, 250, 0.3)); /* 淡紫 */
+  }
+  66% { 
+    filter: drop-shadow(-2px -2px 8px rgba(248, 240, 227, 0.4)); /* 暖白 */
+  }
+  100% { 
+    filter: drop-shadow(-2px -2px 12px rgba(148, 218, 218, 0.5)); /* 深青+最大光晕 */
+  }
+}
 
-    25% {
-        box-shadow: 0 0 23px #696969;
-    }
+.logo img {
+  margin-top: 6px;
+}
 
-    50% {
-        box-shadow: 0 0 4px #696969;
-    }
-
-    75% {
-        box-shadow: 0 0 23px #696969;
-    }
-
-    100% {
-        box-shadow: 0 0 4px #696969;
-    }
+.logo a:hover {
+  transition: all 0.3s ease; /* 过渡更丝滑 */
+  transform: scale(1.1); /* 悬浮轻微放大 */
+  filter: brightness(1.1); /* 悬浮亮度提升 */
 }

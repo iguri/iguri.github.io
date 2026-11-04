@@ -1,11 +1,7 @@
 {{- $pageurl := .Permalink }}
 {{- $title := .Title }}
 
-
-
 {{- $.Scratch.Set "tags" ""}}
-
-
 
 {{- with .Params.Tags }}
 {{- $hashtags := newScratch}}

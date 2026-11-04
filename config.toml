@@ -1,0 +1,178 @@
+baseURL = "https://grer.cn"
+title = "故人笔记 - 甲拉古日的自留地"
+locale = "zh-CN"
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = false
+"pagination.pagerSize" = 12
+theme = "PaperMod"
+HasCJKLanguage = true
+isCJKLanguage = true
+summaryLength = 60
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+BaiduAnalytics = "xqDP7owQ6bJEDs9g"
+ignoreLogs = "warning-partial-superfluous-prefix"
+Copyright = '<a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=51343702000108" target="_blank" rel="noopener">川公网安备51343702000108号</a> | <a href="//beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备2021023818号-2</a> | <a href="//icp.gov.moe/?keyword=20223334" target="_blank" rel="noopener">萌ICP备20223334号</a> </br>&copy; 2025 <a href="/about/#我">甲拉古日</a>'
+
+[minify]
+disableXML = true
+minifyOutput = true
+
+[frontmatter]
+date = [ ":filename", ":default" ]
+
+[permalinks]
+blog = "/blog/:year/:slug.html"
+page = "/:slug"
+
+[params]
+env = "duction"
+title = "故人笔记 - 甲拉古日的自留地"
+keywords = [ "故人笔记", "甲拉古日", "个人网站", "灵感创作" ]
+description = "故人笔记 - 甲拉古日的自留地; 随手记录生活与灵感瞬间的创作。"
+author = "甲拉古日"
+DateFormat = "2006-01-02"
+showHomeInfo = false
+hidemeta = false
+ShowWordCounts = false
+ShowLastMod = true
+ShowReadingTime = false
+ShowShareButtons = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+hideSummary = false
+disableSpecial1stPost = true
+disableScrollToTop = false
+hideFooter = false
+defaultTheme = "auto"
+disableThemeToggle = false
+showtoc = true
+tocopen = true
+comments = true
+commentopen = false
+homeInfoMode = false
+shareButtons = [
+  "wechat",
+  "weibo",
+  "qzone",
+  "qq",
+  "linkedin",
+  "telegram",
+  "link"
+]
+
+  [params.footer]
+  text = ""
+
+  [params.twikoo]
+  version = "1.6.39"
+
+  [params.assets]
+  favicon = "/favicon.ico"
+  favicon16x16 = "/favicon.ico"
+  favicon32x32 = "/favicon.ico"
+  apple_touch_icon = "/favicon.ico"
+  safari_pinned_tab = "/favicon.ico"
+
+  [params.label]
+  text = "故人笔记"
+  # icon = "/images/icon.png/"
+  iconSVG = """weibo"""
+  iconheight = 30
+
+  [params.profileMode]
+  enabled = true
+  # subtitle = "<h5>审阅自己 、 超越自己 、 取悦自己</h5>" # 个人资料副标题
+  title = "<h5>审阅自己 、 超越自己 、 取悦自己</h5>"
+  imageUrl = "/logo.png"
+  imageWidth = 180
+  imageHeight = 160
+  imageTitle = "Welcome To My BLOG"
+
+  [params.homeInfoParams]
+  Title = "故人笔记"
+  Content = "Now, just be happy"
+
+  [[params.socialIcons]]
+  name = "github"
+  url = "//github.com/iguri"
+
+  [[params.socialIcons]]
+  name = "weibo"
+  url = "//weibo.com/u/5898165577"
+
+  [[params.socialIcons]]
+  name = "bilibili"
+  url = "//space.bilibili.com/477119718"
+
+  [[params.socialIcons]]
+  name = "steam"
+  url = "//steamcommunity.com/id/migrer"
+
+  [[params.socialIcons]]
+  name = "telegram"
+  url = "//t.me/grlol"
+
+  [params.cover]
+  responsiveImages = true
+  hidden = false
+  hiddenInList = false
+  hiddenInSingle = true
+
+  [params.editPost]
+  URL = "//github.com/iguri/iguri.github.io/blob/master/content"
+  Text = "edit"
+  appendFilePath = true
+
+  [params.fuseOpts]
+  isCaseSensitive = false
+  shouldSort = true
+  location = 0
+  distance = 1_000
+  threshold = 0.4
+  minMatchCharLength = 2
+  keys = [ "title", "permalink", "summary", "content" ]
+
+[[languages.zh.menu.main]]
+identifier = "search"
+name = "搜索"
+url = "/search"
+weight = 20
+
+[[languages.zh.menu.main]]
+identifier = "archives"
+name = "归档"
+url = "/archives"
+weight = 30
+
+[[languages.zh.menu.main]]
+identifier = "about"
+name = "关于"
+url = "/about"
+weight = 40
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+anchorLineNos = false
+codeFences = true
+guessSyntax = true
+hl_Lines = "0"
+lineAnchors = ""
+lineNoStart = 1
+lineNos = false
+lineNumbersInTable = false
+noClasses = true
+noHl = false
+tabWidth = 4
+style = "monokai"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON" ]
+
+[security]
+  allowContent = ['text/markdown', 'text/html']

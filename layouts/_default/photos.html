@@ -8,7 +8,7 @@
   {{ range (readDir "./static/photos") }}
   <figure>
     <img loading="lazy" decoding="async" src="{{"photos/" | absURL }}{{ .Name }}" alt="{{ .Name }}" />
-
+    <figcaption>{{ replaceRE "\\.[^.]+$" "" .Name }}</figcaption>
   </figure>
   {{ end }}
 <script src="//cdn.grer.cn/js/view-image.js"></script>
@@ -19,6 +19,7 @@
 <style type="text/css">
 figure {
   opacity: 0.88;
+  position: relative; /* 为绝对定位子元素建立参照 */
 }
 figure:hover {
   position: relative;
@@ -26,13 +27,29 @@ figure:hover {
   opacity: 1;
   transition: transform 0.3s; opacity: 0.1S;
 }
-  figcaption {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    font-weight: 600;
-    text-align: center;
-    opacity: 0.8;
-  }
+figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-weight: 600;
+  text-align: center;
+  background: rgba(0,0,0,0.4);
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  max-width: 100%; /* 防止超出容器 */
+}
+figure:hover figcaption {
+  opacity: 1;
+}
 </style>
 {{ end }}
