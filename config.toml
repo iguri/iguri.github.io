@@ -24,7 +24,7 @@ minifyOutput = true
 date = [ ":filename", ":default" ]
 
 [permalinks]
-blog = "/blog/:year/:slug.html"
+blog = "/blog/:slug.html"
 page = "/:slug"
 
 [params]
