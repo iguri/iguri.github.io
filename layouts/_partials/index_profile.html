@@ -1,0 +1,89 @@
+{{- /*
+    ===========================================================================
+    【站点自定义覆盖 partial，非主题文件】
+    来源：themes/PaperMod/layouts/_partials/index_profile.html
+    覆盖原因（维护说明）：
+      1. profile 元素（头像 / 文字 / logo）整体居中：由
+         assets/css/extended/theme-toggle.css 的 body flex 方案保证，
+         本文件结构未改动图片与按钮部分。
+      2. 标题（审阅自己 / 超越自己 / 取悦自己）改为「打字机 + 英文 3D 翻转」
+         动效组件：原 <h1>{{ .title }}</h1> 的静态 <h5> 文案被替换为
+         .tw-head 组件（第一行 p1 = 动态词 + 静态「自己」，第二行 = 英文词
+         rotateX 翻转，两侧 30px 暗灰渐变细线）。
+      3. 动效样式在 assets/css/extended/profile-typewriter.css，
+         动效逻辑在 static/js/profile-typewriter.js（defer 加载）。
+      4. config.toml 的 params.profileMode.title 仍保留，作为
+         打字机组件的 SEO/无障碍兜底文案（视觉上隐藏）。
+    若主题升级导致原 partial 变化，请以主题版为基准同步本文件。
+    ===========================================================================
+*/ -}}
+<div class="profile">
+    {{- with site.Params.profileMode }}
+    <div class="profile_inner">
+        {{- if .imageUrl -}}
+        {{- $img := "" }}
+        {{- if not (urls.Parse .imageUrl).IsAbs }}
+            {{- $img = resources.Get .imageUrl }}
+        {{- end }}
+        {{- if $img }}
+            {{- $processableFormats := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif" "webp") -}}
+            {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
+            {{- if and (in $processableFormats $img.MediaType.SubType) (eq $prod true)}}
+                {{- if (not (and (not .imageHeight) (not .imageWidth))) }}
+                    {{- $img = $img.Resize (printf "%dx%d" .imageWidth .imageHeight) }}
+                {{- else if .imageHeight }}
+                    {{- $img = $img.Resize (printf "x%d" .imageHeight) }}
+                {{ else if .imageWidth }}
+                    {{- $img = $img.Resize (printf "%dx" .imageWidth) }}
+                {{ else }}
+                    {{- $img = $img.Resize "150x150" }}
+                {{- end }}
+            {{- end }}
+            <img draggable="false" src="{{ $img.Permalink }}" alt="{{ .imageTitle | default "profile image" }}" title="{{ .imageTitle }}"
+                height="{{ .imageHeight | default 150 }}" width="{{ .imageWidth | default 150 }}" />
+        {{- else }}
+        <img draggable="false" src="{{ .imageUrl | absURL }}" alt="{{ .imageTitle | default "profile image" }}" title="{{ .imageTitle }}"
+            height="{{ .imageHeight | default 150 }}" width="{{ .imageWidth | default 150 }}" />
+        {{- end }}
+        {{- end }}
+
+        {{- /* 打字机 + 英文 3D 翻转标题（替代原静态 h1 标题输出） */}}
+        <div class="tw-head" id="twHead">
+            {{- /* 保留 h1 语义与 SEO：config 里的标题文案，视觉隐藏 */}}
+            <h1 class="tw-sr-only">{{ .title | default site.Title | markdownify | plainify }}</h1>
+            <p class="tw-line1">
+                <span class="tw-typed" id="twTyped"></span><span class="tw-fixed">自己</span><i class="tw-cursor" aria-hidden="true"></i>
+            </p>
+            <div class="tw-line2" aria-hidden="true">
+                <span class="tw-rule tw-rule-left"></span>
+                <span class="tw-en" id="twEn">Review</span>
+                <span class="tw-rule tw-rule-right"></span>
+            </div>
+        </div>
+
+        <span>{{ .subtitle | markdownify }}</span>
+        {{- partial "social_icons.html" -}}
+
+        {{- with .buttons }}
+        <div class="buttons">
+            {{- range . }}
+            <a class="button" href="{{ trim .url " " }}" rel="noopener" title="{{ .name }}">
+                <span class="button-inner">
+                    {{ .name }}
+                    {{- if (findRE "://" .url) }}&nbsp;
+                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="14" width="14">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14L21 3"></path>
+                    </svg>
+                    {{- end }}
+                </span>
+            </a>
+            {{- end }}
+        </div>
+        {{- end }}
+    </div>
+    {{- end}}
+</div>
+<script src="{{ "js/profile-typewriter.js" | relURL }}" defer></script>

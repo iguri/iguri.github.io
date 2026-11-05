@@ -1,0 +1,155 @@
+/* ===================================================================
+   【站点自定义，非主题文件】首页 profile 视觉居中 + 打字机标题
+   -------------------------------------------------------------------
+   配套文件（维护入口，改动请三处一起看）：
+     - 模板：layouts/_partials/index_profile.html（覆盖主题同名 partial）
+     - 样式：assets/css/extended/profile-typewriter.css（本文件）
+     - 脚本：static/js/profile-typewriter.js（由 partial 内 defer 引入）
+
+   一、居中修正
+   主题原始写法（themes/PaperMod/assets/css/common/profile-mode.css）：
+       .main .profile { min-height: calc(100vh - header - footer - gap*2) }
+   再叠加 align-items: center。本站页脚（备案三行 + <br>）实际高度远超
+   主题假设的 60px，且 profile 内容（头像 + 标题 + 社交图标）在小屏/
+   矮屏上比可用高度更高，于是「垂直居中 + 内容溢出」会把内容顶部推到
+   可视区之外 —— 观感就是整体上移、没有居中。
+
+   做法：放弃 align-items: center（溢出会裁顶），改用 auto margin 做
+   「安全居中」：有剩余空间时上下等分，内容超高时自动退化为贴顶可滚，
+   绝不裁掉头部。满高由 theme-toggle.css 的 body flex 方案提供。
+
+   二、打字机标题（.tw-head）
+   第一行 p1：动态词（审阅/超越/取悦）+ 静态「自己」+ 2px 硬闪烁光标
+   第二行　：英文词（Review/Surpass/Please）绕 X 轴 3D 翻转，
+             左右各 30px 暗灰 linear-gradient 细线点缀
+   =================================================================== */
+
+/* ---------- 1. profile 安全垂直居中 ---------- */
+body.list > .main .profile {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.profile .profile_inner {
+    /* 关键：auto margin 居中，溢出时不裁顶部（align-items:center 会裁） */
+    margin: auto;
+    max-width: 100%;
+}
+
+/* ---------- 2. 打字机标题组件 ---------- */
+.tw-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 语义与 SEO 保留：config.toml 里的标题文案，仅视觉隐藏 */
+.tw-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* 第一行：动态词 + 「自己」 + 光标 */
+.tw-line1 {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    min-height: 1.4em; /* 文案为空时也占住行高，避免整块高度跳动 */
+    /* 纯白 + 极淡发光（用户要求在深色下的观感）。
+       浅色模式下首页是灰底、纯白不可读，故 light-dark 取近黑；
+       发光跟随 currentColor，两种主题下都只保留极淡光晕。
+       参数顺序：light-dark(浅色值, 深色值) */
+    color: light-dark(#1c1c1e, #ffffff);
+    text-shadow:
+        0 0 12px color-mix(in srgb, currentColor 20%, transparent),
+        0 0 2px  color-mix(in srgb, currentColor 10%, transparent);
+}
+
+/* 光标：2px 宽竖线，1s 间隔硬闪烁 */
+.tw-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.05em;
+    margin-left: 4px;
+    vertical-align: -0.15em;
+    background: light-dark(#1c1c1e, #ffffff);
+    animation: tw-blink 1s steps(1, end) infinite;
+}
+
+@keyframes tw-blink {
+    0%, 49.9% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+/* 第二行：英文 3D 翻转 + 两侧 30px 渐变细线 */
+.tw-line2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: min(300px, 72vw);
+}
+
+.tw-rule {
+    flex: 1 1 auto;
+    min-width: 30px;
+    height: 1px;
+}
+
+.tw-rule-left {
+    background: linear-gradient(to right, transparent, rgba(108, 108, 108, 0.55));
+}
+
+.tw-rule-right {
+    background: linear-gradient(to left, transparent, rgba(108, 108, 108, 0.55));
+}
+
+.tw-en {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em; /* 抵消末字符 letter-spacing，保证视觉居中 */
+    text-transform: uppercase;
+    color: var(--secondary);
+    min-width: 8em;
+    text-align: center;
+    transform-origin: center center;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+}
+
+/* 翻转动画：绕 X 轴，弹性缓动（与 JS 里 add class 配合） */
+.tw-en.is-flip {
+    animation: tw-flip 0.62s cubic-bezier(0.2, 1.45, 0.35, 1) both;
+}
+
+@keyframes tw-flip {
+    0%   { transform: perspective(340px) rotateX(0deg);     opacity: 1; }
+    45%  { transform: perspective(340px) rotateX(-90deg);   opacity: 0; }
+    46%  { transform: perspective(340px) rotateX(90deg);    opacity: 0; }
+    100% { transform: perspective(340px) rotateX(0deg);     opacity: 1; }
+}
+
+/* 无 JS 时：不出现空标题，静态展示第一行文案 */
+.tw-head:not(.is-js) .tw-typed::after {
+    content: "审阅";
+}
+
+/* 降低动效偏好：关掉闪烁与翻转 */
+@media (prefers-reduced-motion: reduce) {
+    .tw-cursor { animation: none; }
+    .tw-en.is-flip { animation: none; }
+}
