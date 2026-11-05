@@ -29,11 +29,11 @@ slug: "about"
 <a href="https://521404.xyz">521404.xyz</a>
 
 ## 我？
-一个来自大山深处的<del>少</del>中年矮穷矬，喜欢户外运动（骑行、爬山、徒步、慢跑...），也喜欢宅窝打游戏（单机剧情、角色养成、体育竞技都有涉猎，钟爱fps且反应迟钝的手残党。
+一个来自大山深处的<del>少</del>中年矮穷矬，喜欢户外运动（骑行、爬山、徒步、慢跑...），也喜欢宅窝打游戏（单机剧情、角色养成、体育竞技）都有涉猎，钟爱fps且反应迟钝的手残党。
 
 **↓↓↓联系我↓↓↓**
 
-手持电话：<a href="tel:19876544549">MTk4NzY1NDQ1NDk=</a>
+Phone：<a href="tel:19876544549">MTk4NzY1NDQ1NDk=</a>
 
 Email: <a href="jialaguri@outlook.com">jialaguri@outlook.com</a>
 
@@ -43,20 +43,8 @@ Email: <a href="jialaguri@outlook.com">jialaguri@outlook.com</a>
 
 {{<friend
 name="唯爱忆" url="//521404.xyz"
-logo="//cdn.grer.cn/img/favicon.ico" 
+logo="//521404.xyz/favicon.ico" 
 word="记录和Ta的点滴日常与美好瞬间"
->}}
-
-{{<friend
-name="绘影旅忆" url="//pic.grer.cn"
-logo="//grer.cn/img/favicon.ico" 
-word="旅途中的吉光片羽被提炼为诗意的影像，最终沉淀为内心深处的情感地图。"
->}}
-
-{{<friend
-name="迷失博客" url="//www.mishi23.com" 
-logo="//www.mishi23.com/favicon.png" 
-word="一个基于软件和源码分享,创作与抄袭结合的博客"
 >}}
 
 <hr />
@@ -123,7 +111,7 @@ word="本兮的资料馆"
       <li>网站图标： </li>
       <ul>
         <li>Iconfile: https://grer.cn/favicon.ico</li>
-        <li>logotype: https://grer.cn/logo.png</li>
+        <li>logotype: https://grer.cn/images/logo.png</li>
       </ul>
     </ul>
 </ul>

@@ -13,11 +13,19 @@
   故在钩子内就地注入）。
 */ -}}
 <div class="mermaid-wrap">
-  {{- /* .Inner 在 codeblock 钩子里是安全 HTML，直接塞进属性会被判为 #ZgotmplZ；
-       改用 <template> 存一份源码副本，渲染后可从 DOM 取回，主题切换时用它重绘 */ -}}
+  {{- /*
+    源码存两份：
+    - <pre class="mermaid"> 给 mermaid 首次渲染用（渲染后会被替换成 SVG）
+    - <script type="text/plain"> 留一份原文，供主题切换时重绘
+
+    这里必须用 <script> 而不能用 <template>/data- 属性：
+    <template> 的内容会被 HTML 解析/压缩器重组，行首缩进会被吃掉；
+    .Inner 又是安全 HTML，塞进属性会被判成 #ZgotmplZ。
+    script 的内容按原始文本处理，换行与缩进都能完整保留。
+  */ -}}
   {{- $raw := .Inner | strings.TrimSpace }}
   <pre class="mermaid">{{ $raw | safeHTML }}</pre>
-  <template class="mermaid-src">{{ $raw | safeHTML }}</template>
+  <script type="text/plain" class="mermaid-src">{{ $raw | safeHTML }}</script>
 </div>
 {{- if not (.Page.Scratch.Get "mermaidLoaded") }}
 {{- .Page.Scratch.Set "mermaidLoaded" true }}
@@ -72,16 +80,20 @@
         };
     }
 
-    /* 从紧邻的 <template> 取回原始源码 */
+    /* 从紧邻的 <script type="text/plain"> 取回原始源码（script 内容保留原始换行与缩进） */
     function sourceOf( node ) {
         var wrap = node.closest( ".mermaid-wrap" );
-        var tpl = wrap && wrap.querySelector( "template.mermaid-src" );
-        /* template 内容在 DocumentFragment 里，textContent 取不到，要用 innerHTML */
-        return tpl ? tpl.innerHTML : node.dataset.src || node.textContent;
+        var src = wrap && wrap.querySelector( "script.mermaid-src" );
+        return src ? src.textContent : node.textContent;
     }
 
-    /* 把所有 mermaid 块还原成源码后按当前主题重新绘制 */
-    function redraw() {
+    /* 串行化 + 防抖：连续快速切换主题时，上一次 mermaid.run 还是 async 未完成，
+       并发重入会互相覆盖 DOM，表现为偶发的 "Syntax error in text" 或图空白。
+       这里用一条 promise 链把重绘排队，并用定时器合并短时间内的重复请求。 */
+    var redrawQueued = false;
+    var redrawTimer = null;
+
+    function doRedraw() {
         if ( ! window.mermaid ) return;
         var nodes = document.querySelectorAll( "pre.mermaid" );
         if ( ! nodes.length ) return;
@@ -99,6 +111,17 @@
         } catch ( e ) {
             console.warn( "mermaid redraw failed:", e );
         }
+    }
+
+    function redraw() {
+        if ( redrawQueued ) return;
+        redrawQueued = true;
+        if ( redrawTimer ) clearTimeout( redrawTimer );
+        /* 略等一拍，让连续切换合并成一次重绘 */
+        redrawTimer = setTimeout( function () {
+            redrawQueued = false;
+            doRedraw();
+        }, 120 );
     }
 
     function init() {

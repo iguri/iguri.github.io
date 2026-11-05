@@ -96,7 +96,7 @@ shareButtons = [
   [params.profileMode]
   enabled = true
   title = "<h5>审阅自己 、 超越自己 、 取悦自己</h5>"
-  imageUrl = "/logo.png"
+  imageUrl = "/images/logo.png"
   imageWidth = 180
   imageHeight = 160
   imageTitle = "Welcome To My BLOG"

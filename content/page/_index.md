@@ -1,5 +1,5 @@
 ---
-title: 页面
+title: Page
 build:
   render: false
   list: false

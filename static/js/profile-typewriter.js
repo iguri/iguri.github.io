@@ -5,11 +5,11 @@
          assets/css/extended/profile-typewriter.css（翻转动画类 .is-flip）
 
    逻辑：
-   - 词库 ['审阅','超越','取悦']，循环：打字 110ms/字 → 停顿 1400ms
+   - 词库 ['审阅','超越','取悦']，循环：打字 110ms/字 → 停顿 1900ms
      → 删字 55ms/字 → 循环间隙 170ms → 下一个词。
    - 删完字、即将开始打下一个词时，英文词（Review/Surpass/Please）
-     做一次绕 X 轴的 3D 翻转（CSS keyframes，弹性缓动）。
-   - 光标闪烁纯 CSS（steps(1,end) 1s），本脚本不干预。
+     做一次绕 X 轴的 3D 翻转（CSS keyframes，弹性缓动）；
+     翻转时机由本状态机驱动，停顿变化时英文翻转自动同步。
    - prefers-reduced-motion 时停止动效，静态展示首个词。
    =================================================================== */
 (function () {
@@ -19,7 +19,7 @@
     var WORDS_EN = ['Review', 'Surpass', 'Please'];
 
     var TYPE_MS = 110;    // 打字每字
-    var HOLD_MS = 1400;   // 打完停顿
+    var HOLD_MS = 1900;   // 打完停顿（1400 + 500，英文翻转随之同步延后）
     var DEL_MS  = 55;     // 删字每字
     var GAP_MS  = 170;    // 循环间隙
 
