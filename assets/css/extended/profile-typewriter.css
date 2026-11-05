@@ -24,12 +24,27 @@
              左右各 30px 暗灰 linear-gradient 细线点缀
    =================================================================== */
 
-/* ---------- 1. profile 安全垂直居中 ---------- */
+/* ---------- 1. profile 安全垂直居中 ----------
+   根因（实测）：.main 的高度来自 flex-grow，不是"确定高度"，
+   子元素的百分比 min-height 解析为 auto，所以主题/旧版补丁里的
+   min-height: calc(...) / min-height: 100% 全部失效，profile 只按
+   内容高排布 → 整体贴顶。
+   做法：让含 .profile 的 .main 变成 flex 列，.profile 用 flex:1
+   真实吃掉剩余高度（不依赖百分比解析），.profile_inner 再用
+   auto margin 在其中居中；内容超高时 auto margin 退化为贴顶可滚，
+   不会裁头。:has 限定只作用于 profileMode 首页，不影响其它列表页
+   的块级布局（flex 下相邻 margin 不折叠，会改变文章列表间距）。 */
+body.list > .main:has(> .profile) {
+    display: flex;
+    flex-direction: column;
+}
+
 body.list > .main .profile {
     display: flex;
     align-items: stretch;
     justify-content: center;
-    min-height: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
 }
 
 .profile .profile_inner {
@@ -76,6 +91,16 @@ body.list > .main .profile {
     text-shadow:
         0 0 12px color-mix(in srgb, currentColor 20%, transparent),
         0 0 2px  color-mix(in srgb, currentColor 10%, transparent);
+}
+
+/* 动态词容器：固定占 2 个汉字宽、左对齐。
+   打字/删字时「自己」与光标的水平位置完全不动（用户要求），
+   动态词在自己的槽内从左到右逐字出现/从右逐字消失，
+   不会出现字符位置跳动 */
+.tw-typed {
+    display: inline-block;
+    width: 2.12em; /* 2 字 + letter-spacing(0.06em*2)，防止抖动 */
+    text-align: left;
 }
 
 /* 光标：2px 宽竖线，1s 间隔硬闪烁 */

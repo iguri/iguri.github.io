@@ -223,11 +223,19 @@ body > .main {
     width: 100%;
 }
 
-/* 首页 profile 区域：填满 .main 而不是再算一遍视口高度。
-   注意：.profile 只在 profileMode 首页出现（文章页没有该元素），
-   用 body.list 限定范围，避免影响其它页面的 .main 高度计算 */
-body.list > .main .profile {
-    min-height: 100%;
+/* 首页 profile 区域：填满 .main 的修正已迁到
+   profile-typewriter.css（根因：.main 高度来自 flex-grow，
+   百分比 min-height 解析为 auto 而失效；改为 .main flex 列 +
+   .profile flex:1）。此处不再重复声明。 */
+
+/* 回到顶部按钮：bottom 跟随 --corner-bottom 变量。
+   主题写死 bottom:4rem，而窄屏下 --corner-bottom 改为 5.5rem，
+   导致 top 按钮与主题切换按钮间距变成 38px（宽屏为 14px）。
+   统一由变量推导后，三颗按钮在任何视口都等距 14px。
+   注意用 #top-link 而不是 .top-link：评论区按钮也带 .top-link 类，
+   它的位置由上面 .bottom-comment 的 calc 推导，不能被这条覆盖 */
+#top-link {
+    bottom: var(--corner-bottom);
 }
 
 /* 屏幕较高时给上下留一点呼吸空间，避免内容贴边 */
