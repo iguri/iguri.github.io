@@ -1,0 +1,111 @@
+{{- /*
+  ====================================================================
+  【站点自定义模板，非主题文件】分类 term 页（美化排查 2026-11-06）
+  --------------------------------------------------------------------
+  作用范围：仅 /categories/<分类>/ 这 7 个 term 页（Hugo v0.146+ 新
+  模板系统的 Page path 查找：layouts/categories/term.html 优先于主题
+  layouts/list.html）。/tags/、/blog/、首页等不受影响。
+  来源基准：themes/PaperMod/layouts/list.html（v8.0-152）的 term 分支，
+  已剥离首页 profileMode / homeInfoParams / .IsHome 等本站该路径下
+  不可能命中的死分支。
+  站点唯一功能改动：H1 前插入 {{ partial "category-icon" .Data.Term }}
+  （主题模板 H1 里无图标钩子，也无法用参数开关，故整页覆盖）。
+  主题升级时以主题 list.html 的 term 相关段落为基准重新 diff。
+  ====================================================================
+*/ -}}
+
+{{- define "main" }}
+
+{{- if .Title }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>
+    {{- /* [站点改动] 此行：分类 term 页标题前加分类图标 */ -}}
+    {{- partial "category-icon" .Data.Term }}
+    {{ .Title }}
+    {{- if ($.Param "ShowRssButtonInSectionTermList") }}
+    {{- with .OutputFormats.Get "rss" }}
+    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+    {{- end }}
+    {{- end }}
+  </h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+{{- end }}
+
+{{- if .Content }}
+<div class="post-content md-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+
+{{- $paginator := .Paginate (union .RegularPages .Sections) }}
+
+{{- range $index, $page := $paginator.Pages }}
+<article class="post-entry tag-entry">
+  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+      {{- .Title }}
+      {{- if .Draft }}
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+      {{- end }}
+    </h2>
+  </header>
+  {{- if (ne (.Param "hideSummary") true) }}
+  <div class="entry-content">
+    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+  </div>
+  {{- end }}
+  {{- if not (.Param "hideMeta") }}
+  <footer class="entry-footer">
+    {{- partial "post_meta.html" . -}}
+  </footer>
+  {{- end }}
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
+
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+      «&nbsp;{{ i18n "prev_page" }}&nbsp;
+      {{- if ($.Param "ShowPageNums") }}
+      {{- sub $paginator.PageNumber 1 }}/{{ $paginator.TotalPages }}
+      {{- end }}
+    </a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+      {{- i18n "next_page" }}&nbsp;
+      {{- if ($.Param "ShowPageNums") }}
+      {{- add 1 $paginator.PageNumber }}/{{ $paginator.TotalPages }}
+      {{- end }}&nbsp;»
+    </a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}
+
+{{- end }}{{- /* end main */ -}}

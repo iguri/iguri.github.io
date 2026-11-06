@@ -2,4 +2,15 @@
 {{- /*     Insert any custom code (web-analytics, resources, etc.) - it will appear in the <head></head> section of every page. */ -}}
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
 {{- /* Head custom content area end */ -}}
-<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont/style.css" media="print" onload="this.media='all'">  
+{{- /*
+    [美化排查 2026-11-06] 字体改为本站自托管。
+    原引用 npm.elemecdn.com/lxgw-wenkai-screen-webfont/style.css（该 style.css
+    用 @import 拉 4 个变体、每个 97 个 @font-face 分片，elemecdn 有过区域故障）。
+    现只引入正文实际使用的 "LXGW WenKai Screen" 一个变体（见
+    assets/css/extended/fonts.css 的字体栈），其余 R/GB 变体与正文无关，未迁入。
+    资源位置：static/fonts/lxgw/（构建后为 /fonts/lxgw/，woff2 共 97 片 5.1MB，
+    按 unicode-range 懒加载，单页实际只下载命中的分片）。
+    更新方式：从 npm 包 lxgw-wenkai-screen-webfont 取 lxgwwenkaiscreen.css 与
+    files/ 覆盖即可；保留 media=print+onload 异步加载模式，字体失败不阻塞渲染。
+*/ -}}
+<link rel="stylesheet" href="/fonts/lxgw/lxgwwenkaiscreen.css" media="print" onload="this.media='all'">  

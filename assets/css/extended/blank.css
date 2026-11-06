@@ -11,20 +11,9 @@
     visibility: hidden;
 }
 
-@keyframes breathe {
-  0% {
-    opacity: 0.1;
-    transform: scale(1.2);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.3);
-  }
-  100% {
-    opacity: 0.1;
-    transform: scale(1.2);
-  }
-}
+/* [美化排查 2026-11-06] 删除死代码：@keyframes breathe。
+   原为旧版主题切换按钮（.logo-switches 浮动期）的呼吸动画，
+   按钮组已迁到 theme-toggle.css 的 --corner-* 方案后无任何使用方。 */
 
 /* 链接样式 */
 .post-content a {
@@ -89,6 +78,19 @@ table {
   border-radius: 50%; /* 圆形图片适配 */
   animation: breathColor 3s ease-in-out infinite alternate;
   transform: translateZ(0); /* 开启硬件加速，动画更流畅 */
+}
+
+/* [美化排查 2026-11-06] 动晕敏感豁免：logo 呼吸特效是全站唯一的无限循环
+   动画（3s alternate 永久跑），系统开启"减少动态效果"时必须停掉。
+   drop-shadow 滤镜动画会强制 logo 图层持续重绘，静止后也省电。
+   同批动画中 tw-flip（profile-typewriter.css 末尾）与 theme-circle-reveal
+   （theme-toggle.css 末尾）此前已各自做了 reduced-motion 分支，不再重复。 */
+@media (prefers-reduced-motion: reduce) {
+  .profile img {
+    animation: none;
+    /* 保留一帧静态光晕（取动画起点色），观感不至于完全平掉 */
+    filter: drop-shadow(-2px -2px 3px rgba(148, 218, 218, 0.2));
+  }
 }
 
 /* 呼吸动画：向上偏移+多色渐变+光晕缩放 */

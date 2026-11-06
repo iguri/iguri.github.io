@@ -1,0 +1,44 @@
+{{- /*
+  ====================================================================
+  【站点自定义覆盖模板，非主题文件】（美化排查 2026-11-06）
+  来源：themes/PaperMod/layouts/taxonomy.html（v8.0-152）
+  覆盖原因：taxonomy.html 同时渲染 /tags/ 与 /categories/ 总览页。
+    本站只给"分类"加图标、不给标签加（避免 /tags/ 页 111 个词条视觉噪音）。
+    主题模板本身无条件输出 terms 列表，无法用配置开关区分，故整文件覆盖，
+    唯一改动是 <li> 内加了一行 {{ partial "category-icon" $name }}，
+    并只在 .Type == "categories" 时生效；其余逐字保持主题原样。
+    主题升级时以主题版为基准重新 diff 本文件。
+  相关：layouts/_partials/category-icon.html（图标定义）
+        assets/css/extended/category-icons.css（尺寸与排版，含入场动画豁免）
+  ====================================================================
+*/ -}}
+
+{{- define "main" }}
+
+{{- if .Title }}
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+    {{- end }}
+</header>
+{{- end }}
+
+<ul class="terms-tags">
+    {{- $type := .Type }}
+        {{- range $key, $value := .Data.Terms.Alphabetical }}
+            {{- $name := .Name }}
+            {{- $count := .Count }}
+            {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+            <li>
+                {{- /* [站点改动] 仅分类总览页加图标；标签页不加。改动仅此三行 */ -}}
+                {{- if eq $type "categories" }}{{ partial "category-icon" $name }}{{ end }}
+                <a href="{{ .Permalink }}">{{ .LinkTitle }} <sup><strong><sup>{{ $count }}</sup></strong></sup> </a>
+            </li>
+        {{- end }}
+    {{- end }}
+</ul>
+
+{{- end }}{{/* end main */ -}}

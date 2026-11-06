@@ -1,17 +1,42 @@
 {{- if not (.Param "hideFooter") }}
+{{- /*
+    ====================================================================
+    【站点自定义覆盖 partial，非主题文件】（美化排查 2026-11-06 第4项）
+    来源：themes/PaperMod/layouts/_partials/footer.html（v8.0-152）
+    本文件此前已因 回顶按钮/滚动脚本 覆盖过主题版本。
+    本次改动仅在 Copyright 渲染处：
+      原实现把 site.Copyright 整串直出（三个备案号 + </br> + ©行），
+      在移动端 12px 下折行成参差的 4~5 行。现按 </br> 与 " | " 把
+      Copyright 拆成 备案项 ×3 与 ©行 ×1，连同 Powered by 一起放进
+      .footer-parts 容器；排版规则在 assets/css/extended/footer-mobile.css：
+      桌面端保持主题原样的"一行流"，≤600px 切换为两栏小字网格。
+      config.toml 的 Copyright 字符串不需要改动，RSS 等消费方不受影响。
+      若 Copyright 不含 </br>（自定义站点复用时），退化为原整串渲染。
+    主题升级时以主题版为基准 diff，保留本注释。
+    ====================================================================
+*/ -}}
+{{- $cr := site.Copyright }}
+{{- $crParts := split $cr "</br>" }}
 <footer class="footer">
+    <div class="footer-parts">
     {{- if not site.Params.footer.hideCopyright }}
-        {{- if site.Copyright }}
-        <span>{{ site.Copyright | markdownify }}</span>
+        {{- if $cr }}
+            {{- if gt (len $crParts) 1 }}
+                {{- /* [站点改动] 备案号逐项拆分，供窄屏两栏排版 */}}
+                {{- range $item := split (index $crParts 0) " | " }}
+        <span class="footer-icp">{{ $item | safeHTML }}</span>
+                {{- end }}
+        <span class="footer-copy">{{ index $crParts 1 | safeHTML }}</span>
+            {{- else }}
+        <span>{{ $cr | markdownify }}</span>
+            {{- end }}
         {{- else }}
         <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
         {{- end }}
-        {{- print " · "}}
     {{- end }}
 
     {{- with site.Params.footer.text }}
         {{ . | markdownify }}
-        {{- print " · "}}
     {{- end }}
 
     {{/*
@@ -26,6 +51,7 @@
         <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
         <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
+    </div>{{- /* [站点改动] .footer-parts 容器闭合 */}}
 </footer>
 {{- end }}
 

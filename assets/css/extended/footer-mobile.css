@@ -1,0 +1,41 @@
+/* ===================================================================
+   【站点自定义，非主题文件】页脚两栏排版（美化排查 2026-11-06 第4项）
+   -------------------------------------------------------------------
+   配套改动：layouts/_partials/footer.html（覆盖版）——Copyright 按
+   " | " 拆成 .footer-icp ×3，©行 .footer-copy，外加主题原 Powered by
+   span，全部包进 .footer-parts。
+   策略：宽屏完全维持主题原样（.footer 的一行流、居中、12px 不变，
+   .footer-parts 仅作 display:contents 不产生盒子）；≤600px 时改为
+   两栏网格：三个备案号一行两个，©行与 Powered by 各占一行，
+   字号缩至 11px、行距收紧，避免三行备案在手机上折成参差的五六行。
+   =================================================================== */
+
+.footer-parts {
+    display: contents; /* 宽屏：对布局透明，等同未改动 */
+}
+
+@media (max-width: 600px) {
+    .footer {
+        line-height: 1.5;
+        padding-bottom: var(--gap);
+    }
+
+    .footer-parts {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        gap: 2px 10px;
+        font-size: 11px;
+    }
+
+    /* ©行与 Powered by 独占一行 */
+    .footer-copy,
+    .footer-parts > span:last-child {
+        grid-column: 1 / -1;
+    }
+
+    /* 两栏里长链接（公安备案 URL 文本长但链接文字短）保持不撑破 */
+    .footer-icp {
+        white-space: nowrap;
+    }
+}

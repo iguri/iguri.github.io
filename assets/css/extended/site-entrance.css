@@ -1,0 +1,38 @@
+/* ===================================================================
+   【站点自定义，非主题文件】入场动画（美化排查 2026-11-06 第6项）
+   -------------------------------------------------------------------
+   全站唯一一处入场动效定义（打字机/主题切换呼吸等原有动画不动）：
+   列表卡片（.post-entry/.first-entry，含 /blog/、term 页、搜索外
+   的全部列表）与文章正文首屏（.post-single .post-content）在页面
+   加载时做一次 150ms 的 translateY(8px)+opacity 0→1 上浮。
+   - 150ms 属于"感知不到过程"的阈值区间：比主题默认的生硬出现柔和，
+     又不会拖慢首屏可读时间；fill 用默认 none，动画结束后 transform
+     即被移除，不留 stacking context，不影响 sticky/绝对定位钩子。
+   - 卡片同时入场、不做逐张 stagger（保持一处定义、实现最简）。
+   - reduced-motion：直接不跑动画（0% 帧不生效，等同原生出现）。
+   =================================================================== */
+
+@keyframes site-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post-entry,
+.first-entry,
+.post-single .post-content {
+    animation: site-entrance 150ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .post-entry,
+    .first-entry,
+    .post-single .post-content {
+        animation: none;
+    }
+}

@@ -1,0 +1,35 @@
+/* ===================================================================
+   【站点自定义，非主题文件】分类图标样式（美化排查 2026-11-06 第5项）
+   -------------------------------------------------------------------
+   图标来源：layouts/_partials/category-icon.html（Lucide 线性、
+   stroke=currentColor，自动跟随主题前景色，无需深浅色两套）。
+   出现位置（站点侧模板，均不动主题文件）：
+     - layouts/taxonomy.html（覆盖版）：/categories/ 总览页词条
+     - layouts/categories/term.html（Page path 定向）：各分类列表页 H1
+   尺寸用 1em 跟随宿主字号；vertical-align 微调与中文基线对齐。
+   只给分类用——/tags/ 页 111 词条不加（taxonomy.html 里按 $type 区分）。
+   =================================================================== */
+
+.cat-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.12em; /* 中文基线下沉微调，视觉居中 */
+    flex: none;
+}
+
+/* 分类总览页：图标与文字间距 */
+.terms-tags li .cat-icon {
+    margin-inline-end: 0.35em;
+    color: var(--secondary); /* 词条图标略退灰，压住视觉重量 */
+}
+.terms-tags li a:hover .cat-icon {
+    color: var(--primary);
+}
+
+/* 分类 term 页 H1：与标题字号同步（H1 为 2.5em 级），稍放大 */
+.page-header h1 .cat-icon {
+    width: 0.9em;
+    height: 0.9em;
+    margin-inline-end: 0.28em;
+    color: var(--primary);
+}
