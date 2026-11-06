@@ -1,0 +1,34 @@
+{{- /*
+    站点自定义输出模板（非主题文件）——llms-full.txt
+    作用：把全站主要页面的 Markdown 原文拼接为单个纯文本文件，供 LLM 一次性读取。
+    输出注册：config.toml 的 [outputFormats.llms-full] + [outputs] home 列表。
+    过滤规则与主题 layouts/llms.txt 对齐：跳过 archives/search 等功能页与 searchHidden 页面。
+*/ -}}
+{{- $desc := site.Params.description | default site.Title -}}
+# {{ site.Title }}
+
+{{ $desc }}
+
+本文件是 llms.txt 的全文版：按发布时间倒序内联了全站每篇文章与主要单页的
+Markdown 原文（已剔除搜索、归档、友链跳转等功能页）。若只需目录与链接，
+请读 {{ "llms.txt" | absURL }}。
+
+{{- range site.RegularPages }}
+{{- if and (not .Params.searchHidden) (ne .Layout "archives") (ne .Layout "search") (ne .Layout "links") }}
+
+---
+
+# {{ .Title }}
+
+URL: {{ .Permalink }}
+Date: {{ .Date.Format "2006-01-02" }}
+{{- with .Params.categories }}
+Categories: {{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}
+{{- end }}
+{{- with .Params.tags }}
+Tags: {{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}
+{{- end }}
+
+{{ .RawContent }}
+{{- end }}
+{{- end }}

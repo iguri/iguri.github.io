@@ -179,8 +179,24 @@ lineNos = false
 lineNumbersInTable = false
 tabWidth = 4
 
+# llms.txt / llms-full.txt —— 面向 LLM 的站点说明与全文内联版
+# 输出格式需在此显式注册：主题只带了 layouts/llms.txt 模板，没有定义格式；
+# llms-full 连模板都没有，模板补在站点 layouts/llms-full.txt（不动主题）。
+# baseName 必须等于模板文件名去掉扩展名的部分，故 "llms-full" 对应 llms-full.txt。
 [outputs]
-home = [ "HTML", "RSS", "JSON" ]
+home = [ "HTML", "RSS", "JSON", "llms", "llms-full" ]
+
+[outputFormats.llms]
+baseName = "llms"
+mediaType = "text/plain"
+isPlainText = true
+notAlternative = true
+
+[outputFormats.llms-full]
+baseName = "llms-full"
+mediaType = "text/plain"
+isPlainText = true
+notAlternative = true
 
 [security]
   allowContent = [ 'text/markdown', 'text/html' ]
