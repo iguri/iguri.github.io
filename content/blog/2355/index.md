@@ -17,68 +17,68 @@ aliases:
 
 ![wordpress](wordpress.jpg)
 
-在WordPress中，用户提交评论甚至是用户访问，相应的UA信息都会储存到数据库中，如果感兴趣，可以查看WordPress数据库下的wp\_comments表单，里面有一项comment\_agent即是评论的UA信息，因此很轻易地，我们可以通过调用各条评论的UA，来显示评论者的操作系统和浏览器等信息。 
+在WordPress中，用户提交评论甚至是用户访问，相应的 UA 信息都会储存到数据库中。如果感兴趣，可以查看 WordPress 数据库下的 `wp_comments` 表，里面有一项 `comment_agent` 即是评论的 UA 信息，因此很轻易地，我们可以通过调用各条评论的UA，来显示评论者的操作系统和浏览器等信息。 
 
-在WordPress提供的函数中，如get\_comment\_author\_IP可以直接调取评论者IP，但是同一数据表下的comment\_agent却没有直接调取的函数，那么自己造一个函数吧。
+WordPress 提供的函数中，如 `get_comment_author_IP` 可以直接调取评论者 IP，但同一数据表下的 `comment_agent` 却没有直接调取的函数，那么自己造一个吧。
 
-在WordPress文档中发现，get\_comment\_author\_IP函数实际是通过wp-includes/comment-template.php这个文件定义的，那么接下来直接对comment-template.php中的get\_comment\_author\_IP函数稍加改造就能调用UA了。
+在 WordPress 文档中发现，`get_comment_author_IP` 实际是由 `wp-includes/comment-template.php` 定义的，那么直接对它稍加改造就能调用 UA 了。
 
-具体，在主题的function.php中直接加入下面一段函数，get\_comment\_agent函数就造好了：
+具体来说，在主题的 `function.php` 中直接加入下面一段函数，`get_comment_agent` 就造好了：
 
-```css
-comment\_agent, $comment->comment\_ID, $comment );
+```php
+comment_agent, $comment->comment_ID, $comment );
   }
   ?>
 ```
 
 接下来我们需要一个转换函数把上面调取出来的UA字段转换为显示在用户屏幕上的内容，我的想法是使用icon font来显示，那么直接把UA输出到HTML标签上就好啦。
 
-可是User Agent是一段类似"Mozilla/5.0 (X11; Fedora; Linux x86\_64)      AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"这样的文字，需要用正则表达拆分，然后用UA数据库匹配，实在太麻烦，我懒得做，不过幸好找到一个转换UA的API，那么直接调用就行了（这个数据库服务器好像有点不稳，偶尔会掉线，不妨在API请求部分添加一个超时的条件）。
+可是 User Agent 是一段类似 `Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36` 的文字，需要用正则拆分再用 UA 数据库匹配，实在太麻烦，我懒得做。幸好找到一个转换 UA 的 API，直接调用就行（这个数据库服务器好像有点不稳，偶尔掉线，不妨在 API 请求部分加一个超时条件）。
 
 下面是UA转换的代码，添加到function.php中：
 
-```js
-agent\_name; //Chrome / Android Webkit Browser / Safari / Firefox / BlackBerry / Internet Explorer / Edge
-$OsType = $getua->os\_type; //Windows / Android / Linux / Macintosh / BlackBerryOS 
-$OsName = $getua->os\_name; //Windows 10 / Windows 8 / Windows 8.1 / Windows 7 / Windows XP /  / Android / Linux / OS X / iPhone OS / BlackBerryOS / FreeBSD
-$LinuxDistibution = $getua->linux\_distibution; //Ubuntu / CentOS / Fedora / Debian / Red Hat
+```php
+agent_name; //Chrome / Android Webkit Browser / Safari / Firefox / BlackBerry / Internet Explorer / Edge
+$OsType = $getua->os_type; //Windows / Android / Linux / Macintosh / BlackBerryOS 
+$OsName = $getua->os_name; //Windows 10 / Windows 8 / Windows 8.1 / Windows 7 / Windows XP /  / Android / Linux / OS X / iPhone OS / BlackBerryOS / FreeBSD
+$LinuxDistibution = $getua->linux_distibution; //Ubuntu / CentOS / Fedora / Debian / Red Hat
  
 // Browser name
 if (($AgentName == "Chrome") || ($AgentName == "Android Webkit Browser") || ($AgentName == "Safari") || ($AgentName == "Firefox") || ($AgentName == "BlackBerry") || ($AgentName == "Internet Explorer") || ($AgentName == "Edge")) {
     if (($AgentName == "Android Webkit Browser") || ($AgentName == "Internet Explorer")) {
-        $print\_browser = str\_replace( " ", "-",$AgentName);
+        $print_browser = str_replace( " ", "-",$AgentName);
     } else {
-        $print\_browser = $AgentName;
+        $print_browser = $AgentName;
     }
 }
 else {
-    $print\_browser = "unkwon-browser";
+    $print_browser = "unkwon-browser";
 }
  
 // System name
 if (($LinuxDistibution == "Ubuntu") || ($LinuxDistibution == "CentOS") || ($LinuxDistibution == "Fedora") || ($LinuxDistibution == "Debian") || ($LinuxDistibution == "Red Hat")) {
     if ($LinuxDistibution == "Red Hat") {
-        $print\_system = str\_replace( " ", "-",$LinuxDistibution);
+        $print_system = str_replace( " ", "-",$LinuxDistibution);
     } else {
-        $print\_system = $LinuxDistibution; // Linux Distributions
+        $print_system = $LinuxDistibution; // Linux Distributions
     }
 } elseif (($OsName == "Windows 10") || ($OsName == " Windows 8") || ($OsName == "Windows 7") || ($OsName == "Windows XP") || ($OsName == "Android") || ($OsName == "Linux") || ($OsName == "OS X") || ($OsName == "iPhone OS") || ($OsName == "BlackBerryOS") || ($OsName == "FreeBSD")) {
     if (($OsName == "Windows 10") || ($OsName == " Windows 8") || ($OsName == "Windows 8.1") || ($OsName == "Windows 7") || ($OsName == "Windows XP") || ($OsName == "OS X") || ($OsName == "iPhone OS")) {
-        $print\_system = str\_replace( " ", "-",$OsName);
+        $print_system = str_replace( " ", "-",$OsName);
     } elseif ($OsName == "Windows 8.1") {
-        $print\_system = "Windows-9";
+        $print_system = "Windows-9";
     } else {
-        $print\_system = $OsName; // OS name like Windows 10, iPhone
+        $print_system = $OsName; // OS name like Windows 10, iPhone
     }
 } elseif (($OsType == "Windows") || ($OsType == "Android") || ($OsType == "Linux") || ($OsType == "Macintosh") || ($OsType == "BlackBerryOS")) {
-    $print\_system = $OsType; // No specified OS info
+    $print_system = $OsType; // No specified OS info
 } else { 
-    $print\_system = "unkwon-system";
+    $print_system = "unkwon-system";
 }
  
 return "  ";
 //return ""; 
-//return $print\_system . $print\_browser;
+//return $print_system . $print_browser;
 //return $ua;
 }
 ?>

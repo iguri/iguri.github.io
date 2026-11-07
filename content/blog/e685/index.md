@@ -18,16 +18,16 @@ aliases:
 
 经过我搜索试错，再第n次我成功了... 其实也很简单的原理， 配置文件里加入以下这段代码：
 
-```css
+```nginx
 server {
 listen 80;
-#listen \[::\]:80; // IPv6监控相关，我选择关闭
- 
-server\_name www.grins.top;  //替换成你的域名
- 
-return 301 http://demo.blog.2sxs.net$request\_uri; //替换成你的域名
+#listen [::]:80; // IPv6监控相关，我选择关闭
+
+server_name www.grins.top;  //替换成你的域名
+
+return 301 http://demo.blog.2sxs.net$request_uri; //替换成你的域名
 }
- 
+
 server {
 // other server block
 }

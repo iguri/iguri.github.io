@@ -35,18 +35,18 @@ aliases:
 首先还是跟本地环境一样配置好，git服务就不用说了，服务器应该是自己就有的...吧。
 
 1. 查看已安装的的git版本号：
-```
+```text
 root@VM-12-10-debian:~# git --version
 git version 2.39.2
 ```
 
 如果没有就安装：
-```
+```bash
 apt install git
 ```
 
 2. 生成密钥并添加到GitHub：
-```
+```text
 root@VM-12-10-debian:~# ssh-keygen -t rsa
 Generating public/private rsa key pair.
 Enter file in which to save the key (/root/.ssh/id_rsa): 
@@ -71,7 +71,7 @@ The key's randomart image is:
 ```
 
 上面可以看出证书生成到了 `/root/.ssh/`目录，接着我们查看并复制到GitHub：
-```
+```text
 root@VM-12-10-debian:~# cd ~/.ssh
 root@VM-12-10-debian:~/.ssh# ls
 authorized_keys  id_ed25519  id_ed25519.pub  id_rsa  id_rsa.pub
@@ -127,7 +127,7 @@ fi
 
 保存完查看密钥，除了密钥下边有使用说明：
 
-```
+```text
 宝塔WebHook使用方法:
 GET/POST:
 http://ip:端口/hook?access_key=密钥&param=项目名
@@ -137,7 +137,7 @@ http://ip:端口/hook?access_key=密钥&param=项目名
 
 我们需要把它拆开来用，分别是:
 
-```html
+```text
 # 第一条
 http://ip:端口/hook?access_key=密钥
 

@@ -25,7 +25,7 @@ aliases:
 
 **生成ssh**:
 
-```html
+```bash
 ssh-keygen -t rsa -C "your_email@example.com"
 ```
 
@@ -35,7 +35,7 @@ ssh-keygen -t rsa -C "your_email@example.com"
 
 接着无脑回车就行，中间会让你输入密码什么的可以设置也可以忽略，反正现在也只能用toke了，当出现以下字符就算是成功生成本地ssh key了：
 
-```html
+```text
 Your identification has been saved in /c/Users/you/.ssh/id_rsa.
 # Your public key has been saved in /c/Users/you/.ssh/id_rsa.pub.
 # The key fingerprint is:
@@ -49,13 +49,13 @@ Your identification has been saved in /c/Users/you/.ssh/id_rsa.
 
 测试一下：
 
-```html
+```bash
 ssh -t git@github.com
 ```
 
 如果没有报错会出现：
 
-```html
+```text
 The authenticity of host 'github.com (207.97.227.239)' can't be established.
 # RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
 # Are you sure you want to continue connecting (yes/no)?
@@ -63,7 +63,7 @@ The authenticity of host 'github.com (207.97.227.239)' can't be established.
 
 yes回车，输入刚刚创建SSH时设置的密码，没有设置就不需要密码，后续push不能用密码，只能token
 
-```html
+```text
 Hi username! You've successfully authenticated, but GitHub does not
 # provide shell access.
 ```
@@ -74,14 +74,14 @@ Hi username! You've successfully authenticated, but GitHub does not
 
 先将远程仓库clone到本地：
 
-```html
+```bash
 git clone https://github.com/用户名/仓库名.git
 # 例 git clone https://github.com/grinxxoo/grinxxoo.github.io.git
 ```
 
 将本地修改后
 
-``` html
+```bash
 git add .
 git commit -m "描述"
 # 代码分别执行回车，第一次coomit后会提示 please tell me who are...等信息
@@ -89,7 +89,7 @@ git commit -m "描述"
 
 按照所提示设置：
 
-```html
+```bash
 git config --global user.name "your name"
 git config --global user.email "your_email@youremail.com"
 # 如无报错就算建立链接了
@@ -101,15 +101,15 @@ git config --global user.email "your_email@youremail.com"
 
 这里指的是源文件，就是最开始用`hugo new site filename`生成的站点目录，复制到上面clone下来的仓库里，然后整个push到github仓库（uname.github.io)：
 
-```
+```bash
 git add .
 ```
 
-```
+```bash
 git commit -m "上传hugo博客源文件"
 ```
 
-```
+```bash
 git push origin master
 # 除了第一次指定分支 后续可以简写如下
 git push

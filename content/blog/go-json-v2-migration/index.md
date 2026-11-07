@@ -3,13 +3,13 @@ title: "Go 1.27 把 JSON 默认改狠了：重复键报错，和一次快 14 倍
 date: 2026-11-06T20:45:00+08:00
 summary: "Go 1.27 的 json/v2 默认拒绝重复键与非法 UTF-8，对比 v1，嵌套 DTO 反序列化提速 14 倍。"
 tags: ["Go", "JSON", "API 设计"]
-categories: AI仁有话说
+categories: 折腾笔记
 author: "甲拉古日"
 slug: go-json-v2-migration
 draft: false
 ---
 
-```
+```text
 jsontext: duplicate object member name "name"
 ```
 
@@ -54,7 +54,7 @@ jsonv2.Unmarshal(data, &u, jsonv2.MatchCaseInsensitiveNames(true))
 
 官方说 Unmarshal 最多快 10 倍。我先拿一个普通订单结构试，没能复现：
 
-```
+```text
 BenchmarkUnmarshalV1-8   13806-14879 ns/op   550 B/op   9 allocs/op
 BenchmarkUnmarshalV2-8   13131-14945 ns/op   550 B/op   9 allocs/op
 ```
@@ -63,7 +63,7 @@ BenchmarkUnmarshalV2-8   13131-14945 ns/op   550 B/op   9 allocs/op
 
 10 倍是有前提的，前提在 `UnmarshalJSON` 本身。v1 要调一个类型的 `UnmarshalJSON([]byte)`，必须先把整个值解析完来确定边界，再把这段字节交出去——方法内部又得重新解析一遍。两层嵌套就是 4 次解析，n 层是 2ⁿ 量级。我照 kube-openapi#315 的形状做了个递归树，每层都实现自定义反序列化，v1 与 v2 各自跑：
 
-```
+```text
 depth   bytes        v1/op        v2/op   ratio
     8    200 B     13.005µs     4.621µs    2.8x
    16    384 B     40.279µs     9.369µs    4.3x

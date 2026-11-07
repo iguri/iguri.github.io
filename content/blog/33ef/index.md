@@ -21,7 +21,7 @@ hexo-lazyload-image需要安装插件才能使用
 
 安装：
 
-```
+```bash
 npm install hexo-lazyload-image --save
 ```
 
@@ -34,6 +34,7 @@ lazyload:
   onlypost: false
   loadingImg: /medias/loading.gif
 ```
+
 ![](159878786gfas.jpg)
 
 ### 懒加载插件优化（可选）
@@ -42,7 +43,7 @@ lazyload:
 
 第 9 行修改为：
 
-```
+```javascript
 && rect.top <= (window.innerHeight +240 || document.documentElement.clientHeight +240)
 ```
 
@@ -58,7 +59,7 @@ matery主题和`hexo-lazyload-image`插件有个BUG，查看大图，发现全�
 
 修改主题文件下的 `matery.js`，在 108 行左右添加以下代码：
 
-```
+```javascript
 $(document).find('img[data-original]').each(function(){ 	$(this).parent().attr("href", $(this).attr("data-original")); });
 ```
 

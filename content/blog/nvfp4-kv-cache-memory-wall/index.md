@@ -3,7 +3,7 @@ title: "HBM 只增 3%，吞吐却涨 30 倍：NVFP4 KV Cache 与 AI 推理的内
 date: 2026-11-06T09:20:00+08:00
 summary: "HBM 增 3% 吞吐涨 30 倍。拆 NVFP4 两级缩放与 KV 缓存数据流，附可复现显存估算脚本。"
 tags: ["KV Cache", "量化", "AI 推理"]
-categories: AI仁有话说
+categories: 折腾笔记
 author: "甲拉古日"
 slug: nvfp4-kv-cache-memory-wall
 draft: false

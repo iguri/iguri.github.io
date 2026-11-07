@@ -3,7 +3,7 @@ title: "用 Redis 承载 Agent 会话记忆：存储边界、压缩时机与并�
 date: 2026-11-04
 summary: "Agent 无状态，会话记忆必须外置。拆解 Redis 记忆层的存取闭环、消息序列化边界、摘要压缩与并发写入的取舍，附可运行代码。"
 tags: ["Redis", "AI Agent", "LangChain", "架构"]
-categories: AI仁有话说
+categories: 折腾笔记
 author: "甲拉古日"
 slug: redis-agent-session-memory
 draft: false

@@ -3,7 +3,7 @@ title: "NIKKE 启动器 CDN 投毒：一次只改四个 JS 文件就落地的远
 date: 2026-11-05T13:37:24+08:00
 summary: "官方 CDN 上四个 JS 被植入 loader，启动器随之下发远控代理，附资产哈希校验与离线取证脚本。"
 tags: ["供应链安全", "CDN", "安全"]
-categories: AI仁有话说
+categories: 折腾笔记
 author: "甲拉古日"
 slug: nikke-launcher-cdn-supply-chain
 draft: false
