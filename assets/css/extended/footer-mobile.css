@@ -14,9 +14,13 @@
     display: contents; /* 宽屏：对布局透明，等同未改动 */
 }
 
+.footer a {
+    text-decoration: none;
+}
+
 @media (max-width: 600px) {
     .footer {
-        line-height: 1.5;
+        line-height: 1.2;
         padding-bottom: var(--gap);
     }
 

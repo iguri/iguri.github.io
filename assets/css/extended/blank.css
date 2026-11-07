@@ -15,18 +15,6 @@
    原为旧版主题切换按钮（.logo-switches 浮动期）的呼吸动画，
    按钮组已迁到 theme-toggle.css 的 --corner-* 方案后无任何使用方。 */
 
-/* 链接样式 */
-.post-content a {
-    box-shadow: none;
-    text-decoration: none;
-    border-bottom: 2px solid skyblue;
-    padding-bottom: 1.5px;
-}
-.post-content a:hover {
-    color: #263a43;
-    border-bottom: hidden; 
-}
-
 /* 图片居中 */
 .post-content img {
     margin: auto;

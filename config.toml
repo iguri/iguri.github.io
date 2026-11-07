@@ -30,7 +30,7 @@ minifyOutput = true
 date = [ ":default" ]
 
 [permalinks]
-blog = "/blog/:slug.html"
+blog = "/blog/:slug"
 page = "/:slug"
 
 [pagination]
@@ -39,9 +39,9 @@ path = "page"
 
 [params]
 env = "production"
-title = "故人笔记 - 甲拉古日的自留地"
-description = "故人笔记 - 甲拉古日的自留地; 随手记录生活与灵感瞬间的创作。"
-keywords = [ "故人笔记", "甲拉古日", "个人网站", "灵感创作" ]
+title = "故人笔记 | 甲拉古日：技术实践 · 数字生活 · 环境部署与优化实录"
+description = "甲拉古日的笔记：持续记录 Hugo + PaperMod 折腾、GitHub Actions 自动化部署、数字生活技巧，以及山野骑行与夜跑日常。技术、生活与个人叙事在此交汇。"
+keywords = [ "个人随笔", "甲拉古日", "Hugo 博客搭建", "GitHub Actions 部署", "AI全流程写作" ]
 author = "甲拉古日"
 DateFormat = "2006-01-02"
 
@@ -133,7 +133,7 @@ shareButtons = [
 
   [params.editPost]
   URL = "//github.com/iguri/iguri.github.io/blob/main/content"
-  Text = "edit"
+  Text = "Edit"
   appendFilePath = true
 
   [params.fuseOpts]

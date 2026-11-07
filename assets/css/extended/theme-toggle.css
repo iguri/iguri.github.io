@@ -69,7 +69,7 @@
 /* 窄屏时三个按钮整体下移，避免和正文重叠 */
 @media screen and (max-width: 900px) {
     :root {
-        --corner-bottom: 5.5rem;
+        --corner-bottom: 4rem;
     }
 }
 
