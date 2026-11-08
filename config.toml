@@ -1,5 +1,5 @@
 baseURL = "https://grer.cn"
-title = "故人笔记 - 甲拉古日的自留地"
+title = "故人笔记 | 甲拉古日：技术实践 · 数字生活 · 环境部署与优化实录"
 locale = "zh-CN"
 defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = false
@@ -79,7 +79,7 @@ shareButtons = [
   text = ""
 
   [params.twikoo]
-  version = "1.6.39"
+  version = "2.0.17"
 
   [params.assets]
   favicon = "/favicon.ico"
