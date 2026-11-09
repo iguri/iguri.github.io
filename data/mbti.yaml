@@ -1,0 +1,73 @@
+# MBTI 维度数据（16personalities INFP-A 结果）
+#
+# 字段说明：
+#   cat          维度分类，显示在右侧详情面板顶部
+#   pct          百分比（进度条数值）
+#   name         主导极名称
+#   key          对应 SVG 文件名后缀（static/mbti/16personalities_trait_<key>.svg）
+#   color        色系：blue / yellow / green / purple / red
+#   score_color  百分比文字颜色
+#   left / right 进度条两端标签（左 / 右）
+#   side         主导极所在侧：right / left
+#                （left 时圆点位置 = 100 - pct，与 16personalities 官方一致）
+#   desc         详情说明文字
+
+type: INFP-A · 调停者
+source: https://www.16personalities.com/ch
+data: 2026-11-09
+
+traits:
+  - cat: 能量
+    pct: 80
+    name: 内向
+    key: introverted
+    color: blue
+    score_color: "#4298B4"
+    left: 外向
+    right: 内向
+    side: right
+    desc: 内向型的人往往更喜欢较少但深入和有意义的社交互动，通常更喜欢安静的环境。
+
+  - cat: 心智
+    pct: 78
+    name: 天马行空
+    key: intuitive
+    color: yellow
+    score_color: "#E4AE3A"
+    left: 天马行空
+    right: 求真务实
+    side: left
+    desc: 天马行空型的人非常富有想象力，思想开放，充满好奇心。他们重视独创性，关注表象背后的含义和遥远的可能性。
+
+  - cat: 天性
+    pct: 51
+    name: 情感细腻
+    key: feeling
+    color: green
+    score_color: "#33A474"
+    left: 理性思考
+    right: 情感细腻
+    side: right
+    desc: 情感细腻型的人重视情感表达和敏锐的感受力。他们非常看重同理心、社会和谐与合作。
+
+  - cat: 应对方式
+    pct: 63
+    name: 随机应变
+    key: prospecting
+    color: purple
+    score_color: "#88619A"
+    left: 运筹帷幄
+    right: 随机应变
+    side: right
+    desc: 随机应变型的人很擅长临场发挥，也很善于根据机会调整做法。他们往往灵活变通、不墨守成规，比起稳定，更看重新奇事物。
+
+  - cat: 身份特征
+    pct: 53
+    name: 自信果断
+    key: assertive
+    color: red
+    score_color: "#F25E62"
+    left: 自信果断
+    right: 情绪易波动
+    side: left
+    desc: 自信果断型的人对自己有信心，情绪稳定，抗压能力强。他们不愿过度担忧，在努力实现目标时往往很有自信。

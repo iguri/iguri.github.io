@@ -31,7 +31,8 @@
         <span>{{ $cr | markdownify }}</span>
             {{- end }}
         {{- else }}
-        <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
+        </br>
+        <span>&copy;{{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
         {{- end }}
     {{- end }}
 

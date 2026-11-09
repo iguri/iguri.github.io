@@ -1,0 +1,279 @@
+/* ==========================================================================
+   MBTI 维度条（16personalities INFP-A 数据）
+   --------------------------------------------------------------------------
+   来源：xiaoten.com 博客组件结构 + 16personalities 结果接口数据
+   作用域：.mbti-advanced-wrapper（不与主题类名冲突）
+   深色：跟随 PaperMod 的 html[data-theme="dark"]，无需额外开关
+   说明：已去除字体声明与主题切换按钮；尺寸 / 布局 / 配色与原组件一致
+   ========================================================================== */
+
+/* 原组件按 content-box 计算尺寸；PaperMod 全局为 border-box，这里还原，
+   否则详情面板会窄 31px、圆点会小 5px */
+.mbti-advanced-wrapper,
+.mbti-advanced-wrapper *,
+.mbti-advanced-wrapper *::before,
+.mbti-advanced-wrapper *::after {
+    box-sizing: content-box;
+}
+
+.mbti-advanced-wrapper {
+    /* 与上下段落的间距（主题的 p 只有 margin-bottom，组件下方需要自己留白） */
+    margin: 1.25rem 0;
+    --mb-border: #eee;
+    --mb-card-bg: #fff;
+    --mb-text-main: #333;
+    --mb-text-sub: #888;
+    --mb-shadow: 0 4px 12px rgba(0, 0, 0, .05);
+    --mb-hover-bg: #f9f9f9;
+    --mb-detail-bg: #fff;
+    --mb-time-color: #999;
+}
+
+html[data-theme="dark"] .mbti-advanced-wrapper {
+    --mb-border: #333;
+    --mb-card-bg: #252525;
+    --mb-text-main: #eee;
+    --mb-text-sub: #aaa;
+    --mb-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+    --mb-hover-bg: #2a2a2a;
+    --mb-detail-bg: #2a2a2a;
+}
+
+.mbti-advanced-wrapper .mbti-box {
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 6px;
+    border: 1px solid var(--mb-border);
+    border-radius: 6px;
+    background: var(--mb-card-bg);
+    box-shadow: var(--mb-shadow);
+    transition: all .3s ease;
+}
+
+.mbti-advanced-wrapper .mbti-list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px 15px;
+}
+
+.mbti-advanced-wrapper .mbti-detail {
+    display: flex;
+    width: 280px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 15px;
+    background: var(--mb-detail-bg);
+    text-align: center;
+    transition: all .3s ease;
+}
+
+.mbti-advanced-wrapper .mbti-item {
+    margin-bottom: 6px;
+    padding: 15px 10px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.mbti-advanced-wrapper .mbti-item:last-child {
+    margin-bottom: 0;
+}
+
+@media (min-width: 769px) {
+    .mbti-advanced-wrapper .mbti-item:hover,
+    .mbti-advanced-wrapper .mbti-item.active {
+        background: var(--mb-hover-bg);
+    }
+}
+
+@media (max-width: 768px) {
+    .mbti-advanced-wrapper .mbti-item.active {
+        background: var(--mb-hover-bg);
+    }
+}
+
+.mbti-advanced-wrapper .mbti-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    color: var(--mb-text-sub);
+    font-size: 12px;
+}
+
+.mbti-advanced-wrapper .mbti-labels span.active-side {
+    color: var(--mb-text-main);
+    font-weight: 700;
+}
+
+.mbti-advanced-wrapper .mbti-track {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    margin-top: 12px;
+    border-radius: 4px;
+}
+
+.mbti-advanced-wrapper .mbti-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.mbti-advanced-wrapper .mbti-dot {
+    position: absolute;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    transform: translateY(-50%);
+    border: 2.5px solid var(--mb-card-bg);
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+}
+
+.mbti-advanced-wrapper .mbti-value {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: 6px;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.mbti-advanced-wrapper .detail-cat {
+    margin-bottom: 4px;
+    color: var(--mb-text-sub);
+    font-size: 11px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+.mbti-advanced-wrapper .detail-title {
+    margin-bottom: 12px;
+    color: var(--mb-text-main);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.mbti-advanced-wrapper .detail-score {
+    margin-right: 4px;
+    font-weight: 700;
+}
+
+/* 覆盖主题 .md-content img 的 margin: 1rem 0 与圆角，保持原组件位置 */
+.mbti-advanced-wrapper .detail-img {
+    display: block;
+    width: 130px;
+    height: auto;
+    margin: 0 0 12px;
+    border-radius: 0;
+}
+
+.mbti-advanced-wrapper .detail-desc {
+    color: var(--mb-text-main);
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    text-align: justify;
+    word-wrap: break-word;
+}
+
+.mbti-advanced-wrapper .detail-content {
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.mbti-advanced-wrapper .detail-content.show {
+    opacity: 1;
+}
+
+.mbti-advanced-wrapper .mbti-time {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    color: var(--mb-time-color);
+    font-size: 12px;
+}
+
+/* 底栏链接：跟随文字颜色，避免主题下划线打断小字排版 */
+.mbti-advanced-wrapper .mbti-time a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.mbti-advanced-wrapper .mbti-time a:hover {
+    text-decoration: underline;
+}
+
+.mbti-advanced-wrapper .c-blue {
+    background-color: #4298b4;
+}
+
+.mbti-advanced-wrapper .c-yellow {
+    background-color: #e4ae3a;
+}
+
+.mbti-advanced-wrapper .c-green {
+    background-color: #33a474;
+}
+
+.mbti-advanced-wrapper .c-purple {
+    background-color: #88619a;
+}
+
+.mbti-advanced-wrapper .c-red {
+    background-color: #f25e62;
+}
+
+.mbti-advanced-wrapper .mbti-text-blue {
+    color: #4298b4;
+}
+
+.mbti-advanced-wrapper .mbti-text-yellow {
+    color: #e4ae3a;
+}
+
+.mbti-advanced-wrapper .mbti-text-green {
+    color: #33a474;
+}
+
+.mbti-advanced-wrapper .mbti-text-purple {
+    color: #88619a;
+}
+
+.mbti-advanced-wrapper .mbti-text-red {
+    color: #f25e62;
+}
+
+@media screen and (max-width: 768px) {
+    .mbti-advanced-wrapper .mbti-box {
+        flex-direction: column;
+    }
+
+    .mbti-advanced-wrapper .mbti-detail {
+        display: none;
+    }
+
+    .mbti-advanced-wrapper .mbti-list {
+        padding: 10px 8px;
+    }
+
+    .mbti-advanced-wrapper .mbti-item {
+        margin-bottom: 4px;
+        padding: 15px 5px 6px;
+    }
+
+    .mbti-advanced-wrapper .mbti-time {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    }
+}

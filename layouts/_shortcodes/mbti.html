@@ -1,0 +1,51 @@
+{{- /*
+  MBTI 维度条短代码
+  用法：{{< mbti >}}
+  数据：data/mbti.yaml    样式：assets/css/extended/mbti.css    脚本：static/js/mbti.js
+  图标：static/mbti/*.svg
+  深色模式跟随 PaperMod 的 html[data-theme]，无需独立开关。
+*/ -}}
+{{- $d := hugo.Data.mbti -}}
+{{- $traits := $d.traits -}}
+{{- $first := index $traits 0 -}}
+<div class="mbti-advanced-wrapper">
+  <div class="mbti-box">
+    <div class="mbti-list" id="mbtiList">
+      {{- range $i, $t := $traits }}
+      {{- $leftPos := $t.pct -}}
+      {{- if eq $t.side "left" }}{{ $leftPos = sub 100 $t.pct }}{{ end -}}
+      {{- $img := printf "mbti/16personalities_trait_%s.svg" $t.key | relURL -}}
+      <div class="mbti-item{{ if eq $i 0 }} active{{ end }}" data-color="c-{{ $t.color }}" data-cat="{{ $t.cat }}" data-label="{{ printf "%v%% %s" $t.pct $t.name }}" data-score-color="{{ $t.score_color }}" data-img="{{ $img }}" data-desc="{{ $t.desc }}">
+        <div class="mbti-track c-{{ $t.color }}">
+          <div class="mbti-bar">
+            <div class="mbti-dot c-{{ $t.color }}" style="left:{{ $leftPos }}%">
+              <div class="mbti-value"><span class="mbti-text-{{ $t.color }}">{{ $t.pct }}%</span> {{ $t.name }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="mbti-labels">
+          {{- if eq $t.side "right" -}}
+          <span>{{ $t.left }}</span><span class="active-side">{{ $t.right }}</span>
+          {{- else -}}
+          <span class="active-side">{{ $t.left }}</span><span>{{ $t.right }}</span>
+          {{- end -}}
+        </div>
+      </div>
+      {{- end }}
+    </div>
+    <div class="mbti-detail">
+      <div id="mbtiDetailContent" class="detail-content show">
+        <div class="detail-cat" id="dCat">{{ $first.cat }}</div>
+        <div class="detail-title"><span class="detail-score mbti-text-{{ $first.color }}" id="dScore" style="color: {{ $first.score_color }}">{{ $first.pct }}%</span> <span id="dLabelText">{{ $first.name }}</span></div>
+        <img id="dImg" class="detail-img" src="{{ printf "mbti/16personalities_trait_%s.svg" $first.key | relURL }}" alt="{{ $first.name }} 插图">
+        <div class="detail-desc" id="dDesc">{{ $first.desc }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="mbti-time">
+    <span>测试时间: {{ $d.data }}</span>
+    <span>类型: {{ $d.type }}</span>
+    <span>数据来源: <a href="{{ $d.source }}" target="_blank" rel="noopener noreferrer">{{ $d.source }}</a></span>
+  </div>
+</div>
+<script src="{{ "js/mbti.js" | relURL }}" defer></script>

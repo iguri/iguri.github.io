@@ -1,3 +1,13 @@
+.tk-content a {
+  color: #eeecaa; /*默认模式超链接配色*/
+  font-weight: 600; 
+}
+
+/* 隐藏头像 */
+#twikoo .tk-comments .tk-submit .tk-avatar {
+  display: none;
+}
+
 .tc-container {
   margin-top: 8px;
   background-color: var(--code-bg);
@@ -6,7 +16,7 @@
 }
 
 .twikoo {
-  font-size: .75em;
+  font-size: .88em;
   padding: 1rem 0.5rem 0rem 0.5rem;
 }
 

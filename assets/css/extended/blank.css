@@ -61,6 +61,11 @@ table {
     border: 1px solid #979da3 !important;
 }
 
+/* 链接样式 */
+.post-content a:hover {
+    font-weight: 600; 
+}
+
 /** logo 渐变呼吸特效（光源向上偏移+颜色渐变）**/
 .profile img {
   border-radius: 50%; /* 圆形图片适配 */

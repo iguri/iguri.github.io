@@ -33,6 +33,7 @@
 <script>
   let comment = document.getElementById("comment");
   let bottomToComment = document.getElementById("bottom-comment")
+
   document.addEventListener('scroll', function () {
     const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
     const offsetTop = comment.offsetTop
@@ -46,4 +47,10 @@
       bottomToComment.style.opacity = "1";
     }
   })
+  // ===== 新增 1：点击按钮（含 Alt+B）时展开评论区 =====
+  bottomToComment.addEventListener('click', function () {
+    if (!comment.open) {
+      comment.open = true;
+    }
+  });
 </script>
