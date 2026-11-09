@@ -1,0 +1,731 @@
+/**
+ * 随笔页交互脚本 —— 配合 layouts/suibi.html 使用
+ * ===================================================================
+ * 页面骨架（含第一页正文）是 Hugo 在构建期渲染好的静态 HTML，
+ * 本脚本只负责 ech0 那部分"活的"交互，行为对齐 ech0 自己的前端：
+ *
+ *   1. 点赞   —— 7 个表情的选择条；点已选中的表情 = 取消，否则 = 添加
+ *                写接口：PUT / DELETE /api/echo/{id}/reactions/{key}
+ *                访客标识：请求头 X-Ech0-Visitor（localStorage 里的 uuid）
+ *                更新策略：乐观更新，失败回滚（与 ech0 一致）
+ *   2. 评论   —— 点「评论」才加载；列表 + 回复 + 提交
+ *                接口：GET /api/comments?echo_id=、GET /api/comments/form、
+ *                      POST /api/comments
+ *                正文按纯文本渲染（转义 + 保留换行），不引第三方 Markdown 库
+ *                没有验证码；仍保留 ech0 的 form_token 与 2 秒最短提交间隔
+ *   3. 加载更多 —— 第 2 页起拉取，按 id 去重后追加
+ *   4. 首屏对齐 —— 带访客标识重拉第 1 页，纠正"我赞过没"的初始状态，
+ *                  并把构建之后新发的随笔插到顶部
+ *
+ * 所有接口都在 ech0 域上，跨域由 ech0 的 CORS 放行（已实测）。
+ * ===================================================================
+ */
+(function () {
+  'use strict';
+
+  var root = document.getElementById('suibi-timeline');
+  if (!root) return;
+
+  /* ---------- 基础配置 ---------- */
+
+  var API = (root.getAttribute('data-api') || '').replace(/\/+$/, '');
+  var PAGE_SIZE = parseInt(root.getAttribute('data-page-size') || '20', 10) || 20;
+  var total = parseInt(root.getAttribute('data-total') || '0', 10) || 0;
+  var page = 1;
+  var loading = false;
+
+  /* 访客标识：与 ech0 用同一个 localStorage 键，
+     这样在博客和 essay.grer.cn 上看到的是同一份点赞身份 */
+  var VISITOR_KEY = 'ech0_visitor_id';
+  /* 评论昵称/邮箱记忆键，同样沿用 ech0 的命名 */
+  var GUEST_KEY = 'ech0:comment-guest-profile';
+
+  function visitorId() {
+    var v = '';
+    try { v = localStorage.getItem(VISITOR_KEY) || ''; } catch (e) {}
+    if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v)) return v;
+    v = (window.crypto && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+          var r = (Math.random() * 16) | 0;
+          var n = c === 'x' ? r : (r & 0x3) | 0x8;
+          return n.toString(16);
+        });
+    try { localStorage.setItem(VISITOR_KEY, v); } catch (e) {}
+    return v;
+  }
+
+  /* 统一的请求封装：自动带访客头，统一判 code !== 1 为失败 */
+  function request(path, options) {
+    options = options || {};
+    var headers = { 'X-Ech0-Visitor': visitorId() };
+    if (options.body) headers['Content-Type'] = 'application/json';
+    if (options.headers) {
+      for (var k in options.headers) headers[k] = options.headers[k];
+    }
+    return fetch(API + path, {
+      method: options.method || 'GET',
+      headers: headers,
+      credentials: 'omit',
+      body: options.body ? JSON.stringify(options.body) : undefined
+    }).then(function (res) {
+      return res.json().catch(function () {
+        throw new Error('响应不是合法 JSON（HTTP ' + res.status + '）');
+      });
+    }).then(function (json) {
+      if (json.code !== 1) {
+        var err = new Error(json.msg || '请求失败');
+        err.code = json.error_code;
+        throw err;
+      }
+      return json;
+    });
+  }
+
+  /* ---------- 小工具 ---------- */
+
+  /* 转义：评论正文、最新随笔的兜底渲染都走这里，避免任何注入 */
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  /* 时间：ech0 存的是 Unix 秒，按浏览器本地时区显示，形如 2026-11-09 16:02 */
+  function fmtTime(ts) {
+    var d = new Date((ts || 0) * 1000);
+    if (isNaN(d.getTime())) return '';
+    function p(n) { return n < 10 ? '0' + n : String(n); }
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) +
+      ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+
+  /* 构建期之后新发的随笔：这里做一个极小的安全 Markdown 兜底。
+     不追求和 Hugo 的 markdownify 完全一致，只保证常见记号能看、
+     且绝对不会因为内容里的 HTML 造成注入（先整体转义，再套白名单替换）。 */
+  function renderBody(md) {
+    var html = esc(md)
+      .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+      .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+      .replace(/\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener">$1</a>')
+      .replace(/(^|\n)(#{1,6})\s+([^\n]+)/g, function (m, lead, hashes, text) {
+        var level = Math.min(hashes.length + 2, 6);
+        return lead + '<h' + level + '>' + text + '</h' + level + '>';
+      })
+      .replace(/\n{2,}/g, '</p><p>')
+      .replace(/\n/g, '<br>');
+    return '<p>' + html + '</p>';
+  }
+
+  /* 把 ech0 的相对文件路径补成可直接访问的绝对地址 */
+  function fileUrl(u) {
+    if (!u) return '';
+    return u.charAt(0) === '/' ? API + u : u;
+  }
+
+  /* ---------- 点赞 ---------- */
+
+  /* 表情目录：先用 ech0 的默认 7 个，拿到 /api/reactions 后再替换 */
+  var catalog = [
+    { key: 'like', emoji: '👍' }, { key: 'heart', emoji: '❤️' },
+    { key: 'haha', emoji: '😂' }, { key: 'wow', emoji: '😮' },
+    { key: 'sad', emoji: '😢' }, { key: 'cry', emoji: '😭' },
+    { key: 'party', emoji: '🎉' }
+  ];
+  var catalogLoaded = false;
+
+  function loadCatalog() {
+    if (catalogLoaded) return Promise.resolve(catalog);
+    catalogLoaded = true;
+    return request('/api/reactions').then(function (json) {
+      if (json.data && json.data.length) catalog = json.data;
+      return catalog;
+    }).catch(function () { return catalog; });
+  }
+
+  /* 把 reactions 数组渲染进「点赞」按钮：最多 3 个表情 + 总数；没有就显示笑脸图标 */
+  function paintReactions(article, reactions) {
+    var btn = article.querySelector('.suibi-react-btn');
+    if (!btn) return;
+    reactions = reactions || [];
+    var totalCount = reactions.reduce(function (s, r) { return s + (r.count || 0); }, 0);
+    btn.setAttribute('aria-expanded', 'false');
+    btn.classList.remove('is-open');
+    if (!totalCount) {
+      btn.innerHTML =
+        '<svg class="suibi-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+        '<path d="M21 12a9 9 0 1 1-9-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>' +
+        '<circle cx="8.9" cy="10" r="1.35" fill="currentColor"></circle>' +
+        '<circle cx="15.1" cy="10" r="1.35" fill="currentColor"></circle>' +
+        '<path d="M8 13.9a4.7 4.7 0 0 0 8 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>' +
+        '</svg>';
+      return;
+    }
+    var sorted = reactions.slice().sort(function (a, b) { return (b.count || 0) - (a.count || 0); }).slice(0, 3);
+    var html = '';
+    sorted.forEach(function (r) {
+      html += '<span class="suibi-react-emoji" aria-hidden="true">' + esc(r.emoji) + '</span>';
+    });
+    html += '<span class="suibi-react-count">' + (totalCount > 99 ? '99+' : totalCount) + '</span>';
+    btn.innerHTML = html;
+  }
+
+  /* 收起表情条：选中表情之后、点页面空白处时调用 */
+  function closePicker(article) {
+    var bar = article.querySelector('.suibi-reaction-bar');
+    var btn = article.querySelector('.suibi-react-btn');
+    if (bar && bar.parentNode) bar.parentNode.removeChild(bar);
+    if (btn) {
+      btn.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  /* 弹出/收起表情条：条子直接挂在卡片内，靠 CSS 定位在按钮上方 */
+  function togglePicker(article) {
+    var btn = article.querySelector('.suibi-react-btn');
+    var existing = article.querySelector('.suibi-reaction-bar');
+    if (existing) { existing.parentNode.removeChild(existing); btn.classList.remove('is-open'); return; }
+
+    // 同时只允许开一个表情条：先把其它卡片上开着的收掉
+    Array.prototype.forEach.call(root.querySelectorAll('.suibi-reaction-bar'), function (other) {
+      var host = other.closest('.suibi-item');
+      if (host && host !== article) closePicker(host);
+    });
+
+    loadCatalog().then(function (list) {
+      var bar = document.createElement('div');
+      bar.className = 'suibi-reaction-bar';
+      bar.setAttribute('role', 'menu');
+      bar.setAttribute('aria-label', '选择表情反应');
+      list.forEach(function (item) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'suibi-reaction-item';
+        b.setAttribute('data-key', item.key);
+        b.setAttribute('title', item.key);
+        b.textContent = item.emoji;
+        b.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          react(article, item.key);
+          // 选完就收起：表情条浮在按钮上方，不收会挡住旁边的「评论」按钮
+          closePicker(article);
+        });
+        bar.appendChild(b);
+      });
+      // 标记当前已选中的表情（高亮）
+      var current = article._reactions || [];
+      current.forEach(function (r) {
+        if (!r.reacted) return;
+        var target = bar.querySelector('[data-key="' + r.key + '"]');
+        if (target) target.classList.add('is-active');
+      });
+      article.appendChild(bar);
+      btn.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    });
+  }
+
+  /* 一次点赞/取消：先乐观更新界面，再打接口，失败回滚（对齐 ech0 的做法） */
+  function react(article, key) {
+    var id = article.getAttribute('data-echo-id');
+    var snapshot = JSON.parse(JSON.stringify(article._reactions || []));
+    var current = snapshot.filter(function (r) { return r.key === key; })[0];
+    var add = !(current && current.reacted);
+
+    // —— 乐观更新 ——
+    var next = snapshot.map(function (r) { return { key: r.key, emoji: r.emoji, count: r.count, reacted: r.reacted }; });
+    var target = next.filter(function (r) { return r.key === key; })[0];
+    if (!target) {
+      var meta = catalog.filter(function (c) { return c.key === key; })[0] || { key: key, emoji: '' };
+      target = { key: key, emoji: meta.emoji, count: 0, reacted: false };
+      next.push(target);
+    }
+    target.reacted = add;
+    target.count = Math.max(0, (target.count || 0) + (add ? 1 : -1));
+    article._reactions = next;
+    paintReactions(article, next);
+
+    request('/api/echo/' + encodeURIComponent(id) + '/reactions/' + encodeURIComponent(key), {
+      method: add ? 'PUT' : 'DELETE'
+    }).then(function (json) {
+      article._reactions = json.data || [];
+      paintReactions(article, article._reactions);
+      // 表情条按最新状态重新高亮
+      var bar = article.querySelector('.suibi-reaction-bar');
+      if (bar) {
+        Array.prototype.forEach.call(bar.children, function (b) {
+          b.classList.remove('is-active');
+        });
+        (article._reactions || []).forEach(function (r) {
+          if (!r.reacted) return;
+          var t = bar.querySelector('[data-key="' + r.key + '"]');
+          if (t) t.classList.add('is-active');
+        });
+      }
+    }).catch(function () {
+      // —— 失败回滚 ——
+      article._reactions = snapshot;
+      paintReactions(article, snapshot);
+    });
+  }
+
+  /* Esc 关闭表情条（与 ech0 的键盘行为一致） */
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Escape') return;
+    Array.prototype.forEach.call(root.querySelectorAll('.suibi-reaction-bar'), function (bar) {
+      var host = bar.closest('.suibi-item');
+      if (host) closePicker(host);
+    });
+  });
+
+  /* 点空白处收起表情条 */
+  document.addEventListener('click', function (ev) {
+    if (ev.target.closest && ev.target.closest('.suibi-reaction-bar, .suibi-react-btn')) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.suibi-reaction-bar'), function (bar) {
+      var art = bar.closest('.suibi-item');
+      bar.parentNode.removeChild(bar);
+      var btn = art && art.querySelector('.suibi-react-btn');
+      if (btn) { btn.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); }
+    });
+  });
+
+  /* ---------- 评论 ---------- */
+
+  /* 对一条评论按纯文本渲染：转义 + 保留换行。
+     不渲染 Markdown，也就不需要任何第三方库，内容不可能造成注入。 */
+  function renderCommentText(text) {
+    return esc(text).replace(/\n/g, '<br>');
+  }
+
+  /* 拉评论列表 + 表单元信息（并行的两个请求） */
+  function loadComments(article) {
+    var id = article.getAttribute('data-echo-id');
+    var section = article.querySelector('.suibi-comments');
+    if (!section) return Promise.resolve();
+    if (section.getAttribute('data-loaded') === '1') return Promise.resolve();
+    section.hidden = false;
+    section.innerHTML = '<p class="suibi-hint">评论加载中…</p>';
+
+    return Promise.all([
+      request('/api/comments?echo_id=' + encodeURIComponent(id)),
+      request('/api/comments/form')
+    ]).then(function (res) {
+      var comments = res[0].data || [];
+      var meta = res[1].data || {};
+      section.setAttribute('data-loaded', '1');
+      // 顺带同步卡片底部「评论」按钮上的计数
+      var badge = article.querySelector('.suibi-comment-count');
+      if (badge) badge.textContent = comments.length;
+      renderComments(article, section, comments, meta);
+    }).catch(function (err) {
+      section.innerHTML = '<p class="suibi-hint">评论加载失败：' + esc(err.message) + '</p>';
+    });
+  }
+
+  /* 渲染整个评论区：线程 + 表单 */
+  function renderComments(article, section, comments, meta) {
+    var html = '';
+
+    if (!meta.enable_comment) {
+      html += '<p class="suibi-hint">本站暂时关闭了评论。</p>';
+      section.innerHTML = html;
+      return;
+    }
+
+    // —— 按 parent_id 分组：一级评论 + 它们的回复 ——
+    var tops = [], repliesMap = {};
+    comments.forEach(function (c) {
+      if (c.parent_id) {
+        (repliesMap[c.parent_id] = repliesMap[c.parent_id] || []).push(c);
+      } else {
+        tops.push(c);
+      }
+    });
+
+    var floorOf = {};
+    comments.forEach(function (c, i) { floorOf[c.id] = i + 1; });
+
+    html += '<div class="suibi-cmt-board">';
+    html += '<div class="suibi-cmt-head">' +
+      '<button type="button" class="suibi-cmt-write">写评论</button>' +
+      '<span class="suibi-cmt-total">' + comments.length + ' 条评论</span>' +
+      '</div>';
+
+    // 提交结果提示：放在表单之外，这样「已发布」后重新拉列表也不会被冲掉
+    var notice = section.getAttribute('data-notice') || '';
+    if (notice) {
+      html += '<p class="suibi-cmt-notice">' + esc(notice) + '</p>';
+    }
+
+    // —— 表单（默认收起，点「写评论」展开） ——
+    html += '<form class="suibi-cmt-form" hidden>' +
+      '<div class="suibi-cmt-fields">' +
+      '<input type="text" name="nickname" placeholder="昵称（必填）" maxlength="40" autocomplete="nickname">' +
+      '<input type="email" name="email" placeholder="邮箱（必填，不公开）" maxlength="120" autocomplete="email">' +
+      '<input type="text" name="website" placeholder="网址（选填）" maxlength="120">' +
+      '</div>' +
+      '<textarea name="content" rows="3" maxlength="200" placeholder="说点什么…（最多 200 字）"></textarea>' +
+      // 蜜罐字段：人看不见，机器人会填；ech0 侧收到非空即拒
+      '<input type="text" name="hp_field" class="suibi-hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+      '<div class="suibi-cmt-actions">' +
+      '<button type="submit" class="suibi-cmt-submit" disabled>提交</button>' +
+      '<button type="button" class="suibi-cmt-cancel">取消</button>' +
+      '<span class="suibi-cmt-tip"></span>' +
+      '</div>' +
+      '</form>';
+
+    // —— 列表 ——
+    html += '<div class="suibi-cmt-list">';
+    if (!tops.length) {
+      html += '<p class="suibi-hint">还没有评论，来说两句吧。</p>';
+    } else {
+      tops.forEach(function (c) {
+        html += renderOneComment(c, floorOf[c.id], false);
+        var replies = repliesMap[c.id] || [];
+        if (replies.length) {
+          html += '<div class="suibi-cmt-replies">';
+          replies.forEach(function (r) {
+            html += renderOneComment(r, floorOf[r.id], true);
+          });
+          html += '</div>';
+        }
+      });
+    }
+    html += '</div></div>';
+
+    section.innerHTML = html;
+    bindCommentForm(article, section, meta);
+  }
+
+  /* 单条评论的 HTML（纯文本正文，无头像） */
+  function renderOneComment(c, floor, isReply) {
+    var author = c.website
+      ? '<a class="suibi-cmt-author" href="' + esc(c.website) + '" target="_blank" rel="noopener nofollow">' + esc(c.nickname) + '</a>'
+      : '<span class="suibi-cmt-author">' + esc(c.nickname) + '</span>';
+    var verified = c.source === 'system'
+      ? '<span class="suibi-cmt-badge" title="站内用户">✓</span>' : '';
+    var hot = c.hot ? '<span class="suibi-cmt-hot">Hot</span>' : '';
+    var replyRef = '';
+    if (isReply && c.parent_id) {
+      replyRef = '<button type="button" class="suibi-cmt-toreply" disabled>回复</button>';
+    }
+    return '<div class="suibi-cmt-item' + (isReply ? ' is-reply' : '') + '">' +
+      '<div class="suibi-cmt-meta">' +
+        '<span class="suibi-cmt-floor">#' + floor + '</span>' +
+        author + verified +
+        '<span class="suibi-cmt-dot">·</span>' +
+        '<span class="suibi-cmt-time">' + fmtTime(c.created_at) + '</span>' +
+        hot + replyRef +
+      '</div>' +
+      '<div class="suibi-cmt-content">' + renderCommentText(c.content) + '</div>' +
+      '</div>';
+  }
+
+  /* 绑定表单行为：展开/收起、记忆昵称邮箱、提交 */
+  function bindCommentForm(article, section, meta) {
+    var form = section.querySelector('.suibi-cmt-form');
+    var writeBtn = section.querySelector('.suibi-cmt-write');
+    var cancelBtn = section.querySelector('.suibi-cmt-cancel');
+    var submitBtn = section.querySelector('.suibi-cmt-submit');
+    var tip = section.querySelector('.suibi-cmt-tip');
+    var contentEl = form.querySelector('textarea[name="content"]');
+    var minMs = meta.min_submit_ms || 2000;
+    var tokenAt = Date.now();
+    var ready = false;
+
+    // 表单令牌有最短提交间隔，到点前禁用提交按钮（与 ech0 的 2 秒一致）
+    var enableTimer = setTimeout(function () {
+      ready = true;
+      updateSubmitState();
+    }, minMs);
+
+    // 回填上次填过的昵称/邮箱
+    try {
+      var saved = JSON.parse(localStorage.getItem(GUEST_KEY) || 'null');
+      if (saved) {
+        if (saved.nickname) form.nickname.value = saved.nickname;
+        if (saved.email) form.email.value = saved.email;
+        if (saved.website) form.website.value = saved.website;
+      }
+    } catch (e) {}
+
+    function updateSubmitState() {
+      var ok = ready &&
+        form.nickname.value.trim() !== '' &&
+        form.email.value.trim() !== '' &&
+        contentEl.value.trim() !== '';
+      submitBtn.disabled = !ok;
+      if (!ready) tip.textContent = '请稍候…';
+      else if (!ok) tip.textContent = '';
+      else tip.textContent = '';
+    }
+
+    form.addEventListener('input', updateSubmitState);
+
+    writeBtn.addEventListener('click', function () {
+      form.hidden = false;
+      writeBtn.hidden = true;
+      contentEl.focus();
+      updateSubmitState();
+    });
+
+    cancelBtn.addEventListener('click', function () {
+      form.hidden = true;
+      writeBtn.hidden = false;
+      form.reset();
+      tip.textContent = '';
+    });
+
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      if (submitBtn.disabled) return;
+      submitBtn.disabled = true;
+      tip.textContent = '提交中…';
+
+      var payload = {
+        echo_id: article.getAttribute('data-echo-id'),
+        content: contentEl.value.trim(),
+        nickname: form.nickname.value.trim(),
+        email: form.email.value.trim(),
+        website: form.website.value.trim(),
+        form_token: meta.form_token,
+        // 蜜罐必须为空；ech0 侧收到非空直接拒绝
+        hp_field: form.hp_field.value
+      };
+
+      request('/api/comments', { method: 'POST', body: payload }).then(function (json) {
+        var status = (json.data && json.data.status) || 'pending';
+        // 记住昵称邮箱，下次自动回填
+        try {
+          localStorage.setItem(GUEST_KEY, JSON.stringify({
+            nickname: payload.nickname, email: payload.email, website: payload.website
+          }));
+        } catch (e) {}
+
+        contentEl.value = '';
+        var noticeText = status === 'approved'
+          ? '评论已发布。'
+          : '已提交，等待博主审核后显示。';
+        // 记在 section 上：approved 时会重新渲染评论区，提示不能丢
+        section.setAttribute('data-notice', noticeText);
+        tip.textContent = noticeText;
+
+        if (status === 'approved') {
+          // 已直接通过：重新拉一次列表（顺带刷新评论数）
+          section.removeAttribute('data-loaded');
+          loadComments(article);
+        } else {
+          submitBtn.disabled = false;
+        }
+      }).catch(function (err) {
+        tip.textContent = '提交失败：' + (err.message || '请稍后再试');
+        submitBtn.disabled = false;
+      });
+    });
+  }
+
+  /* ---------- 卡片构建（加载更多 / 首屏新增用） ---------- */
+
+  function buildArticle(item) {
+    var art = document.createElement('article');
+    art.className = 'post-entry suibi-item';
+    art.setAttribute('data-echo-id', item.id);
+    art.setAttribute('data-created', item.created_at);
+    art._reactions = (item.reactions || []).map(function (r) {
+      return { key: r.key, emoji: r.emoji, count: r.count, reacted: r.reacted };
+    });
+
+    var files = (item.echo_files || []).map(function (ef) {
+      return ef.file;
+    }).filter(Boolean);
+
+    // 标签只做展示（ech0 的标签过滤不落 URL，避免生成死链）
+    var tags = (item.tags || []).map(function (t) {
+      return '<li><span class="suibi-tag">#' + esc(t.name) + '</span></li>';
+    }).join('');
+
+    art.innerHTML =
+      '<header class="suibi-head">' +
+        '<time class="suibi-time">' + fmtTime(item.created_at) + '</time>' +
+      '</header>' +
+      '<div class="entry-content suibi-body">' + renderBody(item.content || '') + '</div>' +
+      (files.length
+        ? '<div class="suibi-files">' + files.map(function (f) {
+            var u = fileUrl(f.url);
+            return '<a href="' + esc(u) + '" target="_blank" rel="noopener" class="suibi-file">' +
+              '<img src="' + esc(u) + '" alt="' + esc(f.name || '') + '" loading="lazy" decoding="async"></a>';
+          }).join('') + '</div>'
+        : '') +
+      '<footer class="entry-footer suibi-meta">' +
+        (tags ? '<ul class="terms-tags suibi-tags">' + tags + '</ul>' : '') +
+        '<div class="suibi-actions">' +
+          '<button type="button" class="suibi-react-btn" aria-haspopup="true" aria-expanded="false" aria-label="添加表情反应"></button>' +
+          '<button type="button" class="suibi-comment-btn" aria-expanded="false">' +
+            '<svg class="suibi-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+              '<path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.7 8.7 0 0 1-3.9-.9L3 20.5l1.4-4.6A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>' +
+            '</svg><span class="suibi-comment-count">0</span>' +
+          '</button>' +
+        '</div>' +
+      '</footer>' +
+      '<section class="suibi-comments" hidden></section>';
+
+    paintReactions(art, art._reactions);
+    return art;
+  }
+
+  /* 给一张卡片挂上交互（构建期渲染的和运行时新建的都用这一个入口） */
+  function wire(article) {
+    if (article.getAttribute('data-wired') === '1') return;
+    article.setAttribute('data-wired', '1');
+
+    // 构建期渲染的卡片没带 _reactions，从 DOM 里读不出来，
+    // 交给首屏对齐请求补齐；这里只保证按钮能点。
+    var reactBtn = article.querySelector('.suibi-react-btn');
+    if (reactBtn) {
+      reactBtn.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        if (!article._reactions) article._reactions = [];
+        togglePicker(article);
+      });
+    }
+
+    var cmtBtn = article.querySelector('.suibi-comment-btn');
+    if (cmtBtn) {
+      cmtBtn.addEventListener('click', function () {
+        var section = article.querySelector('.suibi-comments');
+        var expanded = cmtBtn.getAttribute('aria-expanded') === 'true';
+        cmtBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        if (expanded) {
+          section.hidden = true;
+        } else {
+          section.hidden = false;
+          loadComments(article);
+        }
+      });
+    }
+  }
+
+  /* ---------- 加载更多 ---------- */
+
+  var moreBtn = document.getElementById('suibi-more');
+  var moreWrap = document.getElementById('suibi-more-wrap');
+
+  function loadMore() {
+    if (loading) return;
+    loading = true;
+    if (moreBtn) moreBtn.textContent = '加载中…';
+    // 正常情况下构建期已渲染第一页（page=1），所以续拉第 2 页；
+    // 但如果构建期抓取失败（页面上一张卡都没有），首屏对齐也可能失败，
+    // 这时从第 1 页开始拉，避免直接跳过第一页。
+    var hasCards = root.querySelector('.suibi-item') !== null;
+    var next = hasCards ? page + 1 : 1;
+
+    request('/api/echo/query', {
+      method: 'POST',
+      body: { page: next, pageSize: PAGE_SIZE, private: false, sortBy: 'created_at', sortOrder: 'desc' }
+    }).then(function (json) {
+      var data = json.data || {};
+      var items = data.items || [];
+      var existing = {};
+      Array.prototype.forEach.call(root.querySelectorAll('.suibi-item'), function (a) {
+        existing[a.getAttribute('data-echo-id')] = true;
+      });
+      var empty = root.querySelector('.suibi-empty');
+      var frag = document.createDocumentFragment();
+      var added = 0;
+      items.forEach(function (item) {
+        if (existing[item.id]) return;
+        existing[item.id] = true;
+        var art = buildArticle(item);
+        wire(art);
+        frag.appendChild(art);
+        added++;
+      });
+      root.appendChild(frag);
+      if (empty && added) empty.hidden = true;
+
+      page = Math.max(page, next);
+      if (data.total != null) total = data.total;
+      var shown = root.querySelectorAll('.suibi-item').length;
+      if (shown >= total) {
+        if (moreWrap) moreWrap.hidden = true;
+      }
+    }).catch(function () {
+      if (moreBtn) moreBtn.textContent = '加载失败，点击重试';
+    }).then(function () {
+      loading = false;
+      if (moreBtn && moreWrap && !moreWrap.hidden) moreBtn.textContent = '加载更多';
+    });
+  }
+
+  if (moreBtn) moreBtn.addEventListener('click', loadMore);
+
+  /* ---------- 首屏对齐 ---------- */
+
+  /* 构建期渲染的卡片是不带访客身份的，所以：
+       - reactions 里 reacted 全是 false，赞过的表情不会高亮；
+       - 构建之后新发的随笔也不在页面里。
+     这里带访客标识重拉第一页，做两件事：更新已有卡片的点赞状态 + 顶部补新条目。 */
+  function syncFirstPage() {
+    return request('/api/echo/query', {
+      method: 'POST',
+      body: { page: 1, pageSize: PAGE_SIZE, private: false, sortBy: 'created_at', sortOrder: 'desc' }
+    }).then(function (json) {
+      var data = json.data || {};
+      var items = data.items || [];
+      if (data.total != null) total = data.total;
+
+      var byId = {};
+      Array.prototype.forEach.call(root.querySelectorAll('.suibi-item'), function (a) {
+        byId[a.getAttribute('data-echo-id')] = a;
+      });
+
+      var empty = root.querySelector('.suibi-empty');
+      if (items.length && empty) empty.hidden = true;
+
+      // 1) 已有卡片：补上点赞状态
+      items.forEach(function (item) {
+        var art = byId[item.id];
+        if (!art) return;
+        art._reactions = (item.reactions || []).map(function (r) {
+          return { key: r.key, emoji: r.emoji, count: r.count, reacted: r.reacted };
+        });
+        paintReactions(art, art._reactions);
+      });
+
+      // 2) 新条目：按时间倒序插到最前面
+      var fresh = items.filter(function (it) { return !byId[it.id]; });
+      fresh.sort(function (a, b) { return (b.created_at || 0) - (a.created_at || 0); });
+      fresh.reverse().forEach(function (item) {
+        var art = buildArticle(item);
+        wire(art);
+        root.insertBefore(art, root.firstChild);
+      });
+
+      // 3) 分页按钮显隐
+      var shown = root.querySelectorAll('.suibi-item').length;
+      if (moreWrap) moreWrap.hidden = shown >= total;
+    }).catch(function () {
+      // 首屏对齐失败不影响已渲染的静态内容，静默即可
+    });
+  }
+
+  /* ---------- 启动 ---------- */
+
+  function init() {
+    Array.prototype.forEach.call(root.querySelectorAll('.suibi-item'), wire);
+    syncFirstPage().then(function () {
+      // 对齐后如果表情目录还没拉过，顺手拉一次，后续点开就快了
+      return loadCatalog();
+    }).catch(function () {});
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

@@ -158,10 +158,24 @@ url = "/archives"
 weight = 30
 
 [[languages.zh.menu.main]]
+identifier = "suibi"
+name = "随笔"
+# 对应 content/page/suibi/index.md（layout = "suibi" → layouts/suibi.html）
+url = "/suibi"
+weight = 35
+
+[[languages.zh.menu.main]]
 identifier = "about"
 name = "关于"
 url = "/about"
 weight = 40
+
+# 【随笔页对接 ech0】自建时间轴服务（见 layouts/suibi.html / static/js/suibi.js）
+[params.ech0]
+# ech0 对外域名，末尾不要带斜杠；构建期抓取与浏览器端请求都用它
+baseUrl = "https://essay.grer.cn"
+# 首屏静态快照与「加载更多」每次取的条数（接口上限 100）
+pageSize = 20
 
 [markup.goldmark.renderer]
 unsafe = true
