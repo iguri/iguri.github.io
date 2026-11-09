@@ -1,39 +1,39 @@
 /* ===================================================================
-   【站点自定义，非主题文件】随笔页样式（/suibi/）
+   【站点自定义，非主题文件】随笔页样式（/ech0/）
    -------------------------------------------------------------------
-   配合 layouts/suibi.html 与 static/js/suibi.js 使用。
+   配合 layouts/ech0.html 与 static/js/ech0.js 使用。
 
    设计原则：
      - 卡片主体直接复用主题的 .post-entry / .entry-content / .terms-tags，
        这里只补 ech0 才有的部分（时间行、点赞条、评论线程、加载更多）。
      - 颜色一律用主题变量（--entry / --border / --secondary / --radius …），
        明暗主题自动跟随，不写死色值。
-     - 全部选择器以 .suibi- 开头，不会影响站内其它页面。
+     - 全部选择器以 .ech0- 开头，不会影响站内其它页面。
    =================================================================== */
 
 /* ---------- 页面头部 ---------- */
-.suibi-intro {
+.ech0-intro {
   margin-top: 8px;
   color: var(--secondary);
 }
 
 /* ---------- 时间轴容器 ---------- */
-.suibi-timeline {
+.ech0-timeline {
   position: relative;
 }
 
 /* 卡片：.post-entry 已给出背景/边框/圆角/悬浮位移，这里只补定位参照，
    让表情条能相对卡片绝对定位 */
-.suibi-item {
+.ech0-item {
   position: relative;
 }
 
 /* 时间行 */
-.suibi-head {
+.ech0-head {
   margin-bottom: 0.5rem;
 }
 
-.suibi-time {
+.ech0-time {
   font-size: 0.82rem;
   color: var(--secondary);
   font-variant-numeric: tabular-nums;
@@ -45,7 +45,7 @@
    主题的 .entry-content 带 -webkit-line-clamp: 2（列表页摘要用），
    在随笔卡里必须解除截断，否则长文只能看到两行。
    下面用同等特异度 + 后置顺序覆盖（extended 样式表拼在主题之后）。 */
-.suibi-body {
+.ech0-body {
   display: block;
   overflow: visible;
   -webkit-line-clamp: unset;
@@ -56,23 +56,23 @@
   margin: 0 0 0.75rem;
 }
 
-.suibi-body p {
+.ech0-body p {
   margin: 0 0 0.6rem;
 }
 
-.suibi-body p:last-child {
+.ech0-body p:last-child {
   margin-bottom: 0;
 }
 
 /* 附件图片：小网格铺开，点开原图 */
-.suibi-files {
+.ech0-files {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 6px;
   margin: 0 0 0.75rem;
 }
 
-.suibi-file {
+.ech0-file {
   display: block;
   overflow: hidden;
   border-radius: var(--radius);
@@ -80,7 +80,7 @@
   line-height: 0;
 }
 
-.suibi-file img {
+.ech0-file img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -88,12 +88,12 @@
   transition: transform 0.25s ease;
 }
 
-.suibi-file:hover img {
+.ech0-file:hover img {
   transform: scale(1.03);
 }
 
 /* ---------- 底部：标签 + 动作 ---------- */
-.suibi-meta {
+.ech0-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -102,20 +102,20 @@
   margin-top: 0;
 }
 
-.suibi-tags {
+.ech0-tags {
   margin: 0;
 }
 
-.suibi-tags li {
+.ech0-tags li {
   font-size: 0.78rem;
 }
 
 /* 标签是纯展示（非链接），去掉主题 a 标签的悬浮效果 */
-.suibi-tag {
+.ech0-tag {
   color: var(--secondary);
 }
 
-.suibi-actions {
+.ech0-actions {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -123,8 +123,8 @@
 }
 
 /* 点赞与评论按钮的统一外观 */
-.suibi-react-btn,
-.suibi-comment-btn {
+.ech0-react-btn,
+.ech0-comment-btn {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -139,32 +139,32 @@
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
 
-.suibi-react-btn:hover,
-.suibi-comment-btn:hover,
-.suibi-react-btn.is-open,
-.suibi-comment-btn[aria-expanded='true'] {
+.ech0-react-btn:hover,
+.ech0-comment-btn:hover,
+.ech0-react-btn.is-open,
+.ech0-comment-btn[aria-expanded='true'] {
   color: var(--primary);
   border-color: var(--secondary);
 }
 
-.suibi-react-emoji {
+.ech0-react-emoji {
   font-size: 0.95rem;
   line-height: 1;
 }
 
-.suibi-react-count,
-.suibi-comment-count {
+.ech0-react-count,
+.ech0-comment-count {
   font-variant-numeric: tabular-nums;
 }
 
-.suibi-icon {
+.ech0-icon {
   width: 14px;
   height: 14px;
   flex: none;
 }
 
 /* ---------- 表情选择条 ---------- */
-.suibi-reaction-bar {
+.ech0-reaction-bar {
   position: absolute;
   right: 0;
   bottom: 46px;
@@ -177,15 +177,15 @@
   border: 1px solid var(--border);
   border-radius: 999px;
   box-shadow: 0 8px 26px rgb(0 0 0 / 12%);
-  animation: suibi-pop 0.16s ease-out;
+  animation: ech0-pop 0.16s ease-out;
 }
 
-@keyframes suibi-pop {
+@keyframes ech0-pop {
   from { opacity: 0; transform: translateY(4px) scale(0.96); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.suibi-reaction-item {
+.ech0-reaction-item {
   width: 30px;
   height: 30px;
   padding: 0;
@@ -198,37 +198,37 @@
   transition: transform 0.15s, background 0.15s, border-color 0.15s;
 }
 
-.suibi-reaction-item:hover {
+.ech0-reaction-item:hover {
   transform: translateY(-2px) scale(1.12);
   background: var(--code-bg);
 }
 
-.suibi-reaction-item.is-active {
+.ech0-reaction-item.is-active {
   background: var(--code-bg);
   border-color: var(--secondary);
 }
 
 /* 动晕敏感：不做放大动画 */
 @media (prefers-reduced-motion: reduce) {
-  .suibi-reaction-bar { animation: none; }
-  .suibi-reaction-item:hover { transform: none; }
-  .suibi-file:hover img { transform: none; }
+  .ech0-reaction-bar { animation: none; }
+  .ech0-reaction-item:hover { transform: none; }
+  .ech0-file:hover img { transform: none; }
 }
 
 /* ---------- 评论区 ---------- */
-.suibi-comments {
+.ech0-comments {
   margin-top: 0.9rem;
   padding-top: 0.9rem;
   border-top: 1px dashed var(--border);
 }
 
-.suibi-hint {
+.ech0-hint {
   margin: 0.4rem 0;
   font-size: 0.82rem;
   color: var(--secondary);
 }
 
-.suibi-cmt-head {
+.ech0-cmt-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -236,10 +236,10 @@
   margin-bottom: 0.6rem;
 }
 
-.suibi-cmt-write,
-.suibi-cmt-submit,
-.suibi-cmt-cancel,
-.suibi-more {
+.ech0-cmt-write,
+.ech0-cmt-submit,
+.ech0-cmt-cancel,
+.ech0-more {
   padding: 4px 12px;
   font-size: 0.8rem;
   color: var(--primary);
@@ -250,25 +250,25 @@
   transition: border-color 0.2s, opacity 0.2s;
 }
 
-.suibi-cmt-write:hover,
-.suibi-cmt-submit:not(:disabled):hover,
-.suibi-cmt-cancel:hover,
-.suibi-more:hover {
+.ech0-cmt-write:hover,
+.ech0-cmt-submit:not(:disabled):hover,
+.ech0-cmt-cancel:hover,
+.ech0-more:hover {
   border-color: var(--secondary);
 }
 
-.suibi-cmt-submit:disabled {
+.ech0-cmt-submit:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
 
-.suibi-cmt-total {
+.ech0-cmt-total {
   font-size: 0.8rem;
   color: var(--secondary);
 }
 
 /* 提交结果提示（表单外，重渲染也不丢） */
-.suibi-cmt-notice {
+.ech0-cmt-notice {
   margin: 0 0 0.6rem;
   padding: 5px 10px;
   font-size: 0.8rem;
@@ -279,7 +279,7 @@
 }
 
 /* 表单 */
-.suibi-cmt-form {
+.ech0-cmt-form {
   margin-bottom: 0.9rem;
   padding: 0.7rem;
   background: var(--code-bg);
@@ -287,16 +287,16 @@
   border-radius: var(--radius);
 }
 
-.suibi-cmt-fields {
+.ech0-cmt-fields {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 6px;
   margin-bottom: 6px;
 }
 
-.suibi-cmt-form input[type='text'],
-.suibi-cmt-form input[type='email'],
-.suibi-cmt-form textarea {
+.ech0-cmt-form input[type='text'],
+.ech0-cmt-form input[type='email'],
+.ech0-cmt-form textarea {
   width: 100%;
   padding: 6px 8px;
   font-size: 0.82rem;
@@ -307,19 +307,19 @@
   box-sizing: border-box;
 }
 
-.suibi-cmt-form textarea {
+.ech0-cmt-form textarea {
   resize: vertical;
   min-height: 64px;
 }
 
-.suibi-cmt-form input:focus,
-.suibi-cmt-form textarea:focus {
+.ech0-cmt-form input:focus,
+.ech0-cmt-form textarea:focus {
   outline: none;
   border-color: var(--secondary);
 }
 
 /* 蜜罐字段：藏起来，别让它占位或被聚焦 */
-.suibi-hp {
+.ech0-hp {
   position: absolute !important;
   left: -9999px !important;
   width: 1px !important;
@@ -327,29 +327,29 @@
   opacity: 0 !important;
 }
 
-.suibi-cmt-actions {
+.ech0-cmt-actions {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-top: 6px;
 }
 
-.suibi-cmt-tip {
+.ech0-cmt-tip {
   font-size: 0.78rem;
   color: var(--secondary);
 }
 
 /* 列表 */
-.suibi-cmt-item {
+.ech0-cmt-item {
   padding: 0.5rem 0;
   border-bottom: 1px dotted var(--border);
 }
 
-.suibi-cmt-item:last-child {
+.ech0-cmt-item:last-child {
   border-bottom: 0;
 }
 
-.suibi-cmt-meta {
+.ech0-cmt-meta {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -358,22 +358,22 @@
   color: var(--secondary);
 }
 
-.suibi-cmt-floor {
+.ech0-cmt-floor {
   font-variant-numeric: tabular-nums;
   opacity: 0.8;
 }
 
-.suibi-cmt-author {
+.ech0-cmt-author {
   font-weight: 600;
   color: var(--primary);
   text-decoration: none;
 }
 
-.suibi-cmt-author:hover {
+.ech0-cmt-author:hover {
   text-decoration: underline;
 }
 
-.suibi-cmt-badge {
+.ech0-cmt-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -385,7 +385,7 @@
   border-radius: 50%;
 }
 
-.suibi-cmt-hot {
+.ech0-cmt-hot {
   padding: 0 5px;
   font-size: 0.68rem;
   color: #fff;
@@ -393,7 +393,7 @@
   border-radius: 4px;
 }
 
-.suibi-cmt-content {
+.ech0-cmt-content {
   margin-top: 4px;
   font-size: 0.88rem;
   line-height: 1.65;
@@ -402,26 +402,26 @@
 }
 
 /* 回复：缩进 + 左侧竖线 */
-.suibi-cmt-replies {
+.ech0-cmt-replies {
   margin: 0 0 0 14px;
   padding-left: 10px;
   border-left: 2px solid var(--border);
 }
 
 /* ---------- 加载更多 ---------- */
-.suibi-more-wrap {
+.ech0-more-wrap {
   display: flex;
   justify-content: center;
   margin: 1.2rem 0 0.4rem;
 }
 
-.suibi-more {
+.ech0-more {
   padding: 6px 22px;
   font-size: 0.85rem;
 }
 
 /* ---------- 空状态 ---------- */
-.suibi-empty {
+.ech0-empty {
   margin: 1rem 0;
   font-size: 0.85rem;
   color: var(--secondary);
@@ -430,19 +430,19 @@
 
 /* ---------- 窄屏 ---------- */
 @media screen and (max-width: 640px) {
-  .suibi-files {
+  .ech0-files {
     grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
   }
 
-  .suibi-meta {
+  .ech0-meta {
     align-items: flex-start;
   }
 
-  .suibi-actions {
+  .ech0-actions {
     margin-left: 0;
   }
 
-  .suibi-reaction-bar {
+  .ech0-reaction-bar {
     right: auto;
     left: 0;
   }

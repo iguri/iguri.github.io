@@ -158,10 +158,10 @@ url = "/archives"
 weight = 30
 
 [[languages.zh.menu.main]]
-identifier = "suibi"
+identifier = "ech0"
 name = "随笔"
-# 对应 content/page/suibi/index.md（layout = "suibi" → layouts/suibi.html）
-url = "/suibi"
+# 对应 content/page/ech0/index.md（layout = "ech0" → layouts/ech0.html）
+url = "/ech0"
 weight = 35
 
 [[languages.zh.menu.main]]
@@ -170,7 +170,7 @@ name = "关于"
 url = "/about"
 weight = 40
 
-# 【随笔页对接 ech0】自建时间轴服务（见 layouts/suibi.html / static/js/suibi.js）
+# 【随笔页对接 ech0】自建时间轴服务（见 layouts/ech0.html / static/js/ech0.js）
 [params.ech0]
 # ech0 对外域名，末尾不要带斜杠；构建期抓取与浏览器端请求都用它
 baseUrl = "https://essay.grer.cn"

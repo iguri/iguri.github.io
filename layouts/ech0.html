@@ -1,6 +1,6 @@
 {{- /*
   ===================================================================
-  【站点自定义，非主题文件】随笔页 —— 路径 /suibi/
+  【站点自定义，非主题文件】随笔页 —— 路径 /ech0/
   -------------------------------------------------------------------
   数据来源：ech0（自建时间轴服务），默认 https://essay.grer.cn
             接口地址与每页条数在 config.toml 的 [params.ech0] 里配置。
@@ -9,7 +9,7 @@
     1) 构建期（hugo 构建时，跑在 GitHub Actions）
        用 resources.GetRemote 以 POST 调 /api/echo/query 拉第一页，
        把正文直接写进静态 HTML —— 爬虫与禁用 JS 的读者都能读到内容。
-    2) 运行期（static/js/suibi.js）
+    2) 运行期（static/js/ech0.js）
        补上 ech0 的交互：7 个表情的点赞条、评论列表与提交、加载更多、
        以及首屏带访客标识重拉第一页来纠正 "我赞过没" 的状态。
 
@@ -38,7 +38,7 @@
 {{- $total := 0 -}}
 {{- with $resp.Err -}}
   {{- /* 抓取失败：只告警不中断构建，前端会兜底 */ -}}
-  {{- warnf "[suibi] 构建期从 ech0 拉取随笔失败：%s" . -}}
+  {{- warnf "[ech0] 构建期从 ech0 拉取随笔失败：%s" . -}}
 {{- else -}}
   {{- $json := $resp.Value | transform.Unmarshal -}}
   {{- with $json.data -}}
@@ -65,13 +65,13 @@
 <header class="page-header">
   <h1>{{ .Title }}</h1>
   {{- with .Content }}
-  <div class="post-description suibi-intro">{{ . }}</div>
+  <div class="post-description ech0-intro">{{ . }}</div>
   {{- end }}
 </header>
 
-{{- /* 时间轴容器：data-* 交给 suibi.js，脚本启动时据此决定请求哪、取多少 */ -}}
-<div id="suibi-timeline"
-     class="suibi-timeline"
+{{- /* 时间轴容器：data-* 交给 ech0.js，脚本启动时据此决定请求哪、取多少 */ -}}
+<div id="ech0-timeline"
+     class="ech0-timeline"
      data-api="{{ $base }}"
      data-page-size="{{ $pageSize }}"
      data-total="{{ $total }}"
@@ -82,26 +82,26 @@
   {{- range $items }}
   {{- $ts := int .created_at -}}
   {{- $t := time.AsTime $ts -}}
-  <article class="post-entry suibi-item" data-echo-id="{{ .id }}" data-created="{{ $ts }}">
+  <article class="post-entry ech0-item" data-echo-id="{{ .id }}" data-created="{{ $ts }}">
 
-    <header class="suibi-head">
-      <time class="suibi-time" datetime="{{ $t.Format "2006-01-02T15:04:05-07:00" }}">{{ $t.Format "2006-01-02 15:04" }}</time>
+    <header class="ech0-head">
+      <time class="ech0-time" datetime="{{ $t.Format "2006-01-02T15:04:05-07:00" }}">{{ $t.Format "2006-01-02 15:04" }}</time>
     </header>
 
     {{- /* 正文：ech0 存的是 Markdown，这里在构建期就渲染成 HTML。
            注意：内容来自你自己的实例，站点已开 goldmark 的 unsafe，
            ech0 里的内联 HTML 会按原样输出。 */ -}}
-    <div class="entry-content suibi-body">{{ .content | markdownify }}</div>
+    <div class="entry-content ech0-body">{{ .content | markdownify }}</div>
 
     {{- /* 附件图片：ech0 的 file.url 对本地存储是 "/api/files/xxx" 这样的相对路径，
            要补上 ech0 的域名才能显示 */ -}}
     {{- with .echo_files }}
-    <div class="suibi-files">
+    <div class="ech0-files">
       {{- range . }}
       {{- with .file }}
       {{- $u := .url -}}
       {{- if hasPrefix $u "/" }}{{ $u = printf "%s%s" $base $u }}{{ end }}
-      <a href="{{ $u }}" target="_blank" rel="noopener" class="suibi-file">
+      <a href="{{ $u }}" target="_blank" rel="noopener" class="ech0-file">
         <img src="{{ $u }}" alt="{{ .name }}" loading="lazy" decoding="async"
           {{- with .width }} width="{{ . }}"{{ end }}
           {{- with .height }} height="{{ . }}"{{ end }}>
@@ -111,26 +111,26 @@
     </div>
     {{- end }}
 
-    <footer class="entry-footer suibi-meta">
+    <footer class="entry-footer ech0-meta">
       {{- /* 标签只做展示：ech0 前端的标签过滤是客户端状态、不落 URL，
              链到 /?tag=<id> 会是死链，所以这里不生成链接 */ -}}
       {{- with .tags }}
-      <ul class="terms-tags suibi-tags">
+      <ul class="terms-tags ech0-tags">
         {{- range . }}
-        <li><span class="suibi-tag">#{{ .name }}</span></li>
+        <li><span class="ech0-tag">#{{ .name }}</span></li>
         {{- end }}
       </ul>
       {{- end }}
 
-      <div class="suibi-actions">
-        {{- /* 点赞：显示已有的前几个表情 + 总数，点击由 suibi.js 弹出 7 表情选择条 */ -}}
-        <button type="button" class="suibi-react-btn" aria-haspopup="true" aria-expanded="false" aria-label="添加表情反应">
+      <div class="ech0-actions">
+        {{- /* 点赞：显示已有的前几个表情 + 总数，点击由 ech0.js 弹出 7 表情选择条 */ -}}
+        <button type="button" class="ech0-react-btn" aria-haspopup="true" aria-expanded="false" aria-label="添加表情反应">
           {{- $reactions := .reactions -}}
           {{- if $reactions }}
-            {{- range first 3 $reactions }}<span class="suibi-react-emoji" aria-hidden="true">{{ .emoji }}</span>{{ end }}
-            <span class="suibi-react-count">{{- $sum := 0 -}}{{- range $reactions }}{{ $sum = add $sum .count }}{{ end -}}{{ $sum }}</span>
+            {{- range first 3 $reactions }}<span class="ech0-react-emoji" aria-hidden="true">{{ .emoji }}</span>{{ end }}
+            <span class="ech0-react-count">{{- $sum := 0 -}}{{- range $reactions }}{{ $sum = add $sum .count }}{{ end -}}{{ $sum }}</span>
           {{- else }}
-            <svg class="suibi-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg class="ech0-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M21 12a9 9 0 1 1-9-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
               <circle cx="8.9" cy="10" r="1.35" fill="currentColor"></circle>
               <circle cx="15.1" cy="10" r="1.35" fill="currentColor"></circle>
@@ -139,23 +139,23 @@
           {{- end }}
         </button>
 
-        <button type="button" class="suibi-comment-btn" aria-expanded="false">
-          <svg class="suibi-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <button type="button" class="ech0-comment-btn" aria-expanded="false">
+          <svg class="ech0-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.7 8.7 0 0 1-3.9-.9L3 20.5l1.4-4.6A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"
                   stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
-          <span class="suibi-comment-count">{{ $commentCounts.Get .id | default 0 }}</span>
+          <span class="ech0-comment-count">{{ $commentCounts.Get .id | default 0 }}</span>
         </button>
       </div>
     </footer>
 
-    {{- /* 评论区占位：默认隐藏，点「评论」按钮后由 suibi.js 拉数据填充 */ -}}
-    <section class="suibi-comments" hidden></section>
+    {{- /* 评论区占位：默认隐藏，点「评论」按钮后由 ech0.js 拉数据填充 */ -}}
+    <section class="ech0-comments" hidden></section>
   </article>
   {{- end }}
 
   {{- /* ech0 不可达时的提示（前端首屏拉起成功后会自动隐藏） */ -}}
-  <p class="suibi-empty" {{ if $items }}hidden{{ end }}>
+  <p class="ech0-empty" {{ if $items }}hidden{{ end }}>
     暂时没能取到随笔内容，可直接访问
     <a href="{{ $base }}" target="_blank" rel="noopener">essay.grer.cn</a> 查看。
   </p>
@@ -163,24 +163,24 @@
 
 {{- /* 分页按钮：只有总数多于第一页时才显示 */ -}}
 {{- if gt $total $pageSize }}
-<div class="suibi-more-wrap">
-  <button type="button" id="suibi-more" class="suibi-more">加载更多</button>
+<div class="ech0-more-wrap">
+  <button type="button" id="ech0-more" class="ech0-more">加载更多</button>
 </div>
 {{- else }}
-<div class="suibi-more-wrap" id="suibi-more-wrap" hidden>
-  <button type="button" id="suibi-more" class="suibi-more">加载更多</button>
+<div class="ech0-more-wrap" id="ech0-more-wrap" hidden>
+  <button type="button" id="ech0-more" class="ech0-more">加载更多</button>
 </div>
 {{- end }}
 
 {{- /* 无 JS 兜底：给一个直达 ech0 的入口，避免读者以为页面坏了 */ -}}
 <noscript>
-  <p class="suibi-empty">
+  <p class="ech0-empty">
     评论与点赞需要 JavaScript。完整时间轴请访问
     <a href="{{ $base }}" target="_blank" rel="noopener">essay.grer.cn</a>。
   </p>
 </noscript>
 
 {{- /* 交互脚本：只在有本页时加载，defer 不阻塞渲染 */ -}}
-<script src="/js/suibi.js" defer></script>
+<script src="/js/ech0.js" defer></script>
 
 {{- end }}{{/* end main */}}

@@ -1,9 +1,9 @@
 ---
 date: 2026-11-09
 title: 随笔
-slug: "suibi"
-# 使用本站自定义布局 layouts/suibi.html（与 /photos、/search 的机制一致）
-layout: "suibi"
+slug: "ech0"
+# 使用本站自定义布局 layouts/ech0.html（与 /photos、/search 的机制一致）
+layout: "ech0"
 # 隐藏标题下方的日期、字数、阅读时长等元信息
 hidemeta: true
 # 不出现在面包屑里，保持与「关于」页一致的简洁观感

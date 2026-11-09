@@ -1,5 +1,5 @@
 /**
- * 随笔页交互脚本 —— 配合 layouts/suibi.html 使用
+ * 随笔页交互脚本 —— 配合 layouts/ech0.html 使用
  * ===================================================================
  * 页面骨架（含第一页正文）是 Hugo 在构建期渲染好的静态 HTML，
  * 本脚本只负责 ech0 那部分"活的"交互，行为对齐 ech0 自己的前端：
@@ -23,7 +23,7 @@
 (function () {
   'use strict';
 
-  var root = document.getElementById('suibi-timeline');
+  var root = document.getElementById('ech0-timeline');
   if (!root) return;
 
   /* ---------- 基础配置 ---------- */
@@ -147,7 +147,7 @@
 
   /* 把 reactions 数组渲染进「点赞」按钮：最多 3 个表情 + 总数；没有就显示笑脸图标 */
   function paintReactions(article, reactions) {
-    var btn = article.querySelector('.suibi-react-btn');
+    var btn = article.querySelector('.ech0-react-btn');
     if (!btn) return;
     reactions = reactions || [];
     var totalCount = reactions.reduce(function (s, r) { return s + (r.count || 0); }, 0);
@@ -155,7 +155,7 @@
     btn.classList.remove('is-open');
     if (!totalCount) {
       btn.innerHTML =
-        '<svg class="suibi-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+        '<svg class="ech0-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
         '<path d="M21 12a9 9 0 1 1-9-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>' +
         '<circle cx="8.9" cy="10" r="1.35" fill="currentColor"></circle>' +
         '<circle cx="15.1" cy="10" r="1.35" fill="currentColor"></circle>' +
@@ -166,16 +166,16 @@
     var sorted = reactions.slice().sort(function (a, b) { return (b.count || 0) - (a.count || 0); }).slice(0, 3);
     var html = '';
     sorted.forEach(function (r) {
-      html += '<span class="suibi-react-emoji" aria-hidden="true">' + esc(r.emoji) + '</span>';
+      html += '<span class="ech0-react-emoji" aria-hidden="true">' + esc(r.emoji) + '</span>';
     });
-    html += '<span class="suibi-react-count">' + (totalCount > 99 ? '99+' : totalCount) + '</span>';
+    html += '<span class="ech0-react-count">' + (totalCount > 99 ? '99+' : totalCount) + '</span>';
     btn.innerHTML = html;
   }
 
   /* 收起表情条：选中表情之后、点页面空白处时调用 */
   function closePicker(article) {
-    var bar = article.querySelector('.suibi-reaction-bar');
-    var btn = article.querySelector('.suibi-react-btn');
+    var bar = article.querySelector('.ech0-reaction-bar');
+    var btn = article.querySelector('.ech0-react-btn');
     if (bar && bar.parentNode) bar.parentNode.removeChild(bar);
     if (btn) {
       btn.classList.remove('is-open');
@@ -185,25 +185,25 @@
 
   /* 弹出/收起表情条：条子直接挂在卡片内，靠 CSS 定位在按钮上方 */
   function togglePicker(article) {
-    var btn = article.querySelector('.suibi-react-btn');
-    var existing = article.querySelector('.suibi-reaction-bar');
+    var btn = article.querySelector('.ech0-react-btn');
+    var existing = article.querySelector('.ech0-reaction-bar');
     if (existing) { existing.parentNode.removeChild(existing); btn.classList.remove('is-open'); return; }
 
     // 同时只允许开一个表情条：先把其它卡片上开着的收掉
-    Array.prototype.forEach.call(root.querySelectorAll('.suibi-reaction-bar'), function (other) {
-      var host = other.closest('.suibi-item');
+    Array.prototype.forEach.call(root.querySelectorAll('.ech0-reaction-bar'), function (other) {
+      var host = other.closest('.ech0-item');
       if (host && host !== article) closePicker(host);
     });
 
     loadCatalog().then(function (list) {
       var bar = document.createElement('div');
-      bar.className = 'suibi-reaction-bar';
+      bar.className = 'ech0-reaction-bar';
       bar.setAttribute('role', 'menu');
       bar.setAttribute('aria-label', '选择表情反应');
       list.forEach(function (item) {
         var b = document.createElement('button');
         b.type = 'button';
-        b.className = 'suibi-reaction-item';
+        b.className = 'ech0-reaction-item';
         b.setAttribute('data-key', item.key);
         b.setAttribute('title', item.key);
         b.textContent = item.emoji;
@@ -254,7 +254,7 @@
       article._reactions = json.data || [];
       paintReactions(article, article._reactions);
       // 表情条按最新状态重新高亮
-      var bar = article.querySelector('.suibi-reaction-bar');
+      var bar = article.querySelector('.ech0-reaction-bar');
       if (bar) {
         Array.prototype.forEach.call(bar.children, function (b) {
           b.classList.remove('is-active');
@@ -275,19 +275,19 @@
   /* Esc 关闭表情条（与 ech0 的键盘行为一致） */
   document.addEventListener('keydown', function (ev) {
     if (ev.key !== 'Escape') return;
-    Array.prototype.forEach.call(root.querySelectorAll('.suibi-reaction-bar'), function (bar) {
-      var host = bar.closest('.suibi-item');
+    Array.prototype.forEach.call(root.querySelectorAll('.ech0-reaction-bar'), function (bar) {
+      var host = bar.closest('.ech0-item');
       if (host) closePicker(host);
     });
   });
 
   /* 点空白处收起表情条 */
   document.addEventListener('click', function (ev) {
-    if (ev.target.closest && ev.target.closest('.suibi-reaction-bar, .suibi-react-btn')) return;
-    Array.prototype.forEach.call(document.querySelectorAll('.suibi-reaction-bar'), function (bar) {
-      var art = bar.closest('.suibi-item');
+    if (ev.target.closest && ev.target.closest('.ech0-reaction-bar, .ech0-react-btn')) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.ech0-reaction-bar'), function (bar) {
+      var art = bar.closest('.ech0-item');
       bar.parentNode.removeChild(bar);
-      var btn = art && art.querySelector('.suibi-react-btn');
+      var btn = art && art.querySelector('.ech0-react-btn');
       if (btn) { btn.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); }
     });
   });
@@ -303,11 +303,11 @@
   /* 拉评论列表 + 表单元信息（并行的两个请求） */
   function loadComments(article) {
     var id = article.getAttribute('data-echo-id');
-    var section = article.querySelector('.suibi-comments');
+    var section = article.querySelector('.ech0-comments');
     if (!section) return Promise.resolve();
     if (section.getAttribute('data-loaded') === '1') return Promise.resolve();
     section.hidden = false;
-    section.innerHTML = '<p class="suibi-hint">评论加载中…</p>';
+    section.innerHTML = '<p class="ech0-hint">评论加载中…</p>';
 
     return Promise.all([
       request('/api/comments?echo_id=' + encodeURIComponent(id)),
@@ -317,11 +317,11 @@
       var meta = res[1].data || {};
       section.setAttribute('data-loaded', '1');
       // 顺带同步卡片底部「评论」按钮上的计数
-      var badge = article.querySelector('.suibi-comment-count');
+      var badge = article.querySelector('.ech0-comment-count');
       if (badge) badge.textContent = comments.length;
       renderComments(article, section, comments, meta);
     }).catch(function (err) {
-      section.innerHTML = '<p class="suibi-hint">评论加载失败：' + esc(err.message) + '</p>';
+      section.innerHTML = '<p class="ech0-hint">评论加载失败：' + esc(err.message) + '</p>';
     });
   }
 
@@ -330,7 +330,7 @@
     var html = '';
 
     if (!meta.enable_comment) {
-      html += '<p class="suibi-hint">本站暂时关闭了评论。</p>';
+      html += '<p class="ech0-hint">本站暂时关闭了评论。</p>';
       section.innerHTML = html;
       return;
     }
@@ -348,45 +348,45 @@
     var floorOf = {};
     comments.forEach(function (c, i) { floorOf[c.id] = i + 1; });
 
-    html += '<div class="suibi-cmt-board">';
-    html += '<div class="suibi-cmt-head">' +
-      '<button type="button" class="suibi-cmt-write">写评论</button>' +
-      '<span class="suibi-cmt-total">' + comments.length + ' 条评论</span>' +
+    html += '<div class="ech0-cmt-board">';
+    html += '<div class="ech0-cmt-head">' +
+      '<button type="button" class="ech0-cmt-write">写评论</button>' +
+      '<span class="ech0-cmt-total">' + comments.length + ' 条评论</span>' +
       '</div>';
 
     // 提交结果提示：放在表单之外，这样「已发布」后重新拉列表也不会被冲掉
     var notice = section.getAttribute('data-notice') || '';
     if (notice) {
-      html += '<p class="suibi-cmt-notice">' + esc(notice) + '</p>';
+      html += '<p class="ech0-cmt-notice">' + esc(notice) + '</p>';
     }
 
     // —— 表单（默认收起，点「写评论」展开） ——
-    html += '<form class="suibi-cmt-form" hidden>' +
-      '<div class="suibi-cmt-fields">' +
+    html += '<form class="ech0-cmt-form" hidden>' +
+      '<div class="ech0-cmt-fields">' +
       '<input type="text" name="nickname" placeholder="昵称（必填）" maxlength="40" autocomplete="nickname">' +
       '<input type="email" name="email" placeholder="邮箱（必填，不公开）" maxlength="120" autocomplete="email">' +
       '<input type="text" name="website" placeholder="网址（选填）" maxlength="120">' +
       '</div>' +
       '<textarea name="content" rows="3" maxlength="200" placeholder="说点什么…（最多 200 字）"></textarea>' +
       // 蜜罐字段：人看不见，机器人会填；ech0 侧收到非空即拒
-      '<input type="text" name="hp_field" class="suibi-hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
-      '<div class="suibi-cmt-actions">' +
-      '<button type="submit" class="suibi-cmt-submit" disabled>提交</button>' +
-      '<button type="button" class="suibi-cmt-cancel">取消</button>' +
-      '<span class="suibi-cmt-tip"></span>' +
+      '<input type="text" name="hp_field" class="ech0-hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+      '<div class="ech0-cmt-actions">' +
+      '<button type="submit" class="ech0-cmt-submit" disabled>提交</button>' +
+      '<button type="button" class="ech0-cmt-cancel">取消</button>' +
+      '<span class="ech0-cmt-tip"></span>' +
       '</div>' +
       '</form>';
 
     // —— 列表 ——
-    html += '<div class="suibi-cmt-list">';
+    html += '<div class="ech0-cmt-list">';
     if (!tops.length) {
-      html += '<p class="suibi-hint">还没有评论，来说两句吧。</p>';
+      html += '<p class="ech0-hint">还没有评论，来说两句吧。</p>';
     } else {
       tops.forEach(function (c) {
         html += renderOneComment(c, floorOf[c.id], false);
         var replies = repliesMap[c.id] || [];
         if (replies.length) {
-          html += '<div class="suibi-cmt-replies">';
+          html += '<div class="ech0-cmt-replies">';
           replies.forEach(function (r) {
             html += renderOneComment(r, floorOf[r.id], true);
           });
@@ -403,34 +403,34 @@
   /* 单条评论的 HTML（纯文本正文，无头像） */
   function renderOneComment(c, floor, isReply) {
     var author = c.website
-      ? '<a class="suibi-cmt-author" href="' + esc(c.website) + '" target="_blank" rel="noopener nofollow">' + esc(c.nickname) + '</a>'
-      : '<span class="suibi-cmt-author">' + esc(c.nickname) + '</span>';
+      ? '<a class="ech0-cmt-author" href="' + esc(c.website) + '" target="_blank" rel="noopener nofollow">' + esc(c.nickname) + '</a>'
+      : '<span class="ech0-cmt-author">' + esc(c.nickname) + '</span>';
     var verified = c.source === 'system'
-      ? '<span class="suibi-cmt-badge" title="站内用户">✓</span>' : '';
-    var hot = c.hot ? '<span class="suibi-cmt-hot">Hot</span>' : '';
+      ? '<span class="ech0-cmt-badge" title="站内用户">✓</span>' : '';
+    var hot = c.hot ? '<span class="ech0-cmt-hot">Hot</span>' : '';
     var replyRef = '';
     if (isReply && c.parent_id) {
-      replyRef = '<button type="button" class="suibi-cmt-toreply" disabled>回复</button>';
+      replyRef = '<button type="button" class="ech0-cmt-toreply" disabled>回复</button>';
     }
-    return '<div class="suibi-cmt-item' + (isReply ? ' is-reply' : '') + '">' +
-      '<div class="suibi-cmt-meta">' +
-        '<span class="suibi-cmt-floor">#' + floor + '</span>' +
+    return '<div class="ech0-cmt-item' + (isReply ? ' is-reply' : '') + '">' +
+      '<div class="ech0-cmt-meta">' +
+        '<span class="ech0-cmt-floor">#' + floor + '</span>' +
         author + verified +
-        '<span class="suibi-cmt-dot">·</span>' +
-        '<span class="suibi-cmt-time">' + fmtTime(c.created_at) + '</span>' +
+        '<span class="ech0-cmt-dot">·</span>' +
+        '<span class="ech0-cmt-time">' + fmtTime(c.created_at) + '</span>' +
         hot + replyRef +
       '</div>' +
-      '<div class="suibi-cmt-content">' + renderCommentText(c.content) + '</div>' +
+      '<div class="ech0-cmt-content">' + renderCommentText(c.content) + '</div>' +
       '</div>';
   }
 
   /* 绑定表单行为：展开/收起、记忆昵称邮箱、提交 */
   function bindCommentForm(article, section, meta) {
-    var form = section.querySelector('.suibi-cmt-form');
-    var writeBtn = section.querySelector('.suibi-cmt-write');
-    var cancelBtn = section.querySelector('.suibi-cmt-cancel');
-    var submitBtn = section.querySelector('.suibi-cmt-submit');
-    var tip = section.querySelector('.suibi-cmt-tip');
+    var form = section.querySelector('.ech0-cmt-form');
+    var writeBtn = section.querySelector('.ech0-cmt-write');
+    var cancelBtn = section.querySelector('.ech0-cmt-cancel');
+    var submitBtn = section.querySelector('.ech0-cmt-submit');
+    var tip = section.querySelector('.ech0-cmt-tip');
     var contentEl = form.querySelector('textarea[name="content"]');
     var minMs = meta.min_submit_ms || 2000;
     var tokenAt = Date.now();
@@ -531,7 +531,7 @@
 
   function buildArticle(item) {
     var art = document.createElement('article');
-    art.className = 'post-entry suibi-item';
+    art.className = 'post-entry ech0-item';
     art.setAttribute('data-echo-id', item.id);
     art.setAttribute('data-created', item.created_at);
     art._reactions = (item.reactions || []).map(function (r) {
@@ -544,33 +544,33 @@
 
     // 标签只做展示（ech0 的标签过滤不落 URL，避免生成死链）
     var tags = (item.tags || []).map(function (t) {
-      return '<li><span class="suibi-tag">#' + esc(t.name) + '</span></li>';
+      return '<li><span class="ech0-tag">#' + esc(t.name) + '</span></li>';
     }).join('');
 
     art.innerHTML =
-      '<header class="suibi-head">' +
-        '<time class="suibi-time">' + fmtTime(item.created_at) + '</time>' +
+      '<header class="ech0-head">' +
+        '<time class="ech0-time">' + fmtTime(item.created_at) + '</time>' +
       '</header>' +
-      '<div class="entry-content suibi-body">' + renderBody(item.content || '') + '</div>' +
+      '<div class="entry-content ech0-body">' + renderBody(item.content || '') + '</div>' +
       (files.length
-        ? '<div class="suibi-files">' + files.map(function (f) {
+        ? '<div class="ech0-files">' + files.map(function (f) {
             var u = fileUrl(f.url);
-            return '<a href="' + esc(u) + '" target="_blank" rel="noopener" class="suibi-file">' +
+            return '<a href="' + esc(u) + '" target="_blank" rel="noopener" class="ech0-file">' +
               '<img src="' + esc(u) + '" alt="' + esc(f.name || '') + '" loading="lazy" decoding="async"></a>';
           }).join('') + '</div>'
         : '') +
-      '<footer class="entry-footer suibi-meta">' +
-        (tags ? '<ul class="terms-tags suibi-tags">' + tags + '</ul>' : '') +
-        '<div class="suibi-actions">' +
-          '<button type="button" class="suibi-react-btn" aria-haspopup="true" aria-expanded="false" aria-label="添加表情反应"></button>' +
-          '<button type="button" class="suibi-comment-btn" aria-expanded="false">' +
-            '<svg class="suibi-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+      '<footer class="entry-footer ech0-meta">' +
+        (tags ? '<ul class="terms-tags ech0-tags">' + tags + '</ul>' : '') +
+        '<div class="ech0-actions">' +
+          '<button type="button" class="ech0-react-btn" aria-haspopup="true" aria-expanded="false" aria-label="添加表情反应"></button>' +
+          '<button type="button" class="ech0-comment-btn" aria-expanded="false">' +
+            '<svg class="ech0-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
               '<path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.7 8.7 0 0 1-3.9-.9L3 20.5l1.4-4.6A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>' +
-            '</svg><span class="suibi-comment-count">0</span>' +
+            '</svg><span class="ech0-comment-count">0</span>' +
           '</button>' +
         '</div>' +
       '</footer>' +
-      '<section class="suibi-comments" hidden></section>';
+      '<section class="ech0-comments" hidden></section>';
 
     paintReactions(art, art._reactions);
     return art;
@@ -583,7 +583,7 @@
 
     // 构建期渲染的卡片没带 _reactions，从 DOM 里读不出来，
     // 交给首屏对齐请求补齐；这里只保证按钮能点。
-    var reactBtn = article.querySelector('.suibi-react-btn');
+    var reactBtn = article.querySelector('.ech0-react-btn');
     if (reactBtn) {
       reactBtn.addEventListener('click', function (ev) {
         ev.stopPropagation();
@@ -592,10 +592,10 @@
       });
     }
 
-    var cmtBtn = article.querySelector('.suibi-comment-btn');
+    var cmtBtn = article.querySelector('.ech0-comment-btn');
     if (cmtBtn) {
       cmtBtn.addEventListener('click', function () {
-        var section = article.querySelector('.suibi-comments');
+        var section = article.querySelector('.ech0-comments');
         var expanded = cmtBtn.getAttribute('aria-expanded') === 'true';
         cmtBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         if (expanded) {
@@ -610,8 +610,8 @@
 
   /* ---------- 加载更多 ---------- */
 
-  var moreBtn = document.getElementById('suibi-more');
-  var moreWrap = document.getElementById('suibi-more-wrap');
+  var moreBtn = document.getElementById('ech0-more');
+  var moreWrap = document.getElementById('ech0-more-wrap');
 
   function loadMore() {
     if (loading) return;
@@ -620,7 +620,7 @@
     // 正常情况下构建期已渲染第一页（page=1），所以续拉第 2 页；
     // 但如果构建期抓取失败（页面上一张卡都没有），首屏对齐也可能失败，
     // 这时从第 1 页开始拉，避免直接跳过第一页。
-    var hasCards = root.querySelector('.suibi-item') !== null;
+    var hasCards = root.querySelector('.ech0-item') !== null;
     var next = hasCards ? page + 1 : 1;
 
     request('/api/echo/query', {
@@ -630,10 +630,10 @@
       var data = json.data || {};
       var items = data.items || [];
       var existing = {};
-      Array.prototype.forEach.call(root.querySelectorAll('.suibi-item'), function (a) {
+      Array.prototype.forEach.call(root.querySelectorAll('.ech0-item'), function (a) {
         existing[a.getAttribute('data-echo-id')] = true;
       });
-      var empty = root.querySelector('.suibi-empty');
+      var empty = root.querySelector('.ech0-empty');
       var frag = document.createDocumentFragment();
       var added = 0;
       items.forEach(function (item) {
@@ -649,7 +649,7 @@
 
       page = Math.max(page, next);
       if (data.total != null) total = data.total;
-      var shown = root.querySelectorAll('.suibi-item').length;
+      var shown = root.querySelectorAll('.ech0-item').length;
       if (shown >= total) {
         if (moreWrap) moreWrap.hidden = true;
       }
@@ -679,11 +679,11 @@
       if (data.total != null) total = data.total;
 
       var byId = {};
-      Array.prototype.forEach.call(root.querySelectorAll('.suibi-item'), function (a) {
+      Array.prototype.forEach.call(root.querySelectorAll('.ech0-item'), function (a) {
         byId[a.getAttribute('data-echo-id')] = a;
       });
 
-      var empty = root.querySelector('.suibi-empty');
+      var empty = root.querySelector('.ech0-empty');
       if (items.length && empty) empty.hidden = true;
 
       // 1) 已有卡片：补上点赞状态
@@ -706,7 +706,7 @@
       });
 
       // 3) 分页按钮显隐
-      var shown = root.querySelectorAll('.suibi-item').length;
+      var shown = root.querySelectorAll('.ech0-item').length;
       if (moreWrap) moreWrap.hidden = shown >= total;
     }).catch(function () {
       // 首屏对齐失败不影响已渲染的静态内容，静默即可
@@ -716,7 +716,7 @@
   /* ---------- 启动 ---------- */
 
   function init() {
-    Array.prototype.forEach.call(root.querySelectorAll('.suibi-item'), wire);
+    Array.prototype.forEach.call(root.querySelectorAll('.ech0-item'), wire);
     syncFirstPage().then(function () {
       // 对齐后如果表情目录还没拉过，顺手拉一次，后续点开就快了
       return loadCatalog();
