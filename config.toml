@@ -176,6 +176,12 @@ weight = 40
 baseUrl = "https://essay.grer.cn"
 # 首屏静态快照与「加载更多」每次取的条数（接口上限 100）
 pageSize = 20
+# 卡片上显示的昵称：优先用 ech0 每条随笔自带的 username，
+# 取不到时回落到这里的值
+nickname = "guri"
+# 头像：ech0 上传后把文件名改成 ech0-avatar.png 放在这里即可；
+# 图片加载失败时卡片会自动退化成昵称首字母的圆形占位
+avatar = "/api/files/images/ech0-avatar.png"
 
 [markup.goldmark.renderer]
 unsafe = true

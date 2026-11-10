@@ -30,6 +30,10 @@
 
   var API = (root.getAttribute('data-api') || '').replace(/\/+$/, '');
   var PAGE_SIZE = parseInt(root.getAttribute('data-page-size') || '20', 10) || 20;
+  /* 昵称兜底与头像地址：优先用每条 echo 自带的 username / 配置里的 avatar，
+     由 layouts/ech0.html 写在容器的 data-* 上 */
+  var NICK_FALLBACK = root.getAttribute('data-nickname') || 'guri';
+  var AVATAR = root.getAttribute('data-avatar') || (API + '/api/files/images/ech0-avatar.png');
   var total = parseInt(root.getAttribute('data-total') || '0', 10) || 0;
   var page = 1;
   var loading = false;
@@ -997,8 +1001,18 @@
       return '<li><span class="ech0-tag">#' + esc(t.name) + '</span></li>';
     }).join('');
 
+    // 昵称优先用 echo 自带的 username，头像用配置里的地址；
+    // 头像加载失败时移除 img，露出底下的首字母占位
+    var nick = item.username || NICK_FALLBACK;
+    var initial = nick ? String(nick).charAt(0) : '?';
+
     art.innerHTML =
       '<header class="ech0-head">' +
+        '<span class="ech0-avatar" aria-hidden="true">' +
+          '<span class="ech0-avatar__letter">' + esc(initial) + '</span>' +
+          '<img src="' + esc(AVATAR) + '" alt="" loading="lazy" decoding="async" onerror="this.remove()">' +
+        '</span>' +
+        '<span class="ech0-nick">' + esc(nick) + '</span>' +
         '<time class="ech0-time">' + fmtTime(item.created_at) + '</time>' +
       '</header>' +
       // post-content / md-content 是主题的排版类，和构建期模板保持一致

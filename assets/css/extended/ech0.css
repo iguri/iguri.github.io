@@ -28,15 +28,63 @@
   position: relative;
 }
 
-/* 时间行 */
+/* 卡片头部：头像 + 昵称 + 时间 */
 .ech0-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 0.5rem;
 }
 
+/* 头像：圆形；图片加载失败时露出底下的昵称首字母占位 */
+.ech0-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  overflow: hidden;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--secondary);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+
+.ech0-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ech0-avatar__letter {
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ech0-nick {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--primary);
+  /* 昵称过长时截断，不把时间挤走 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 40%;
+}
+
+/* 时间靠右 */
 .ech0-time {
-  font-size: 0.82rem;
+  margin-left: auto;
+  font-size: 0.78rem;
   color: var(--secondary);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 /* 正文：ech0 的 Markdown 渲染结果直接落进 .entry-content，

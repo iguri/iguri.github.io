@@ -24,6 +24,12 @@
 {{- $base := $cfg.baseUrl | default "https://essay.grer.cn" -}}
 {{- $base = strings.TrimSuffix "/" $base -}}
 {{- $pageSize := $cfg.pageSize | default 20 -}}
+{{- /* 昵称：每条 echo 自带 username，取不到时用配置里的 nickname */ -}}
+{{- $nickFallback := $cfg.nickname | default "guri" -}}
+{{- /* 头像：配置里给的是 ech0 侧的相对路径，这里补上域名 */ -}}
+{{- $avatarPath := $cfg.avatar | default "/api/files/images/ech0-avatar.png" -}}
+{{- $avatarURL := $avatarPath -}}
+{{- if hasPrefix $avatarURL "/" }}{{ $avatarURL = printf "%s%s" $base $avatarURL }}{{ end -}}
 
 {{- /* -------------------------------------------------------------
      构建期抓取：第一页随笔
@@ -76,7 +82,9 @@
      data-page-size="{{ $pageSize }}"
      data-total="{{ $total }}"
      data-page="1"
-     data-title="随笔">
+     data-title="随笔"
+     data-nickname="{{ $nickFallback }}"
+     data-avatar="{{ $avatarURL }}">
 
   {{- /* 构建期渲染的卡片。前端会按 data-echo-id 与接口返回对齐，只补新增的 */ -}}
   {{- range $items }}
@@ -84,7 +92,16 @@
   {{- $t := time.AsTime $ts -}}
   <article class="post-entry ech0-item" data-echo-id="{{ .id }}" data-created="{{ $ts }}">
 
+    {{- /* 卡片头部：头像 + 昵称 + 时间（时间靠右）。
+           头像加载失败时 img 被移除，露出底下的昵称首字母占位，
+           所以即使 ech0-avatar.png 还没上传，卡片也不会出现破图。 */ -}}
+    {{- $nick := .username | default $nickFallback }}
     <header class="ech0-head">
+      <span class="ech0-avatar" aria-hidden="true">
+        <span class="ech0-avatar__letter">{{ substr $nick 0 1 }}</span>
+        <img src="{{ $avatarURL }}" alt="" loading="lazy" decoding="async" onerror="this.remove()">
+      </span>
+      <span class="ech0-nick">{{ $nick }}</span>
       <time class="ech0-time" datetime="{{ $t.Format "2006-01-02T15:04:05-07:00" }}">{{ $t.Format "2006-01-02 15:04" }}</time>
     </header>
 
