@@ -653,8 +653,7 @@
     var html = '';
 
     if (images.length) {
-      var cols = Math.min(images.length, 3);
-      html += '<div class="ech0-files" style="--cols:' + cols + '">' +
+      html += '<div class="ech0-files">' +
         images.map(function (f) {
           var u = fileUrl(f.url);
           return '<a class="ech0-file" href="' + esc(u) + '" target="_blank" rel="noopener">' +
@@ -664,16 +663,16 @@
 
     videos.forEach(function (f) {
       var u = fileUrl(f.url);
-      // 原生播放：ech0 的文件接口支持 Range，可以拖动进度条
-      html += '<div class="ech0-video"><video controls preload="metadata" playsinline src="' +
-        esc(u) + '"></video></div>';
+      // controlsList 去掉下载入口；JS 会把控制条换成主题化的一套
+      html += '<div class="ech0-video"><video controls controlsList="nodownload noremoteplayback" ' +
+        'preload="metadata" playsinline src="' + esc(u) + '"></video></div>';
     });
 
     audios.forEach(function (f) {
       var u = fileUrl(f.url);
-      html += '<div class="ech0-audio">' +
+      html += '<div class="ech0-audio" data-name="' + esc(f.name || '') + '">' +
         (f.name ? '<p class="ech0-audio-name">' + esc(f.name) + '</p>' : '') +
-        '<audio controls preload="metadata" src="' + esc(u) + '"></audio></div>';
+        '<audio controls controlsList="nodownload" preload="metadata" src="' + esc(u) + '"></audio></div>';
     });
 
     if (others.length) {
@@ -776,6 +775,208 @@
     });
   }
 
+  /* ---------- 灯箱：点图片原地放大，不再跳转 ---------- */
+
+  var lightbox = null;
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    var el = lightbox;
+    lightbox = null;
+    document.removeEventListener('keydown', onLightboxKey);
+    el.classList.remove('is-open');
+    document.body.style.overflow = '';
+    window.setTimeout(function () {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }, 200);
+  }
+
+  function onLightboxKey(ev) {
+    if (ev.key === 'Escape') closeLightbox();
+  }
+
+  function openLightbox(src, alt) {
+    closeLightbox();
+    var box = document.createElement('div');
+    box.className = 'ech0-lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', alt || '图片预览');
+
+    var img = document.createElement('img');
+    img.src = src;
+    img.alt = alt || '';
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'ech0-lightbox__close';
+    btn.setAttribute('aria-label', '关闭预览');
+    btn.textContent = '×';
+
+    box.appendChild(img);
+    box.appendChild(btn);
+    document.body.appendChild(box);
+    // 打开灯箱时锁住背后页面滚动
+    document.body.style.overflow = 'hidden';
+    window.requestAnimationFrame(function () { box.classList.add('is-open'); });
+
+    lightbox = box;
+    btn.addEventListener('click', closeLightbox);
+    box.addEventListener('click', function (ev) {
+      if (ev.target === box) closeLightbox();
+    });
+    document.addEventListener('keydown', onLightboxKey);
+  }
+
+  /* ---------- 播放器：把原生 <video>/<audio> 换成主题化的控制条 ---------- */
+  /* 图标：内联 SVG，颜色用 currentColor，随明暗主题自动变化 */
+  var ICON = {
+    play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+    pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>',
+    volume: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z"/>' +
+      '<path d="M16 8.6a5 5 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    mute: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z"/>' +
+      '<path d="M16.5 9l4.5 6M21 9l-4.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    full: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    exitFull: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+  };
+
+  /* 秒 → m:ss（超过一小时补上小时） */
+  function fmtClock(sec) {
+    sec = Math.max(0, Math.floor(sec || 0));
+    var h = Math.floor(sec / 3600);
+    var m = Math.floor((sec % 3600) / 60);
+    var s = sec % 60;
+    function p(n) { return n < 10 ? '0' + n : String(n); }
+    return (h ? h + ':' + p(m) : String(m)) + ':' + p(s);
+  }
+
+  /* 给一个 media 元素接上控制条，audio/video 共用这套逻辑 */
+  function buildControls(mediaEl, playerEl, isVideo) {
+    var controls = document.createElement('div');
+    controls.className = 'ech0-controls';
+    controls.innerHTML =
+      '<button type="button" class="ech0-btn ech0-play" aria-label="播放">' + ICON.play + '</button>' +
+      '<input type="range" class="ech0-seek" min="0" max="1000" step="1" value="0" aria-label="播放进度">' +
+      '<span class="ech0-time">0:00 / 0:00</span>' +
+      '<button type="button" class="ech0-btn ech0-mute" aria-label="静音">' + ICON.volume + '</button>' +
+      (isVideo ? '<button type="button" class="ech0-btn ech0-full" aria-label="全屏">' + ICON.full + '</button>' : '');
+    playerEl.appendChild(controls);
+
+    var playBtn = controls.querySelector('.ech0-play');
+    var seek = controls.querySelector('.ech0-seek');
+    var timeEl = controls.querySelector('.ech0-time');
+    var muteBtn = controls.querySelector('.ech0-mute');
+    var fullBtn = controls.querySelector('.ech0-full');
+    var seeking = false;
+
+    function setTime() {
+      var dur = isFinite(mediaEl.duration) ? mediaEl.duration : 0;
+      timeEl.textContent = fmtClock(mediaEl.currentTime) + ' / ' + fmtClock(dur);
+    }
+
+    function setProgress() {
+      var dur = isFinite(mediaEl.duration) && mediaEl.duration > 0 ? mediaEl.duration : 0;
+      var pct = dur ? (mediaEl.currentTime / dur) * 100 : 0;
+      if (!seeking) seek.value = String(Math.round(pct * 10));
+      seek.style.setProperty('--ech0-progress', pct.toFixed(2) + '%');
+    }
+
+    function setPlayIcon(playing) {
+      playBtn.innerHTML = playing ? ICON.pause : ICON.play;
+      playBtn.setAttribute('aria-label', playing ? '暂停' : '播放');
+      if (playerEl.classList) playerEl.classList.toggle('is-playing', playing);
+    }
+
+    playBtn.addEventListener('click', function () {
+      if (mediaEl.paused || mediaEl.ended) {
+        // 有些浏览器会拒绝首次播放，失败时静默即可
+        var p = mediaEl.play();
+        if (p && p.catch) p.catch(function () {});
+      } else {
+        mediaEl.pause();
+      }
+    });
+
+    if (isVideo) {
+      // 点画面也能暂停/继续（控制条自身不触发）
+      mediaEl.addEventListener('click', function () {
+        if (mediaEl.paused) { var p = mediaEl.play(); if (p && p.catch) p.catch(function () {}); }
+        else mediaEl.pause();
+      });
+    }
+
+    seek.addEventListener('pointerdown', function () { seeking = true; });
+    seek.addEventListener('input', function () {
+      var dur = isFinite(mediaEl.duration) ? mediaEl.duration : 0;
+      if (dur) mediaEl.currentTime = (Number(seek.value) / 1000) * dur;
+      setTime();
+      setProgress();
+    });
+    ['pointerup', 'pointercancel', 'blur'].forEach(function (evt) {
+      seek.addEventListener(evt, function () { seeking = false; });
+    });
+
+    muteBtn.addEventListener('click', function () {
+      mediaEl.muted = !mediaEl.muted;
+      muteBtn.innerHTML = mediaEl.muted ? ICON.mute : ICON.volume;
+      muteBtn.setAttribute('aria-label', mediaEl.muted ? '取消静音' : '静音');
+    });
+
+    if (fullBtn) {
+      fullBtn.addEventListener('click', function () {
+        if (document.fullscreenElement) {
+          document.exitFullscreen && document.exitFullscreen();
+        } else if (playerEl.requestFullscreen) {
+          playerEl.requestFullscreen();
+        }
+      });
+      document.addEventListener('fullscreenchange', function () {
+        var on = document.fullscreenElement === playerEl;
+        fullBtn.innerHTML = on ? ICON.exitFull : ICON.full;
+        fullBtn.setAttribute('aria-label', on ? '退出全屏' : '全屏');
+      });
+    }
+
+    mediaEl.addEventListener('play', function () { setPlayIcon(true); });
+    mediaEl.addEventListener('pause', function () { setPlayIcon(false); });
+    mediaEl.addEventListener('ended', function () { setPlayIcon(false); setProgress(); });
+    mediaEl.addEventListener('timeupdate', function () { setTime(); setProgress(); });
+    mediaEl.addEventListener('loadedmetadata', function () { setTime(); setProgress(); });
+    mediaEl.addEventListener('volumechange', function () {
+      muteBtn.innerHTML = mediaEl.muted ? ICON.mute : ICON.volume;
+    });
+
+    setTime();
+    setProgress();
+  }
+
+  /* 音频：隐藏原生控件，前面插一条自定义控制条 */
+  function setupAudio(host) {
+    var audio = host.querySelector('audio');
+    if (!audio || host.getAttribute('data-player') === '1') return;
+    host.setAttribute('data-player', '1');
+
+    var player = document.createElement('div');
+    player.className = 'ech0-player ech0-player--audio';
+    host.insertBefore(player, audio);
+    audio.controls = false;
+    audio.setAttribute('tabindex', '-1');
+    buildControls(audio, player, false);
+  }
+
+  /* 视频：保留画面，把控制条叠加在底部 */
+  function setupVideo(host) {
+    var video = host.querySelector('video');
+    if (!video || host.getAttribute('data-player') === '1') return;
+    host.setAttribute('data-player', '1');
+
+    host.classList.add('ech0-player', 'ech0-player--video');
+    video.controls = false;
+    video.removeAttribute('controls');
+    buildControls(video, host, true);
+  }
+
   /* ---------- 卡片构建（加载更多 / 首屏新增用） ---------- */
 
   function buildArticle(item) {
@@ -828,6 +1029,20 @@
 
     // 长文折叠（构建期卡片与运行时新增卡片都走这里）
     setupCollapse(article);
+
+    // 图片灯箱：拦住默认跳转，改为原地放大（无 JS 时仍能点开原图）
+    Array.prototype.forEach.call(article.querySelectorAll('.ech0-file'), function (a) {
+      a.addEventListener('click', function (ev) {
+        var img = a.querySelector('img');
+        if (!img) return;
+        ev.preventDefault();
+        openLightbox(img.currentSrc || img.src, img.getAttribute('alt'));
+      });
+    });
+
+    // 原生播放器换成主题化控制条（含去掉下载入口）
+    Array.prototype.forEach.call(article.querySelectorAll('.ech0-audio'), setupAudio);
+    Array.prototype.forEach.call(article.querySelectorAll('.ech0-video'), setupVideo);
 
     // 构建期渲染的卡片没带 _reactions，从 DOM 里读不出来，
     // 交给首屏对齐请求补齐；这里只保证按钮能点。

@@ -158,14 +158,12 @@
   color: var(--primary);
 }
 
-/* 附件图片：列数由模板/JS 写在 --cols 上（1~3 列），
-   图片按原始宽高比完整显示，不做裁切（原来是定高裁切，竖图会被切掉） */
+/* 附件图片：定高网格（与回滚前一致），点击走灯箱预览 */
 .ech0-files {
   display: grid;
-  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 6px;
   margin: 0 0 0.75rem;
-  align-items: start;
 }
 
 .ech0-file {
@@ -174,40 +172,72 @@
   border-radius: var(--radius);
   border: 1px solid var(--border);
   line-height: 0;
-  background: var(--code-bg);
+  cursor: zoom-in;
 }
 
 .ech0-file img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  object-fit: cover;
+  max-height: 180px;
   transition: transform 0.25s ease;
 }
 
 .ech0-file:hover img {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
-/* 原生视频：宽度占满卡片，圆角与卡片一致 */
-.ech0-video {
-  margin: 0 0 0.75rem;
+/* ---------- 灯箱（自建，不依赖外部脚本） ---------- */
+.ech0-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vmin;
+  background: rgb(0 0 0 / 82%);
+  backdrop-filter: blur(2px);
+  cursor: zoom-out;
+  opacity: 0;
+  transition: opacity 0.18s ease;
 }
 
-.ech0-video video {
-  display: block;
-  width: 100%;
-  max-height: 70vh;
-  background: #000;
+.ech0-lightbox.is-open {
+  opacity: 1;
+}
+
+.ech0-lightbox img {
+  max-width: 100%;
+  max-height: 100%;
   border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 45%);
+  cursor: default;
 }
 
-/* 原生音频：文件名 + 播放器 */
+.ech0-lightbox__close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+  line-height: 1;
+  color: #fff;
+  background: rgb(255 255 255 / 14%);
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.ech0-lightbox__close:hover {
+  background: rgb(255 255 255 / 26%);
+}
+
+/* ---------- 播放器（视频 / 音频共用一套外观，全部用主题变量） ---------- */
+.ech0-video,
 .ech0-audio {
   margin: 0 0 0.75rem;
-  padding: 8px 10px;
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
 }
 
 .ech0-audio-name {
@@ -217,9 +247,187 @@
   word-break: break-all;
 }
 
-.ech0-audio audio {
-  width: 100%;
+/* 播放器外壳 */
+.ech0-player {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.ech0-player--video {
   display: block;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.ech0-player video {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  background: #000;
+}
+
+/* 视频的控制条浮在画面上 */
+.ech0-player--video .ech0-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18px 10px 8px;
+  background: linear-gradient(to top, rgb(0 0 0 / 72%), transparent);
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.ech0-player--video.is-playing .ech0-controls:not(:focus-within) {
+  opacity: 0;
+}
+
+.ech0-player--video:hover .ech0-controls,
+.ech0-player--video:focus-within .ech0-controls {
+  opacity: 1;
+}
+
+/* 控制条：音频用一行，视频用同一套但文字为白色 */
+.ech0-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.ech0-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.ech0-btn:hover {
+  background: var(--entry);
+  border-color: var(--border);
+}
+
+.ech0-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
+/* 视频上的按钮改为白色描边式，避免在黑色画面上看不清 */
+.ech0-player--video .ech0-btn {
+  color: #fff;
+}
+
+.ech0-player--video .ech0-btn:hover {
+  background: rgb(255 255 255 / 18%);
+  border-color: rgb(255 255 255 / 30%);
+}
+
+/* 进度条：用 range 的轨道与滑块做主题化 */
+.ech0-seek {
+  flex: 1;
+  min-width: 60px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.ech0-seek::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--primary) 0,
+    var(--primary) var(--ech0-progress, 0%),
+    var(--border) var(--ech0-progress, 0%),
+    var(--border) 100%
+  );
+}
+
+.ech0-seek::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+}
+
+.ech0-seek::-moz-range-progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--primary);
+}
+
+.ech0-seek::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -4px;
+  background: var(--primary);
+  border: 2px solid var(--theme);
+  border-radius: 50%;
+}
+
+.ech0-seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--primary);
+  border: 2px solid var(--theme);
+  border-radius: 50%;
+}
+
+/* 视频画面上的进度条配色反转 */
+.ech0-player--video .ech0-seek::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    #fff 0,
+    #fff var(--ech0-progress, 0%),
+    rgb(255 255 255 / 32%) var(--ech0-progress, 0%),
+    rgb(255 255 255 / 32%) 100%
+  );
+}
+
+.ech0-player--video .ech0-seek::-webkit-slider-thumb {
+  background: #fff;
+  border-color: rgb(0 0 0 / 35%);
+}
+
+/* 时间显示 */
+.ech0-time {
+  flex: none;
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--secondary);
+  white-space: nowrap;
+}
+
+.ech0-player--video .ech0-time {
+  color: rgb(255 255 255 / 88%);
+}
+
+/* 视频全屏时的控制条位置交给浏览器 */
+.ech0-player--video:fullscreen .ech0-controls {
+  padding-bottom: 14px;
 }
 
 /* 其它类型附件：下载链接列表 */
@@ -249,7 +457,21 @@
   display: block;
   width: 100%;
   border: 0;
+  /* 高度按 85px 定（66/85 之间取观感更自然的 85） */
+  height: 85px;
 }
+
+/* 网易云 outchain 播放器自身只有浅色皮肤，深色主题下反相处理，
+   让它跟页面明暗一致（hue-rotate 把反相后的颜色拉回正常色相） */
+[data-theme='dark'] .ech0-embed--music iframe {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.ech0-embed--music {
+  border-color: var(--border);
+  background: var(--entry);
+}
+
 
 /* 无法渲染的扩展卡（GitHub 项目 / 网站 / 位置 / 推文）降级为外链 */
 .ech0-linkcard {

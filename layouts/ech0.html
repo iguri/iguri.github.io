@@ -120,8 +120,7 @@
     {{- end -}}
 
     {{- with $images }}
-    {{- $cols := len . }}{{ if gt $cols 3 }}{{ $cols = 3 }}{{ end }}
-    <div class="ech0-files" style="--cols:{{ $cols }}">
+    <div class="ech0-files">
       {{- range . }}
       <a class="ech0-file" href="{{ .url }}" target="_blank" rel="noopener">
         <img src="{{ .url }}" alt="{{ .name }}" loading="lazy" decoding="async"
@@ -133,14 +132,14 @@
 
     {{- range $videos }}
     <div class="ech0-video">
-      <video controls preload="metadata" playsinline src="{{ .url }}"></video>
+      <video controls controlsList="nodownload noremoteplayback" preload="metadata" playsinline src="{{ .url }}"></video>
     </div>
     {{- end }}
 
     {{- range $audios }}
-    <div class="ech0-audio">
+    <div class="ech0-audio" data-name="{{ .name }}">
       <p class="ech0-audio-name">{{ .name }}</p>
-      <audio controls preload="metadata" src="{{ .url }}"></audio>
+      <audio controls controlsList="nodownload" preload="metadata" src="{{ .url }}"></audio>
     </div>
     {{- end }}
 
