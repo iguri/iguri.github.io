@@ -45,6 +45,9 @@
    主题的 .entry-content 带 -webkit-line-clamp: 2（列表页摘要用），
    在随笔卡里必须解除截断，否则长文只能看到两行。
    下面用同等特异度 + 后置顺序覆盖（extended 样式表拼在主题之后）。 */
+/* 正文容器：.post-content / .md-content 是主题自带的排版类，
+   挂上后代码块、表格、引用、列表、标题的样式直接生效；
+   下面几条负责把"文章级"的间距收敛到"卡片内"的尺度。 */
 .ech0-body {
   display: block;
   overflow: visible;
@@ -53,23 +56,116 @@
   color: var(--content);
   font-size: 0.94rem;
   line-height: 1.75;
+  /* 主题给 .post-content 的是 margin: 30px 0，卡片里不需要 */
   margin: 0 0 0.75rem;
 }
 
+/* 站点的 .post-content p 有首行缩进 2rem；随笔多为短句，取消缩进 */
 .ech0-body p {
+  text-indent: 0;
   margin: 0 0 0.6rem;
 }
 
-.ech0-body p:last-child {
+.ech0-body p:last-child,
+.ech0-body .md-content p:last-child {
   margin-bottom: 0;
 }
 
-/* 附件图片：小网格铺开，点开原图 */
+/* 标题间距按卡片尺度收紧（主题是 32px 级别的文章间距） */
+.ech0-body h1,
+.ech0-body h2,
+.ech0-body h3,
+.ech0-body h4,
+.ech0-body h5,
+.ech0-body h6 {
+  margin: 14px 0 8px;
+}
+
+.ech0-body h1 { font-size: 1.4em; }
+.ech0-body h2 { font-size: 1.25em; }
+.ech0-body h3 { font-size: 1.12em; }
+
+/* 列表：主题的 .post-content ul 有 2rem 左移，卡片里收到 1.2rem */
+.ech0-body ul,
+.ech0-body ol {
+  margin-left: 0;
+  padding-inline-start: 1.2rem;
+}
+
+/* 引用块：保留主题的左侧竖线，间距收紧 */
+.ech0-body blockquote {
+  margin: 8px 0;
+  padding: 0 0 0 12px;
+}
+
+/* 代码块：主题的底色规则挂在 .md-content .highlight 上，
+   这里补一条兜底，保证 <pre> 直接出现时也有底色与圆角 */
+.ech0-body pre {
+  margin: 10px 0;
+  padding: 10px 12px;
+  background: var(--code-block-bg) !important;
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+.ech0-body pre code {
+  padding: 0;
+  background: transparent !important;
+  color: rgb(213, 213, 214);
+}
+
+/* 表格：主题已给边框，这里只控制外边距与横向滚动 */
+.ech0-body table {
+  margin: 10px 0;
+}
+
+/* ---------- 长文折叠 ---------- */
+.ech0-body-wrap {
+  position: relative;
+}
+
+.ech0-body-wrap.is-collapsed {
+  max-height: var(--ech0-collapse-h, 105px);
+  overflow: hidden;
+}
+
+/* 折叠时底部渐隐，渐变终点色与卡片底色一致，明暗主题自动跟随 */
+.ech0-body-wrap.is-collapsed::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3em;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--entry));
+}
+
+.ech0-expand {
+  display: inline-block;
+  margin: 2px 0 8px;
+  padding: 0;
+  font-size: 0.8rem;
+  color: var(--secondary);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.ech0-expand:hover {
+  color: var(--primary);
+}
+
+/* 附件图片：列数由模板/JS 写在 --cols 上（1~3 列），
+   图片按原始宽高比完整显示，不做裁切（原来是定高裁切，竖图会被切掉） */
 .ech0-files {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
   gap: 6px;
   margin: 0 0 0.75rem;
+  align-items: start;
 }
 
 .ech0-file {
@@ -78,18 +174,110 @@
   border-radius: var(--radius);
   border: 1px solid var(--border);
   line-height: 0;
+  background: var(--code-bg);
 }
 
 .ech0-file img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  max-height: 180px;
+  height: auto;
+  display: block;
   transition: transform 0.25s ease;
 }
 
 .ech0-file:hover img {
-  transform: scale(1.03);
+  transform: scale(1.02);
+}
+
+/* 原生视频：宽度占满卡片，圆角与卡片一致 */
+.ech0-video {
+  margin: 0 0 0.75rem;
+}
+
+.ech0-video video {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  background: #000;
+  border-radius: var(--radius);
+}
+
+/* 原生音频：文件名 + 播放器 */
+.ech0-audio {
+  margin: 0 0 0.75rem;
+  padding: 8px 10px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.ech0-audio-name {
+  margin: 0 0 6px;
+  font-size: 0.82rem;
+  color: var(--secondary);
+  word-break: break-all;
+}
+
+.ech0-audio audio {
+  width: 100%;
+  display: block;
+}
+
+/* 其它类型附件：下载链接列表 */
+.ech0-attachments {
+  margin: 0 0 0.75rem;
+  padding-inline-start: 1.2rem;
+  font-size: 0.85rem;
+}
+
+/* 第三方播放器 iframe（B 站 / YouTube / 网易云） */
+.ech0-embed {
+  margin: 0 0 0.75rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.ech0-embed--video iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+.ech0-embed--music iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+/* 无法渲染的扩展卡（GitHub 项目 / 网站 / 位置 / 推文）降级为外链 */
+.ech0-linkcard {
+  display: block;
+  margin: 0 0 0.75rem;
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  color: var(--secondary);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  word-break: break-all;
+  text-decoration: none;
+}
+
+.ech0-linkcard:hover {
+  color: var(--primary);
+  border-color: var(--secondary);
+}
+
+.ech0-linkcard-kind {
+  display: inline-block;
+  margin-inline-end: 4px;
+  padding: 0 6px;
+  font-size: 0.72rem;
+  color: var(--secondary);
+  background: var(--entry);
+  border-radius: 4px;
 }
 
 /* ---------- 底部：标签 + 动作 ---------- */

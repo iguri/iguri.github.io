@@ -100,23 +100,133 @@
       ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
   }
 
-  /* 构建期之后新发的随笔：这里做一个极小的安全 Markdown 兜底。
-     不追求和 Hugo 的 markdownify 完全一致，只保证常见记号能看、
-     且绝对不会因为内容里的 HTML 造成注入（先整体转义，再套白名单替换）。 */
-  function renderBody(md) {
-    var html = esc(md)
+  /* 运行时新增/加载更多的随笔：这里做一个安全的 Markdown 渲染兜底。
+     构建期卡片走的是 Hugo 的 markdownify，这里尽量对齐同一种结构
+     （标题/列表/引用/围栏代码/表格/分隔线/行内样式），
+     原则是先整体转义再套白名单替换，内容里的 HTML 一律不生效。 */
+  function inlineMd(text) {
+    return esc(text)
       .replace(/`([^`\n]+)`/g, '<code>$1</code>')
       .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
       .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+      .replace(/!\[([^\]\n]*)\]\((https?:\/\/[^\s)]+)\)/g,
+        '<img src="$2" alt="$1" loading="lazy" decoding="async">')
       .replace(/\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g,
         '<a href="$2" target="_blank" rel="noopener">$1</a>')
-      .replace(/(^|\n)(#{1,6})\s+([^\n]+)/g, function (m, lead, hashes, text) {
-        var level = Math.min(hashes.length + 2, 6);
-        return lead + '<h' + level + '>' + text + '</h' + level + '>';
-      })
-      .replace(/\n{2,}/g, '</p><p>')
       .replace(/\n/g, '<br>');
-    return '<p>' + html + '</p>';
+  }
+
+  function splitTableRow(line) {
+    var s = line.trim().replace(/^\|/, '').replace(/\|$/, '');
+    return s.split('|').map(function (c) { return c.trim(); });
+  }
+
+  function renderBody(md) {
+    var lines = String(md == null ? '' : md).split('\n');
+    var out = [];
+    var para = [];
+    var i = 0;
+
+    function flush() {
+      if (!para.length) return;
+      out.push('<p>' + inlineMd(para.join('\n')) + '</p>');
+      para = [];
+    }
+
+    while (i < lines.length) {
+      var line = lines[i];
+
+      // 围栏代码块：整段原样保留，不做行内替换
+      var fence = line.match(/^\s*```+\s*([\w+-]*)\s*$/);
+      if (fence) {
+        flush();
+        var lang = fence[1] || '';
+        var code = [];
+        i++;
+        while (i < lines.length && !/^\s*```+\s*$/.test(lines[i])) { code.push(lines[i]); i++; }
+        i++;
+        out.push('<pre><code' + (lang ? ' class="language-' + esc(lang) + '"' : '') + '>' +
+          esc(code.join('\n')) + '</code></pre>');
+        continue;
+      }
+
+      // 标题：层级与 Hugo 的 markdownify 保持一致（## → h2）
+      var h = line.match(/^(#{1,6})\s+(.*)$/);
+      if (h) {
+        flush();
+        var lv = Math.min(h[1].length, 6);
+        out.push('<h' + lv + '>' + inlineMd(h[2]) + '</h' + lv + '>');
+        i++;
+        continue;
+      }
+
+      // 引用块
+      if (/^>\s?/.test(line)) {
+        flush();
+        var quote = [];
+        while (i < lines.length && /^>\s?/.test(lines[i])) {
+          quote.push(lines[i].replace(/^>\s?/, ''));
+          i++;
+        }
+        out.push('<blockquote><p>' + inlineMd(quote.join('\n')) + '</p></blockquote>');
+        continue;
+      }
+
+      // 无序 / 有序列表
+      if (/^\s*[-*+]\s+/.test(line) || /^\s*\d+\.\s+/.test(line)) {
+        flush();
+        var ordered = /^\s*\d+\.\s+/.test(line);
+        var re = ordered ? /^\s*\d+\.\s+(.*)$/ : /^\s*[-*+]\s+(.*)$/;
+        var items = [];
+        while (i < lines.length && re.test(lines[i])) {
+          items.push('<li>' + inlineMd(lines[i].match(re)[1]) + '</li>');
+          i++;
+        }
+        out.push('<' + (ordered ? 'ol' : 'ul') + '>' + items.join('') + '</' + (ordered ? 'ol' : 'ul') + '>');
+        continue;
+      }
+
+      // 表格：当前行含 | 且下一行是分隔行
+      if (line.indexOf('|') >= 0 && i + 1 < lines.length &&
+          /^\s*\|?[\s:|-]+\|[\s:|-]*$/.test(lines[i + 1])) {
+        flush();
+        var head = splitTableRow(line);
+        i += 2;
+        var rows = [];
+        while (i < lines.length && lines[i].indexOf('|') >= 0 && lines[i].trim() !== '') {
+          rows.push(splitTableRow(lines[i]));
+          i++;
+        }
+        var tbl = '<table><thead><tr>' + head.map(function (c) {
+          return '<th>' + inlineMd(c) + '</th>';
+        }).join('') + '</tr></thead><tbody>';
+        rows.forEach(function (r) {
+          tbl += '<tr>' + r.map(function (c) { return '<td>' + inlineMd(c) + '</td>'; }).join('') + '</tr>';
+        });
+        out.push(tbl + '</tbody></table>');
+        continue;
+      }
+
+      // 分隔线
+      if (/^\s*([-*_])\1{2,}\s*$/.test(line)) {
+        flush();
+        out.push('<hr>');
+        i++;
+        continue;
+      }
+
+      // 空行 = 段落结束
+      if (line.trim() === '') {
+        flush();
+        i++;
+        continue;
+      }
+
+      para.push(line);
+      i++;
+    }
+    flush();
+    return out.join('\n');
   }
 
   /* 把 ech0 的相对文件路径补成可直接访问的绝对地址 */
@@ -527,6 +637,145 @@
     });
   }
 
+  /* ---------- 媒体与扩展卡（与 layouts/ech0.html 的渲染规则保持一致） ---------- */
+
+  /* 按 ech0 的 file.category 分派：图片网格 / 原生视频 / 原生音频 / 下载链接 */
+  function mediaHtml(files) {
+    var images = [], videos = [], audios = [], others = [];
+    files.forEach(function (f) {
+      var cat = String(f.category || '');
+      if (cat === 'image') images.push(f);
+      else if (cat === 'video') videos.push(f);
+      else if (cat === 'audio') audios.push(f);
+      else others.push(f);
+    });
+
+    var html = '';
+
+    if (images.length) {
+      var cols = Math.min(images.length, 3);
+      html += '<div class="ech0-files" style="--cols:' + cols + '">' +
+        images.map(function (f) {
+          var u = fileUrl(f.url);
+          return '<a class="ech0-file" href="' + esc(u) + '" target="_blank" rel="noopener">' +
+            '<img src="' + esc(u) + '" alt="' + esc(f.name || '') + '" loading="lazy" decoding="async"></a>';
+        }).join('') + '</div>';
+    }
+
+    videos.forEach(function (f) {
+      var u = fileUrl(f.url);
+      // 原生播放：ech0 的文件接口支持 Range，可以拖动进度条
+      html += '<div class="ech0-video"><video controls preload="metadata" playsinline src="' +
+        esc(u) + '"></video></div>';
+    });
+
+    audios.forEach(function (f) {
+      var u = fileUrl(f.url);
+      html += '<div class="ech0-audio">' +
+        (f.name ? '<p class="ech0-audio-name">' + esc(f.name) + '</p>' : '') +
+        '<audio controls preload="metadata" src="' + esc(u) + '"></audio></div>';
+    });
+
+    if (others.length) {
+      html += '<ul class="ech0-attachments">' + others.map(function (f) {
+        var u = fileUrl(f.url);
+        return '<li><a href="' + esc(u) + '" download>' + esc(f.name || '文件') + '</a></li>';
+      }).join('') + '</ul>';
+    }
+
+    return html;
+  }
+
+  /* ech0 扩展卡：VIDEO → B 站/YouTube iframe；MUSIC → 网易云 outchain iframe；
+     其它类型降级成外链卡片（这些卡需要登录态或第三方脚本，博客侧做不了） */
+  function extensionHtml(ext) {
+    if (!ext) return '';
+    var p = ext.payload || {};
+
+    if (ext.type === 'VIDEO') {
+      var vid = String(p.videoId || '');
+      if (!vid) return '';
+      var src = vid.indexOf('BV') === 0
+        ? 'https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=' +
+          encodeURIComponent(vid) + '&as_wide=1&high_quality=1&danmaku=0'
+        : 'https://www.youtube.com/embed/' + encodeURIComponent(vid);
+      return '<div class="ech0-embed ech0-embed--video">' +
+        '<iframe src="' + esc(src) + '" scrolling="no" frameborder="0" allowfullscreen ' +
+        'loading="lazy" title="视频"></iframe></div>';
+    }
+
+    if (ext.type === 'MUSIC') {
+      var mu = String(p.url || '');
+      var m = mu.match(/[?&]id=(\d+)/);
+      if (m) {
+        // 网易云 outchain 的 type：2=单曲、1=专辑、0=歌单
+        var kind = /playlist/.test(mu) ? '0' : /album/.test(mu) ? '1' : '2';
+        var h = kind === '2' ? 66 : 430;
+        var msrc = 'https://music.163.com/outchain/player?type=' + kind + '&id=' + m[1] +
+          '&auto=0&height=' + h;
+        return '<div class="ech0-embed ech0-embed--music">' +
+          '<iframe src="' + esc(msrc) + '" frameborder="0" height="' + h +
+          '" loading="lazy" title="网易云音乐"></iframe></div>';
+      }
+      if (mu) {
+        return '<a class="ech0-linkcard" href="' + esc(mu) +
+          '" target="_blank" rel="noopener">音乐链接：' + esc(mu) + '</a>';
+      }
+      return '';
+    }
+
+    var u = String(p.url || p.repoUrl || '');
+    if (!u) return '';
+    return '<a class="ech0-linkcard" href="' + esc(u) + '" target="_blank" rel="noopener">' +
+      '<span class="ech0-linkcard-kind">' + esc(ext.type) + '</span> ' + esc(u) + '</a>';
+  }
+
+  /* ---------- 长文折叠（4 行） ---------- */
+
+  var COLLAPSE_LINES = 4;
+
+  /* 正文超过 4 行就折叠，点「展开全文」展开。
+     无 JS 时不做任何处理，正文完整显示（不影响 SEO）。 */
+  function setupCollapse(article) {
+    var body = article.querySelector('.ech0-body');
+    if (!body || body.getAttribute('data-collapse-ready') === '1') return;
+    body.setAttribute('data-collapse-ready', '1');
+
+    var cs = window.getComputedStyle(body);
+    var lineHeight = parseFloat(cs.lineHeight);
+    if (!isFinite(lineHeight) || lineHeight <= 0) {
+      lineHeight = parseFloat(cs.fontSize) * 1.75 || 26;
+    }
+    var limit = Math.round(lineHeight * COLLAPSE_LINES);
+
+    // 没超过 4 行就不折叠
+    if (body.scrollHeight <= limit + 4) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'ech0-body-wrap';
+    wrap.style.setProperty('--ech0-collapse-h', limit + 'px');
+    body.parentNode.insertBefore(wrap, body);
+    wrap.appendChild(body);
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'ech0-expand';
+    btn.textContent = '展开全文';
+    btn.setAttribute('aria-expanded', 'false');
+    wrap.parentNode.insertBefore(btn, wrap.nextSibling);
+
+    function apply(collapsed) {
+      wrap.classList.toggle('is-collapsed', collapsed);
+      btn.textContent = collapsed ? '展开全文' : '收起';
+      btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    }
+    apply(true);
+
+    btn.addEventListener('click', function () {
+      apply(!wrap.classList.contains('is-collapsed'));
+    });
+  }
+
   /* ---------- 卡片构建（加载更多 / 首屏新增用） ---------- */
 
   function buildArticle(item) {
@@ -551,14 +800,10 @@
       '<header class="ech0-head">' +
         '<time class="ech0-time">' + fmtTime(item.created_at) + '</time>' +
       '</header>' +
-      '<div class="entry-content ech0-body">' + renderBody(item.content || '') + '</div>' +
-      (files.length
-        ? '<div class="ech0-files">' + files.map(function (f) {
-            var u = fileUrl(f.url);
-            return '<a href="' + esc(u) + '" target="_blank" rel="noopener" class="ech0-file">' +
-              '<img src="' + esc(u) + '" alt="' + esc(f.name || '') + '" loading="lazy" decoding="async"></a>';
-          }).join('') + '</div>'
-        : '') +
+      // post-content / md-content 是主题的排版类，和构建期模板保持一致
+      '<div class="entry-content post-content md-content ech0-body">' + renderBody(item.content || '') + '</div>' +
+      mediaHtml(files) +
+      extensionHtml(item.extension) +
       '<footer class="entry-footer ech0-meta">' +
         (tags ? '<ul class="terms-tags ech0-tags">' + tags + '</ul>' : '') +
         '<div class="ech0-actions">' +
@@ -580,6 +825,9 @@
   function wire(article) {
     if (article.getAttribute('data-wired') === '1') return;
     article.setAttribute('data-wired', '1');
+
+    // 长文折叠（构建期卡片与运行时新增卡片都走这里）
+    setupCollapse(article);
 
     // 构建期渲染的卡片没带 _reactions，从 DOM 里读不出来，
     // 交给首屏对齐请求补齐；这里只保证按钮能点。
@@ -635,16 +883,19 @@
       });
       var empty = root.querySelector('.ech0-empty');
       var frag = document.createDocumentFragment();
+      var pending = [];
       var added = 0;
       items.forEach(function (item) {
         if (existing[item.id]) return;
         existing[item.id] = true;
         var art = buildArticle(item);
-        wire(art);
+        pending.push(art);
         frag.appendChild(art);
         added++;
       });
       root.appendChild(frag);
+      // 必须等元素进了 DOM 再挂交互：长文折叠要靠 scrollHeight 判断行数
+      pending.forEach(wire);
       if (empty && added) empty.hidden = true;
 
       page = Math.max(page, next);
@@ -701,8 +952,9 @@
       fresh.sort(function (a, b) { return (b.created_at || 0) - (a.created_at || 0); });
       fresh.reverse().forEach(function (item) {
         var art = buildArticle(item);
-        wire(art);
         root.insertBefore(art, root.firstChild);
+        // 入 DOM 之后再挂交互，折叠测量才准
+        wire(art);
       });
 
       // 3) 分页按钮显隐

@@ -88,27 +88,119 @@
       <time class="ech0-time" datetime="{{ $t.Format "2006-01-02T15:04:05-07:00" }}">{{ $t.Format "2006-01-02 15:04" }}</time>
     </header>
 
-    {{- /* 正文：ech0 存的是 Markdown，这里在构建期就渲染成 HTML。
-           注意：内容来自你自己的实例，站点已开 goldmark 的 unsafe，
-           ech0 里的内联 HTML 会按原样输出。 */ -}}
-    <div class="entry-content ech0-body">{{ .content | markdownify }}</div>
+    {{- /* 正文：ech0 存的是 Markdown，构建期就渲染成 HTML。
+           额外挂上主题的 post-content / md-content 两个类名，
+           让代码块、表格、引用块、列表、标题的排版规则直接生效
+           （这两个类只带排版规则，不改变卡片外观）。 */ -}}
+    <div class="entry-content post-content md-content ech0-body">{{ .content | markdownify }}</div>
 
-    {{- /* 附件图片：ech0 的 file.url 对本地存储是 "/api/files/xxx" 这样的相对路径，
-           要补上 ech0 的域名才能显示 */ -}}
-    {{- with .echo_files }}
-    <div class="ech0-files">
+    {{- /* 附件按 ech0 的 file.category 分派渲染：
+           image → 图片网格（按数量决定列数，不裁切）
+           video → 原生 <video>；audio → 原生 <audio>；其它 → 下载链接
+           本地存储给的是 "/api/files/…" 相对路径，要补 ech0 域名。 */ -}}
+    {{- $images := slice -}}
+    {{- $videos := slice -}}
+    {{- $audios := slice -}}
+    {{- $others := slice -}}
+    {{- range .echo_files -}}
+      {{- with .file -}}
+        {{- $u := .url -}}
+        {{- if hasPrefix $u "/" -}}{{- $u = printf "%s%s" $base $u -}}{{- end -}}
+        {{- $cat := .category | default "" -}}
+        {{- if eq $cat "image" -}}
+          {{- $images = $images | append (dict "url" $u "name" .name "w" .width "h" .height) -}}
+        {{- else if eq $cat "video" -}}
+          {{- $videos = $videos | append (dict "url" $u "name" .name) -}}
+        {{- else if eq $cat "audio" -}}
+          {{- $audios = $audios | append (dict "url" $u "name" .name) -}}
+        {{- else -}}
+          {{- $others = $others | append (dict "url" $u "name" .name) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- with $images }}
+    {{- $cols := len . }}{{ if gt $cols 3 }}{{ $cols = 3 }}{{ end }}
+    <div class="ech0-files" style="--cols:{{ $cols }}">
       {{- range . }}
-      {{- with .file }}
-      {{- $u := .url -}}
-      {{- if hasPrefix $u "/" }}{{ $u = printf "%s%s" $base $u }}{{ end }}
-      <a href="{{ $u }}" target="_blank" rel="noopener" class="ech0-file">
-        <img src="{{ $u }}" alt="{{ .name }}" loading="lazy" decoding="async"
-          {{- with .width }} width="{{ . }}"{{ end }}
-          {{- with .height }} height="{{ . }}"{{ end }}>
+      <a class="ech0-file" href="{{ .url }}" target="_blank" rel="noopener">
+        <img src="{{ .url }}" alt="{{ .name }}" loading="lazy" decoding="async"
+          {{- with .w }} width="{{ . }}"{{ end }}{{- with .h }} height="{{ . }}"{{ end }}>
       </a>
       {{- end }}
-      {{- end }}
     </div>
+    {{- end }}
+
+    {{- range $videos }}
+    <div class="ech0-video">
+      <video controls preload="metadata" playsinline src="{{ .url }}"></video>
+    </div>
+    {{- end }}
+
+    {{- range $audios }}
+    <div class="ech0-audio">
+      <p class="ech0-audio-name">{{ .name }}</p>
+      <audio controls preload="metadata" src="{{ .url }}"></audio>
+    </div>
+    {{- end }}
+
+    {{- with $others }}
+    <ul class="ech0-attachments">
+      {{- range . }}
+      <li><a href="{{ .url }}" download>{{ .name }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+
+    {{- /* ech0 扩展卡：VIDEO 用 B 站/YouTube 官方播放器 iframe，
+           MUSIC 用网易云 outchain 播放器 iframe（type：2=单曲 1=专辑 0=歌单），
+           其余类型（GITHUBPROJ / WEBSITE / LOCATION / TWEET）降级成外链卡片。 */ -}}
+    {{- with .extension }}
+      {{- $type := .type -}}
+      {{- $payload := .payload -}}
+      {{- if eq $type "VIDEO" -}}
+        {{- $vid := "" -}}
+        {{- with $payload }}{{ with index . "videoId" }}{{ $vid = . }}{{ end }}{{ end -}}
+        {{- if $vid -}}
+        <div class="ech0-embed ech0-embed--video">
+          {{- if hasPrefix $vid "BV" }}
+          <iframe src="https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid={{ $vid }}&as_wide=1&high_quality=1&danmaku=0"
+                  scrolling="no" frameborder="0" allowfullscreen loading="lazy" title="B 站视频"></iframe>
+          {{- else }}
+          <iframe src="https://www.youtube.com/embed/{{ $vid }}" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen loading="lazy" title="YouTube 视频"></iframe>
+          {{- end }}
+        </div>
+        {{- end -}}
+      {{- else if eq $type "MUSIC" -}}
+        {{- $mu := "" -}}
+        {{- with $payload }}{{ with index . "url" }}{{ $mu = . }}{{ end }}{{ end -}}
+        {{- $mid := "" -}}
+        {{- with (findRE "[?&]id=([0-9]+)" $mu 1) -}}{{- $mid = replaceRE "^[?&]id=" "" (index . 0) -}}{{- end -}}
+        {{- if $mid -}}
+          {{- $kind := "2" -}}{{- $h := 66 -}}
+          {{- if findRE "playlist" $mu -}}{{- $kind = "0" -}}{{- $h = 430 -}}
+          {{- else if findRE "album" $mu -}}{{- $kind = "1" -}}{{- $h = 430 -}}{{- end }}
+        <div class="ech0-embed ech0-embed--music">
+          <iframe src="https://music.163.com/outchain/player?type={{ $kind }}&id={{ $mid }}&auto=0&height={{ $h }}"
+                  frameborder="0" height="{{ $h }}" loading="lazy" title="网易云音乐"></iframe>
+        </div>
+        {{- else if $mu }}
+        <a class="ech0-linkcard" href="{{ $mu }}" target="_blank" rel="noopener">音乐链接：{{ $mu }}</a>
+        {{- end -}}
+      {{- else -}}
+        {{- $u := "" -}}
+        {{- with $payload -}}
+          {{- with index . "url" }}{{ $u = . }}{{ end -}}
+          {{- if not $u }}{{ with index . "repoUrl" }}{{ $u = . }}{{ end }}{{ end -}}
+        {{- end -}}
+        {{- if $u }}
+        <a class="ech0-linkcard" href="{{ $u }}" target="_blank" rel="noopener">
+          <span class="ech0-linkcard-kind">{{ $type }}</span> {{ $u }}
+        </a>
+        {{- end -}}
+      {{- end -}}
     {{- end }}
 
     <footer class="entry-footer ech0-meta">
