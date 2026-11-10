@@ -43,10 +43,10 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  width: 22px;
-  height: 22px;
+  width: 38px;
+  height: 38px;
   overflow: hidden;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--secondary);
   background: var(--code-bg);
@@ -71,6 +71,9 @@
   font-size: 0.84rem;
   font-weight: 600;
   color: var(--primary);
+  /* 昵称统一大写显示（中文不受影响） */
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   /* 昵称过长时截断，不把时间挤走 */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -893,15 +896,16 @@
   }
 
   .ech0-meta {
-    align-items: flex-start;
+    align-items: center;
   }
 
+  /* 窄屏下动作按钮依然靠右，不被标签挤到左边 */
   .ech0-actions {
-    margin-left: 0;
+    margin-left: auto;
   }
 
   .ech0-reaction-bar {
-    right: auto;
-    left: 0;
+    right: 0;
+    left: auto;
   }
 }

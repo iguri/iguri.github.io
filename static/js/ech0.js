@@ -1012,7 +1012,7 @@
           '<span class="ech0-avatar__letter">' + esc(initial) + '</span>' +
           '<img src="' + esc(AVATAR) + '" alt="" loading="lazy" decoding="async" onerror="this.remove()">' +
         '</span>' +
-        '<span class="ech0-nick">' + esc(nick) + '</span>' +
+        '<span class="ech0-nick">@' + esc(nick) + '</span>' +
         '<time class="ech0-time">' + fmtTime(item.created_at) + '</time>' +
       '</header>' +
       // post-content / md-content 是主题的排版类，和构建期模板保持一致
