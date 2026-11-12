@@ -5,7 +5,7 @@ author: "甲拉古日"
 tags: # 标签
   - 前端
   - 折腾
-categories: 灵感分享
+categories: 灵感记录
 cover:
     image: "" # 封面url
     alt: # 替换文本

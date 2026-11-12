@@ -5,7 +5,7 @@ author: "甲拉古日"
 tags: # 标签
   - 
   - 
-categories: # 日常水文 # 分类 ! 灵感记录 生活 折腾笔记 日常水文 分享安利 !
+categories: 生活
 cover:
     image: "zzb.png"
     alt: # 替换文本
